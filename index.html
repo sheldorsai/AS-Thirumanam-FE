@@ -3,938 +3,645 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swathi & Adithyaa — Wedding</title>
+<title>Swathi & Adithyaa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf6ef;
-    --bg-deep:#f1e9da;
-    --paper:#fffdfa;
-    --ink:#2a2420;
-    --ink-soft:#6e6258;
-    --rust:#b9562e;
-    --rust-deep:#963f1f;
-    --gold:#c79a3f;
-    --gold-soft:#e7d1a0;
-    --line:#e6dac4;
-    --sage:#6f7d5c;
+    /* warm, earthy, premium palette */
+    --paper:#f7f1e8;          /* warm oat paper */
+    --paper-2:#efe6d6;        /* deeper oat */
+    --card:#fffaf3;           /* warm white card */
+    --ink:#33291f;            /* roasted brown-black text */
+    --ink-soft:#7c6a55;       /* muted clay text */
+    --clay:#c0633b;           /* terracotta / clay primary */
+    --clay-deep:#9e4a28;      /* deep clay */
+    --olive:#6e7449;          /* olive secondary */
+    --olive-deep:#545936;
+    --ochre:#d99a3e;          /* warm ochre accent */
+    --line:#e3d6c2;           /* hairline */
+    --shadow:38 27 16;        /* rgb for shadows */
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--bg);
+    background:var(--paper);
     color:var(--ink);
-    font-family:'Inter', sans-serif;
+    font-family:'Bricolage Grotesque', sans-serif;
     min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    /* subtle paper grain */
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(192,99,59,.05), transparent 38%),
+      radial-gradient(circle at 82% 78%, rgba(110,116,73,.05), transparent 40%);
   }
-  .tamil{font-family:'Noto Sans Tamil', serif;}
-  ::selection{background:var(--gold-soft);}
+  .tamil{font-family:'Noto Sans Tamil', sans-serif;}
+  ::selection{background:var(--ochre); color:#fff;}
+  button{font-family:inherit;}
+
+  /* grain overlay for texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:.4;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .app{position:relative; z-index:1;}
 
   /* ---------- Hero ---------- */
   header.hero{
     position:relative;
-    padding:64px 20px 90px;
     text-align:center;
-    background:
-      radial-gradient(ellipse 600px 300px at 50% 0%, rgba(185,86,46,.07), transparent 70%),
-      var(--bg);
+    padding:62px 22px 54px;
     overflow:hidden;
   }
-  .hero-arc{
-    position:absolute;
-    top:-120px; left:50%;
-    width:640px; height:640px;
-    transform:translateX(-50%);
-    border-radius:50%;
-    border:1px solid var(--line);
-    opacity:.6;
-  }
-  .hero-arc.two{
-    width:760px; height:760px; top:-160px; opacity:.35;
-  }
-  .eyebrow{
-    position:relative; z-index:2;
-    font-size:11.5px;
-    letter-spacing:.24em;
+  .hero-tag{
+    display:inline-block;
+    font-size:11px;
+    letter-spacing:.32em;
     text-transform:uppercase;
-    color:var(--rust);
+    color:var(--clay);
     font-weight:600;
-    margin:0 0 18px;
+    margin-bottom:26px;
+    position:relative;
   }
+  .hero-tag::before, .hero-tag::after{
+    content:"";
+    position:absolute; top:50%;
+    width:26px; height:1px;
+    background:var(--clay); opacity:.4;
+  }
+  .hero-tag::before{ left:-38px; }
+  .hero-tag::after{ right:-38px; }
   h1.names{
-    position:relative; z-index:2;
     font-family:'Fraunces', serif;
-    font-weight:500;
-    font-optical-sizing:auto;
-    font-size:clamp(40px, 9vw, 84px);
+    font-weight:400;
+    font-size:clamp(46px, 13vw, 96px);
+    line-height:.94;
+    letter-spacing:-.02em;
     margin:0;
-    line-height:1.05;
+    color:var(--ink);
+  }
+  h1.names .and{
+    display:block;
+    font-style:italic;
+    font-size:.42em;
+    color:var(--clay);
+    font-weight:400;
+    margin:.06em 0;
+    letter-spacing:0;
+  }
+  .tamil-names{
+    margin-top:20px;
+    font-family:'Noto Sans Tamil', sans-serif;
+    font-size:clamp(15px, 4vw, 19px);
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .hero-when{
+    margin-top:24px;
+    font-size:13px;
+    letter-spacing:.05em;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .hero-when b{ color:var(--ink); font-weight:600; }
+  /* hand-drawn divider */
+  .sprig{ margin:30px auto 0; display:block; width:60px; height:auto; color:var(--olive); opacity:.8; }
+
+  /* ---------- Layout ---------- */
+  main{ max-width:1080px; margin:0 auto; padding:8px 18px 70px; }
+
+  .view{ display:none; }
+  .view.active{ display:block; animation:rise .45s cubic-bezier(.2,.7,.2,1); }
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+
+  .lead{ text-align:center; margin-bottom:34px; }
+  .lead h2{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-size:clamp(26px,6vw,38px);
+    margin:0 0 6px;
     letter-spacing:-.01em;
     color:var(--ink);
   }
-  h1.names .amp{
-    font-style:italic;
-    font-weight:400;
-    color:var(--rust);
-    font-size:.62em;
-    padding:0 .12em;
-    display:inline-block;
-  }
-  .tamil-names{
-    position:relative; z-index:2;
-    font-family:'Noto Sans Tamil', serif;
-    font-size:clamp(16px, 2.6vw, 21px);
-    color:var(--ink-soft);
-    margin-top:14px;
-  }
-  .hero-date{
-    position:relative; z-index:2;
-    margin-top:26px;
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    font-size:12.5px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    font-weight:600;
-    background:var(--paper);
-    border:1px solid var(--line);
-    padding:10px 20px;
-    border-radius:999px;
-  }
-  .hero-date .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+  .lead .tamil{ color:var(--ink-soft); font-size:15px; font-weight:500; }
 
-  /* ---------- Module Nav ---------- */
-  main{
-    max-width:1140px;
-    margin:0 auto;
-    padding:10px 18px 90px;
-  }
-  .section-head{ text-align:center; margin-bottom:38px; }
-  .section-title{
-    font-family:'Fraunces', serif;
-    font-weight:500;
+  .back{
+    display:inline-flex; align-items:center; gap:7px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:9px 16px 9px 13px;
+    font-size:13px; font-weight:600;
     color:var(--ink);
-    font-size:clamp(24px,4.6vw,32px);
-    margin:0 0 8px;
-  }
-  .section-sub{
-    font-size:12.5px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    font-weight:600;
-  }
-
-  .module-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-  }
-  @media (max-width:780px){
-    .module-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto;}
-  }
-  .module-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:38px 26px;
-    text-align:left;
     cursor:pointer;
-    position:relative;
-    transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
-    overflow:hidden;
-  }
-  .module-card::after{
-    content:"";
-    position:absolute; right:-40px; top:-40px;
-    width:140px; height:140px;
-    border-radius:50%;
-    background:radial-gradient(circle, var(--gold-soft) 0%, transparent 70%);
-    opacity:0;
-    transition:opacity .3s ease;
-  }
-  .module-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 24px 48px -16px rgba(150,63,31,.22);
-    border-color:var(--gold);
-  }
-  .module-card:hover::after{ opacity:1; }
-  .module-card .icon-wrap{
-    width:56px; height:56px;
-    border-radius:14px;
-    display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(150deg, var(--rust), var(--rust-deep));
-    color:#fff;
-    margin-bottom:22px;
-    box-shadow:0 8px 18px -6px rgba(150,63,31,.45);
-    position:relative; z-index:1;
-  }
-  .module-card .icon-wrap svg{width:26px;height:26px;}
-  .module-card h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    color:var(--ink);
-    margin:0 0 5px;
-    font-size:23px;
-    position:relative; z-index:1;
-  }
-  .module-card .tamil-label{
-    display:block;
-    font-family:'Noto Sans Tamil', serif;
-    color:var(--ink-soft);
-    font-size:14px;
-    margin-bottom:10px;
-    position:relative; z-index:1;
-  }
-  .module-card p.desc{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin:0 0 18px;
-    line-height:1.5;
-    position:relative; z-index:1;
-  }
-  .module-card .cta{
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--rust);
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    position:relative; z-index:1;
-  }
-  .module-card .cta svg{width:13px;height:13px; transition:transform .25s ease;}
-  .module-card:hover .cta svg{ transform:translateX(4px); }
-  .badge-soon{
-    position:absolute; top:18px; right:18px;
-    font-size:9.5px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    font-weight:700;
-    color:var(--rust-deep);
-    background:var(--gold-soft);
-    padding:4px 10px;
-    border-radius:999px;
-    z-index:2;
-  }
-
-  /* ---------- View transitions ---------- */
-  .view{display:none; animation:fadeUp .4s ease;}
-  .view.active{display:block;}
-  @keyframes fadeUp{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
-
-  .crumb{
-    font-size:12px;
-    letter-spacing:.04em;
-    color:var(--ink-soft);
-    margin-bottom:26px;
-    font-weight:500;
-  }
-  .crumb button{
-    background:none;border:none;
-    font-family:'Inter',sans-serif;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.04em;
-    color:var(--rust);
-    cursor:pointer;
-    padding:0;
-  }
-  .crumb button:hover{ text-decoration:underline; }
-
-  /* ---------- Day chooser ---------- */
-  .day-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:22px;
-    max-width:740px;
-    margin:0 auto;
-  }
-  @media (max-width:560px){ .day-grid{grid-template-columns:1fr;} }
-  .day-card{
-    background:linear-gradient(155deg, var(--rust) 0%, var(--rust-deep) 100%);
-    border-radius:18px;
-    color:#fff;
-    padding:36px 26px;
-    text-align:left;
-    cursor:pointer;
-    transition:transform .3s ease, box-shadow .3s ease;
-    position:relative;
-    overflow:hidden;
-  }
-  .day-card::before{
-    content:"";
-    position:absolute; right:-30px; bottom:-30px;
-    width:140px; height:140px; border-radius:50%;
-    background:rgba(255,255,255,.08);
-  }
-  .day-card:hover{ transform:translateY(-5px); box-shadow:0 20px 40px -14px rgba(150,63,31,.45); }
-  .day-card .day-label{
-    font-size:11px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--gold-soft);
-    font-weight:700;
-    display:block;
-    margin-bottom:10px;
-  }
-  .day-card h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    margin:0 0 6px;
-    font-size:27px;
-  }
-  .day-card .date{
-    font-size:13px;
-    color:rgba(255,255,255,.8);
-  }
-
-  /* ---------- Meal chooser ---------- */
-  .meal-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-  }
-  @media (max-width:780px){ .meal-grid{grid-template-columns:repeat(2,1fr);} }
-  .meal-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:26px 20px;
-    cursor:pointer;
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .meal-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 16px 32px -12px rgba(150,63,31,.2);
-    border-color:var(--gold);
-  }
-  .meal-card .icon-wrap{
-    width:44px; height:44px;
-    border-radius:11px;
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:14px;
-  }
-  .meal-card .icon-wrap svg{width:21px;height:21px;}
-  .meal-card h4{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    color:var(--ink);
-    margin:0 0 3px;
-    font-size:18px;
-  }
-  .meal-card .tamil-label{
-    font-family:'Noto Sans Tamil', serif;
-    font-size:13px;
-    color:var(--ink-soft);
-  }
-
-  /* ---------- Menu list ---------- */
-  .menu-head{ margin-bottom:30px; }
-  .menu-head h2{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    color:var(--ink);
-    margin:0 0 4px;
-    font-size:clamp(24px,5vw,32px);
-  }
-  .menu-head .tamil{
-    color:var(--ink-soft);
-    font-size:15px;
-  }
-  .menu-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  .menu-row{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:14px 18px;
-    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-  .menu-row:hover{
-    transform:translateX(4px);
-    box-shadow:0 10px 24px -14px rgba(150,63,31,.25);
-    border-color:var(--gold);
-  }
-  .menu-row .icon-wrap{
-    flex:0 0 auto;
-    width:48px; height:48px;
-    border-radius:12px;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .menu-row .icon-wrap svg{width:24px;height:24px;}
-  .menu-row .thumb{
-    flex:0 0 auto;
-    width:52px; height:52px;
-    border-radius:12px;
-    overflow:hidden;
-    background:var(--bg-deep);
-    border:1px solid var(--line);
-  }
-  .menu-row .thumb img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-  }
-  .menu-row .names{ flex:1; min-width:0; }
-  .menu-row .en{
-    display:block;
-    font-size:17px;
-    font-weight:600;
-    color:var(--ink);
-  }
-  .menu-row .ta{
-    display:block;
-    font-family:'Noto Sans Tamil', serif;
-    font-size:14px;
-    color:var(--ink-soft);
-    margin-top:2px;
-  }
-  .menu-row .idx{
-    flex:0 0 auto;
-    font-family:'Fraunces', serif;
-    font-size:13px;
-    color:var(--line);
-    font-weight:600;
-  }
-
-  /* ---------- Placeholder views ---------- */
-  .placeholder{
-    text-align:center;
-    padding:80px 24px;
-    border-radius:20px;
-    background:var(--paper);
-    border:1px solid var(--line);
-    max-width:560px;
-    margin:0 auto;
-  }
-  .placeholder .icon-wrap{
-    width:64px; height:64px;
-    border-radius:16px;
-    display:flex; align-items:center; justify-content:center;
-    margin:0 auto 22px;
-    background:linear-gradient(150deg, var(--rust), var(--rust-deep));
-    color:#fff;
-  }
-  .placeholder .icon-wrap svg{width:30px;height:30px;}
-  .placeholder h2{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    color:var(--ink);
-    margin:0 0 10px;
-    font-size:24px;
-  }
-  .placeholder p{
-    color:var(--ink-soft);
-    font-size:14.5px;
-    line-height:1.6;
-    max-width:380px;
-    margin:0 auto;
-  }
-
-  /* ---------- Upload form ---------- */
-  .upload-card{
-    text-align:center;
-    padding:48px 32px;
-    border-radius:20px;
-    background:var(--paper);
-    border:1px solid var(--line);
-    max-width:480px;
-    margin:0 auto;
-  }
-  .upload-card h2{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    color:var(--ink);
-    margin:0 0 6px;
-    font-size:24px;
-  }
-  .upload-card .sub{
-    color:var(--ink-soft);
-    font-size:14px;
-    margin:0 0 28px;
-  }
-  .field-label{
-    display:block;
-    text-align:left;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin:0 0 6px;
-  }
-  .field-input{
-    width:100%;
-    padding:12px 14px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:var(--bg);
-    font-family:'Inter',sans-serif;
-    font-size:14.5px;
-    color:var(--ink);
-    margin-bottom:20px;
-  }
-  .field-input:focus{ outline:2px solid var(--gold); outline-offset:1px; }
-  .upload-btn{
-    width:100%;
-    padding:14px 18px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(150deg, var(--rust), var(--rust-deep));
-    color:#fff;
-    font-family:'Inter',sans-serif;
-    font-weight:700;
-    font-size:14px;
-    letter-spacing:.03em;
-    cursor:pointer;
+    margin-bottom:24px;
     transition:transform .2s ease, box-shadow .2s ease;
   }
-  .upload-btn:hover{ transform:translateY(-2px); box-shadow:0 14px 26px -10px rgba(150,63,31,.4); }
-  .upload-status{
-    margin-top:16px;
-    font-size:13px;
-    color:var(--ink-soft);
-    min-height:18px;
+  .back:hover{ transform:translateX(-3px); box-shadow:0 8px 18px -10px rgb(var(--shadow)/.4); }
+  .back svg{ width:15px; height:15px; }
+
+  /* ---------- Home: big module cards ---------- */
+  .modules{ display:grid; gap:18px; }
+  @media(min-width:760px){ .modules{ grid-template-columns:1fr 1fr; } .modules .m-food{ grid-column:1/-1; } }
+
+  .module{
+    position:relative;
+    border-radius:24px;
+    padding:30px 26px;
+    cursor:pointer;
+    overflow:hidden;
+    border:1px solid var(--line);
+    transition:transform .32s cubic-bezier(.2,.7,.2,1), box-shadow .32s ease;
+    min-height:158px;
+    display:flex; flex-direction:column; justify-content:space-between;
   }
+  .module:hover{ transform:translateY(-6px); box-shadow:0 28px 50px -22px rgb(var(--shadow)/.5); }
+  .module:active{ transform:translateY(-2px); }
+
+  .m-watch{ background:linear-gradient(150deg,#c0633b,#9e4a28); color:#fff7ef; }
+  .m-upload{ background:linear-gradient(150deg,#6e7449,#545936); color:#f6f4e6; }
+  .m-food{ background:var(--card); color:var(--ink); }
+
+  .module .top{ display:flex; align-items:flex-start; justify-content:space-between; }
+  .module .ic{
+    width:52px; height:52px; border-radius:15px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.16);
+  }
+  .m-food .ic{ background:linear-gradient(150deg,var(--clay),var(--clay-deep)); color:#fff; }
+  .module .ic svg{ width:26px; height:26px; }
+  .pill{
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+    padding:5px 11px; border-radius:100px;
+    background:rgba(255,255,255,.2); color:inherit;
+  }
+  .m-food .pill{ background:var(--paper-2); color:var(--clay-deep); }
+  .module{ text-align:left; }
+  .module h3{
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:30px; margin:18px 0 3px; letter-spacing:-.01em;
+  }
+  .module .ta{ font-family:'Noto Sans Tamil',sans-serif; font-size:14px; opacity:.85; margin-bottom:10px; }
+  .module .go{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600;
+  }
+  .module .go svg{ width:16px; height:16px; transition:transform .25s ease; }
+  .module:hover .go svg{ transform:translateX(5px); }
+  /* decorative blob */
+  .module .blob{ position:absolute; right:-50px; bottom:-60px; width:170px; height:170px; border-radius:50%; background:rgba(255,255,255,.07); }
+  .m-food .blob{ background:radial-gradient(circle,var(--ochre),transparent 68%); opacity:.16; }
+
+  /* ---------- Day cards ---------- */
+  .days{ display:grid; gap:18px; max-width:720px; margin:0 auto; }
+  @media(min-width:620px){ .days{ grid-template-columns:1fr 1fr; } }
+  .day{
+    position:relative; border-radius:22px; overflow:hidden; cursor:pointer;
+    padding:34px 26px; color:#fff;
+    transition:transform .3s ease, box-shadow .3s ease; border:none;
+    min-height:170px; display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .day:hover{ transform:translateY(-5px); box-shadow:0 26px 46px -20px rgb(var(--shadow)/.55); }
+  .day.reception{ background:linear-gradient(155deg,#c0633b,#8a3f22); }
+  .day.wedding{ background:linear-gradient(155deg,#6e7449,#444828); }
+  .day .num{ position:absolute; top:22px; right:26px; font-family:'Fraunces',serif; font-style:italic; font-size:46px; opacity:.32; }
+  .day .lbl{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; opacity:.85; }
+  .day h3{ font-family:'Fraunces',serif; font-weight:400; font-size:34px; margin:4px 0 4px; }
+  .day .date{ font-size:13.5px; opacity:.9; font-weight:500; }
+
+  /* ---------- Meal chips ---------- */
+  .meals{ display:grid; gap:14px; grid-template-columns:1fr 1fr; max-width:680px; margin:0 auto; }
+  @media(min-width:720px){ .meals.four{ grid-template-columns:repeat(4,1fr); } }
+  .meal{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:22px 18px; cursor:pointer; text-align:center;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .meal:hover{ transform:translateY(-4px); box-shadow:0 18px 32px -18px rgb(var(--shadow)/.45); border-color:var(--ochre); }
+  .meal .ic{
+    width:50px; height:50px; border-radius:15px; margin:0 auto 12px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--paper-2); color:var(--clay-deep);
+  }
+  .meal .ic svg{ width:25px; height:25px; }
+  .meal h4{ font-family:'Fraunces',serif; font-weight:500; font-size:18px; margin:0 0 2px; }
+  .meal .ta{ font-family:'Noto Sans Tamil',sans-serif; font-size:13px; color:var(--ink-soft); }
+
+  /* ---------- Menu cards ---------- */
+  .menu-grid{ display:grid; gap:14px; }
+  @media(min-width:600px){ .menu-grid{ grid-template-columns:1fr 1fr; } }
+  .dish{
+    display:flex; align-items:center; gap:16px;
+    background:var(--card); border:1px solid var(--line);
+    border-radius:18px; padding:12px 14px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .dish:hover{ transform:translateY(-3px); box-shadow:0 16px 30px -18px rgb(var(--shadow)/.4); }
+  .dish .pic{
+    flex:0 0 auto; width:66px; height:66px; border-radius:14px; overflow:hidden;
+    background:var(--paper-2); position:relative;
+  }
+  .dish .pic img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .dish .pic .ph{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    color:var(--clay); background:linear-gradient(150deg,#f1e6d4,#e7d8c0);
+  }
+  .dish .pic .ph svg{ width:30px; height:30px; }
+  .dish .meta{ min-width:0; }
+  .dish .en{ font-weight:600; font-size:16px; color:var(--ink); line-height:1.2; }
+  .dish .ta{ font-family:'Noto Sans Tamil',sans-serif; font-size:13.5px; color:var(--ink-soft); margin-top:3px; }
+
+  /* ---------- Watch / Upload panels ---------- */
+  .panel{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:24px; padding:46px 30px; text-align:center;
+    max-width:520px; margin:0 auto;
+  }
+  .panel .ic{
+    width:66px; height:66px; border-radius:19px; margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  .panel.watch .ic{ background:linear-gradient(150deg,#c0633b,#9e4a28); }
+  .panel.upload .ic{ background:linear-gradient(150deg,#6e7449,#545936); }
+  .panel .ic svg{ width:32px; height:32px; }
+  .panel h2{ font-family:'Fraunces',serif; font-weight:400; font-size:27px; margin:0 0 8px; }
+  .panel p.say{ color:var(--ink-soft); font-size:14.5px; line-height:1.6; margin:0 auto 26px; max-width:360px; }
+
+  .drop{
+    border:2px dashed var(--line); border-radius:18px;
+    padding:30px 20px; cursor:pointer; transition:border-color .2s ease, background .2s ease;
+    background:var(--paper);
+  }
+  .drop:hover{ border-color:var(--olive); background:var(--paper-2); }
+  .drop svg{ width:34px; height:34px; color:var(--olive); margin-bottom:10px; }
+  .drop .big{ font-weight:600; font-size:15px; color:var(--ink); }
+  .drop .small{ font-size:12.5px; color:var(--ink-soft); margin-top:4px; }
+  #upload-files{ display:none; }
+  .chosen{ margin-top:14px; font-size:13px; color:var(--olive-deep); font-weight:600; min-height:18px; }
+  .go-btn{
+    width:100%; margin-top:18px; padding:15px; border:none; border-radius:14px;
+    background:linear-gradient(150deg,#6e7449,#545936); color:#fff;
+    font-weight:700; font-size:15px; cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .go-btn:hover{ transform:translateY(-2px); box-shadow:0 16px 28px -12px rgba(84,89,54,.55); }
+  .go-btn:disabled{ opacity:.55; cursor:default; transform:none; box-shadow:none; }
+  .status{ margin-top:14px; font-size:13.5px; min-height:18px; color:var(--ink-soft); }
 
   footer{
-    text-align:center;
-    padding:30px 16px 46px;
-    font-size:11.5px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    font-weight:600;
+    text-align:center; padding:8px 16px 44px;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600;
   }
+  footer .heart{ color:var(--clay); }
 </style>
 </head>
 <body>
 <div class="app">
 
   <header class="hero">
-    <div class="hero-arc"></div>
-    <div class="hero-arc two"></div>
-    <p class="eyebrow">You are warmly invited</p>
-    <h1 class="names">Swathi <span class="amp">&amp;</span> Adithyaa</h1>
-    <p class="tamil-names">ஸ்வாதி &amp; ஆதித்யா — திருமணம்</p>
-    <div class="hero-date"><span class="dot"></span>23 &amp; 24 June 2026<span class="dot"></span>Reception &amp; Wedding</div>
+    <span class="hero-tag">Together with our families</span>
+    <h1 class="names">Swathi<span class="and">&amp;</span>Adithyaa</h1>
+    <p class="tamil-names">ஸ்வாதி &amp; ஆதித்யா</p>
+    <p class="hero-when"><b>23 &amp; 24 June 2026</b> · Reception &amp; Wedding</p>
+    <svg class="sprig" viewBox="0 0 80 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <path d="M2 12h26M52 12h26"/>
+      <path d="M40 4c-3 3-3 5 0 8 3-3 3-5 0-8zM40 12c-3 3-3 5 0 8 3-3 3-5 0-8z"/>
+      <circle cx="40" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+    </svg>
   </header>
 
   <main>
 
-    <!-- HOME VIEW -->
+    <!-- HOME -->
     <section id="view-home" class="view active">
-      <div class="section-head">
-        <p class="section-title">Explore the Celebration</p>
-        <p class="section-sub">விழா — தேர்ந்தெடுக்கவும்</p>
-      </div>
-      <div class="module-grid">
+      <div class="modules">
 
-        <div class="module-card" onclick="showView('view-watch')">
-          <span class="badge-soon">Coming soon</span>
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.7l6 3.3-6 3.3z" fill="currentColor" stroke="none"/></svg>
-          </span>
-          <h3>Watch Live</h3>
-          <span class="tamil-label">நேரலை காண்க</span>
-          <p class="desc">Stream the ceremony in real time, from wherever you are.</p>
-          <span class="cta">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
+        <button class="module m-watch" onclick="showView('view-watch')">
+          <div class="blob"></div>
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>
+            <span class="pill">Live soon</span>
+          </div>
+          <div>
+            <h3>Watch Live</h3>
+            <div class="ta">நேரலை</div>
+            <span class="go">Tune in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
 
-        <div class="module-card" onclick="showView('view-upload')">
-          <span class="badge-soon">Coming soon</span>
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8.5a2 2 0 0 1 2-2h1.2l.8-1.4A1.6 1.6 0 0 1 9.4 4.3h5.2a1.6 1.6 0 0 1 1.4.8l.8 1.4H18a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.3" r="3.4"/></svg>
-          </span>
-          <h3>Upload Memories</h3>
-          <span class="tamil-label">நினைவுகளை பகிரவும்</span>
-          <p class="desc">Drop in your favourite photos and videos from the day.</p>
-          <span class="cta">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
+        <button class="module m-upload" onclick="showView('view-upload')">
+          <div class="blob"></div>
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9a2 2 0 0 1 2-2h1.5l1-1.6A1.5 1.5 0 0 1 9.8 4.7h4.4a1.5 1.5 0 0 1 1.3.7l1 1.6H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M12 16V10M9.4 12.3L12 9.7l2.6 2.6"/></svg></span>
+            <span class="pill">Open now</span>
+          </div>
+          <div>
+            <h3>Share Photos</h3>
+            <div class="ta">புகைப்படங்கள்</div>
+            <span class="go">Add yours <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
 
-        <div class="module-card" onclick="showView('view-food-home')">
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3v7a2 2 0 1 0 4 0V3M9 10v11M15 3c2 1 2.5 3 2.5 5.5S17 13 15 13M17 13v8"/></svg>
-          </span>
-          <h3>Food</h3>
-          <span class="tamil-label">உணவு பட்டியல்</span>
-          <p class="desc">Every menu, every meal — Reception and Wedding day.</p>
-          <span class="cta">Open <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
+        <button class="module m-food" onclick="showView('view-days')">
+          <div class="blob"></div>
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v6.5a2.2 2.2 0 0 0 4.4 0V3M8.2 9.6V21M16.5 3c-1.8.6-2.8 2.6-2.8 5.2 0 2 1.1 3.4 2.8 3.6V21"/></svg></span>
+            <span class="pill">The menu</span>
+          </div>
+          <div>
+            <h3>What's Cooking</h3>
+            <div class="ta">உணவு பட்டியல்</div>
+            <span class="go">See every dish <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
 
       </div>
     </section>
 
-    <!-- FOOD: choose day -->
-    <section id="view-food-home" class="view">
-      <p class="crumb"><button onclick="showView('view-home')">&larr; Home</button> &nbsp;/&nbsp; Food</p>
-      <div class="section-head">
-        <p class="section-title">Choose the Day</p>
-        <p class="section-sub">நாளைத் தேர்ந்தெடுக்கவும்</p>
-      </div>
-      <div class="day-grid">
-        <div class="day-card" onclick="showView('view-day-reception')">
-          <span class="day-label">Day One</span>
+    <!-- DAYS -->
+    <section id="view-days" class="view">
+      <button class="back" onclick="showView('view-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Home</button>
+      <div class="lead"><h2>Pick a day</h2><p class="tamil">எந்த நாள்?</p></div>
+      <div class="days">
+        <button class="day reception" onclick="showView('view-meals-reception')">
+          <span class="num">01</span>
+          <span class="lbl">Day One</span>
           <h3>Reception</h3>
           <span class="date">23 June 2026 · வரவேற்பு</span>
-        </div>
-        <div class="day-card" onclick="showView('view-day-wedding')">
-          <span class="day-label">Day Two</span>
+        </button>
+        <button class="day wedding" onclick="showView('view-meals-wedding')">
+          <span class="num">02</span>
+          <span class="lbl">Day Two</span>
           <h3>Wedding</h3>
           <span class="date">24 June 2026 · திருமணம்</span>
-        </div>
+        </button>
       </div>
     </section>
 
-    <!-- FOOD: Reception meal chooser -->
-    <section id="view-day-reception" class="view">
-      <p class="crumb"><button onclick="showView('view-food-home')">&larr; Food</button> &nbsp;/&nbsp; Reception, 23 June</p>
-      <div class="section-head">
-        <p class="section-title">Reception — 23 June 2026</p>
-        <p class="section-sub">வரவேற்பு உணவு பட்டியல்</p>
-      </div>
-      <div class="meal-grid">
-        <div class="meal-card" onclick="renderMenu('reception','breakfast')">
-          <span class="icon-wrap" style="background:#f4ecd8;color:#b3873a">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="9" r="4"/><path d="M12 2.2v1.6M5 9H3.4M20.6 9H19M6.3 3.3l1.1 1.1M17.7 3.3l-1.1 1.1"/><path d="M5 18.5c1.6-1.7 4.2-2.7 7-2.7s5.4 1 7 2.7"/></svg>
-          </span>
-          <h4>Breakfast</h4>
-          <span class="tamil-label">காலை உணவு</span>
-        </div>
-        <div class="meal-card" onclick="renderMenu('reception','lunch')">
-          <span class="icon-wrap" style="background:#eef0df;color:#6f7d3c">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.6"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M5.6 18.4l1.7-1.7M16.7 7.3l1.7-1.7"/></svg>
-          </span>
-          <h4>Lunch</h4>
-          <span class="tamil-label">மதிய உணவு</span>
-        </div>
-        <div class="meal-card" onclick="renderMenu('reception','chat')">
-          <span class="icon-wrap" style="background:#e9e6d6;color:#6f6a3a">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7l16 0M6 7l1.2 11a2 2 0 0 0 2 1.8h5.6a2 2 0 0 0 2-1.8L18 7"/><path d="M9 4.2c0 1.5 1.3 2.8 3 2.8s3-1.3 3-2.8"/></svg>
-          </span>
-          <h4>Chat Corner</h4>
-          <span class="tamil-label">சாட் கார்னர்</span>
-        </div>
-        <div class="meal-card" onclick="renderMenu('reception','dinner')">
-          <span class="icon-wrap" style="background:#e7e3ee;color:#5b4f8a">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
-          </span>
-          <h4>Dinner</h4>
-          <span class="tamil-label">இரவு உணவு</span>
-        </div>
+    <!-- RECEPTION MEALS -->
+    <section id="view-meals-reception" class="view">
+      <button class="back" onclick="showView('view-days')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Days</button>
+      <div class="lead"><h2>Reception · 23 June</h2><p class="tamil">வரவேற்பு உணவு</p></div>
+      <div class="meals four">
+        <button class="meal" onclick="renderMenu('reception','breakfast')">
+          <span class="ic">__SUN__</span><h4>Breakfast</h4><span class="ta">காலை</span>
+        </button>
+        <button class="meal" onclick="renderMenu('reception','lunch')">
+          <span class="ic">__NOON__</span><h4>Lunch</h4><span class="ta">மதியம்</span>
+        </button>
+        <button class="meal" onclick="renderMenu('reception','chat')">
+          <span class="ic">__SNACK__</span><h4>Chat Corner</h4><span class="ta">சிற்றுண்டி</span>
+        </button>
+        <button class="meal" onclick="renderMenu('reception','dinner')">
+          <span class="ic">__MOON__</span><h4>Dinner</h4><span class="ta">இரவு</span>
+        </button>
       </div>
     </section>
 
-    <!-- FOOD: Wedding meal chooser -->
-    <section id="view-day-wedding" class="view">
-      <p class="crumb"><button onclick="showView('view-food-home')">&larr; Food</button> &nbsp;/&nbsp; Wedding, 24 June</p>
-      <div class="section-head">
-        <p class="section-title">Wedding — 24 June 2026</p>
-        <p class="section-sub">திருமண நாள் உணவு பட்டியல்</p>
-      </div>
-      <div class="meal-grid" style="grid-template-columns:repeat(2,1fr); max-width:560px; margin:0 auto;">
-        <div class="meal-card" onclick="renderMenu('wedding','breakfast')">
-          <span class="icon-wrap" style="background:#f4ecd8;color:#b3873a">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="9" r="4"/><path d="M12 2.2v1.6M5 9H3.4M20.6 9H19M6.3 3.3l1.1 1.1M17.7 3.3l-1.1 1.1"/><path d="M5 18.5c1.6-1.7 4.2-2.7 7-2.7s5.4 1 7 2.7"/></svg>
-          </span>
-          <h4>Breakfast</h4>
-          <span class="tamil-label">காலை உணவு</span>
-        </div>
-        <div class="meal-card" onclick="renderMenu('wedding','lunch')">
-          <span class="icon-wrap" style="background:#eef0df;color:#6f7d3c">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.6"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M5.6 18.4l1.7-1.7M16.7 7.3l1.7-1.7"/></svg>
-          </span>
-          <h4>Lunch</h4>
-          <span class="tamil-label">மதிய உணவு</span>
-        </div>
+    <!-- WEDDING MEALS -->
+    <section id="view-meals-wedding" class="view">
+      <button class="back" onclick="showView('view-days')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Days</button>
+      <div class="lead"><h2>Wedding · 24 June</h2><p class="tamil">திருமண உணவு</p></div>
+      <div class="meals">
+        <button class="meal" onclick="renderMenu('wedding','breakfast')">
+          <span class="ic">__SUN__</span><h4>Breakfast</h4><span class="ta">காலை</span>
+        </button>
+        <button class="meal" onclick="renderMenu('wedding','lunch')">
+          <span class="ic">__NOON__</span><h4>Lunch</h4><span class="ta">மதியம்</span>
+        </button>
       </div>
     </section>
 
-    <!-- FOOD: Menu list view -->
+    <!-- MENU LIST -->
     <section id="view-menu" class="view">
-      <p class="crumb"><button id="menu-back-btn" onclick="showView('view-food-home')">&larr; Food</button> &nbsp;/&nbsp; <span id="menu-crumb-label"></span></p>
-      <div class="menu-head">
-        <h2 id="menu-title-en"></h2>
-        <p class="tamil" id="menu-title-ta"></p>
-      </div>
-      <div class="menu-list" id="menu-list-body"></div>
+      <button class="back" id="menu-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg><span id="menu-back-label">Back</span></button>
+      <div class="lead"><h2 id="menu-title"></h2><p class="tamil" id="menu-title-ta"></p></div>
+      <div class="menu-grid" id="menu-grid"></div>
     </section>
 
-    <!-- WATCH LIVE (placeholder) -->
+    <!-- WATCH -->
     <section id="view-watch" class="view">
-      <p class="crumb"><button onclick="showView('view-home')">&larr; Home</button> &nbsp;/&nbsp; Watch Live</p>
-      <div class="placeholder">
-        <span class="icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.7l6 3.3-6 3.3z" fill="currentColor" stroke="none"/></svg>
-        </span>
-        <h2>Watch the Event Live</h2>
-        <p>The live stream link will appear here closer to the day. Check back soon!</p>
+      <button class="back" onclick="showView('view-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Home</button>
+      <div class="panel watch">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>
+        <h2>Watch the Live Stream</h2>
+        <p class="say">We'll go live right here during the ceremony. Come back closer to the day to tune in from wherever you are.</p>
       </div>
     </section>
 
-    <!-- UPLOAD MEMORIES -->
+    <!-- UPLOAD -->
     <section id="view-upload" class="view">
-      <p class="crumb"><button onclick="showView('view-home')">&larr; Home</button> &nbsp;/&nbsp; Upload Memories</p>
-      <div class="upload-card">
-        <span class="icon-wrap" style="margin:0 auto 18px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8.5a2 2 0 0 1 2-2h1.2l.8-1.4A1.6 1.6 0 0 1 9.4 4.3h5.2a1.6 1.6 0 0 1 1.4.8l.8 1.4H18a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.3" r="3.4"/></svg>
-        </span>
-        <h2>Share Your Memories</h2>
-        <p class="sub">Your photos and videos go straight into our shared wedding album.</p>
+      <button class="back" onclick="showView('view-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Home</button>
+      <div class="panel upload">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9a2 2 0 0 1 2-2h1.5l1-1.6A1.5 1.5 0 0 1 9.8 4.7h4.4a1.5 1.5 0 0 1 1.3.7l1 1.6H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M12 16V10M9.4 12.3L12 9.7l2.6 2.6"/></svg></span>
+        <h2>Share Your Photos</h2>
+        <p class="say">Caught a beautiful moment? Add it straight to the couple's album. Pick as many photos or videos as you like.</p>
 
-        <label class="field-label" for="upload-files">Photos &amp; videos</label>
-        <input class="field-input" id="upload-files" type="file" accept="image/*,video/*" multiple>
+        <label class="drop" for="upload-files" id="drop-zone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V5M8 9l4-4 4 4"/><path d="M5 16v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>
+          <div class="big">Tap to choose photos &amp; videos</div>
+          <div class="small">or drag them here</div>
+        </label>
+        <input id="upload-files" type="file" accept="image/*,video/*" multiple onchange="onPick()">
+        <div class="chosen" id="chosen"></div>
 
-        <button class="upload-btn" onclick="uploadFiles()">Upload to Wedding Album</button>
-        <p class="upload-status" id="upload-status"></p>
+        <button class="go-btn" id="go-btn" onclick="uploadFiles()">Add to the album</button>
+        <div class="status" id="status"></div>
       </div>
     </section>
-
 
   </main>
 
-  <footer>Swathi &amp; Adithyaa &middot; 23&ndash;24 June 2026</footer>
+  <footer>Made with <span class="heart">&hearts;</span> for Swathi &amp; Adithyaa</footer>
 </div>
 
 <script>
-// ---------- Icon library (hand-set line icons, by food category) ----------
-const ICONS = {
-  sweet:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 16c0-3 2-5 8-5s8 2 8 5-3 4-8 4-8-1-8-4z"/><path d="M9 11c0-3 1-6 3-6s3 3 3 6"/></svg>', bg:'#f6e3c8', fg:'#a8672c'},
-  rice:    {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="12" cy="17" rx="8" ry="4"/><path d="M6 17c0-5 2-11 6-13 4 2 6 8 6 13"/></svg>', bg:'#eef0df', fg:'#6f7d3c'},
-  fritter: {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.4"/></svg>', bg:'#f3e2cf', fg:'#a85c20'},
-  gravy:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 11h14l-1.2 6.4a2 2 0 0 1-2 1.6H8.2a2 2 0 0 1-2-1.6z"/><path d="M9 11c0-3 1.3-5 3-6 1.7 1 3 3 3 6"/></svg>', bg:'#f1e0d8', fg:'#a8492c'},
-  crepe:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="12" cy="13" rx="9" ry="3.4"/><path d="M3 13c0 2 0 3.6.3 4.4.6 1.6 4 2.6 8.7 2.6s8.1-1 8.7-2.6c.3-.8.3-2.4.3-4.4"/></svg>', bg:'#f4ecd8', fg:'#b3873a'},
-  snack:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7l16 0M6 7l1.2 11a2 2 0 0 0 2 1.8h5.6a2 2 0 0 0 2-1.8L18 7"/><path d="M9 4.2c0 1.5 1.3 2.8 3 2.8s3-1.3 3-2.8"/></svg>', bg:'#e9e6d6', fg:'#6f6a3a'},
-  beverage:{svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3h10l-1 13.5a2 2 0 0 1-2 1.9h-4a2 2 0 0 1-2-1.9z"/><path d="M9 21h6M12 18.4V21"/></svg>', bg:'#ece3d9', fg:'#b3622f'},
-  roti:    {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.4"/><path d="M12 6.6v10.8M6.6 12h10.8" stroke-dasharray="1.5 2.4"/></svg>', bg:'#f3e9cf', fg:'#a8762c'},
-  curry:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 13a8 8 0 0 0 16 0z"/><path d="M9 13V8M12 13V6M15 13V8"/></svg>', bg:'#eee0d4', fg:'#9c5328'},
-  papad:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.2"/><path d="M5.5 8.5c2 1.5 4 1 6.5-.5s4.5-2 6.5-.5M5.5 16c2-1.5 4-1 6.5.5s4.5 2 6.5.5"/></svg>', bg:'#f0e7cd', fg:'#a8842c'},
-  pickle:  {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="7" width="12" height="13" rx="2.4"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>', bg:'#e6e9d3', fg:'#5c6f2c'},
-  fruit:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9.5" cy="14" r="5.3"/><circle cx="16" cy="14" r="4"/><path d="M11 8.5c.5-2 1.8-3.4 3.3-4"/></svg>', bg:'#f1ddd6', fg:'#a8462c'},
-  icecream:{svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 9.5a5 5 0 0 1 10 0z"/><path d="M8 9.5L12 20l4-10.5"/></svg>', bg:'#eee6da', fg:'#a8762c'},
-  betel:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4c4 1 6 5 6 9a6 6 0 0 1-12 0c0-4 2-8 6-9z"/></svg>', bg:'#e4ecd8', fg:'#5c7d3c'},
-  spice:   {svg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4c2.2 3 3.6 5.7 3.6 8.3a3.6 3.6 0 1 1-7.2 0C8.4 9.7 9.8 7 12 4z"/></svg>', bg:'#f1ddd2', fg:'#a8492c'}
+const API_BASE = "https://as-thirumanam.onrender.com";
+
+// ---------- meal-time icons ----------
+const MEAL_ICONS = {
+  SUN:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M5.2 18.8l1.6-1.6M17.2 6.8l1.6-1.6"/></svg>',
+  NOON: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17h18M4.5 17a7.5 7.5 0 0 1 15 0M12 5.5V8M7 6.5l1 1.6M17 6.5l-1 1.6"/></svg>',
+  SNACK:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14M6.5 8l1 10a2 2 0 0 0 2 1.8h5a2 2 0 0 0 2-1.8l1-10"/><path d="M9 5c0 1.4 1.3 2.5 3 2.5S15 6.4 15 5"/></svg>',
+  MOON: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.2A8.4 8.4 0 1 1 9.8 4 7 7 0 0 0 20 14.2z"/></svg>'
 };
 
-function icon(cat){
-  const i = ICONS[cat] || ICONS.snack;
-  return `<span class="icon-wrap" style="background:${i.bg};color:${i.fg}">${i.svg}</span>`;
-}
-
-// Real, licensed photographs (Wikimedia Commons, CC BY-SA) mapped by dish category.
-// Categories without a confirmed real photo fall back to the hand-drawn icon above.
-function filePath(name){
-  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(name)}?width=300`;
-}
-const CATEGORY_PHOTOS = {
-  sweet:    'Paal payasam.JPG',
-  rice:     'Idli sambar.JPG',
-  fritter:  'Vada Food.jpg',
-  gravy:    'Paneer Butter Masala.jpg',
-  crepe:    'Masala Dosa (Bengaluru).JPG',
-  curry:    'Coconut Chutney - Home Made.JPG',
-  icecream: 'Paal payasam.JPG'
+// ---------- fallback category icons (when no photo file exists) ----------
+const ICON = {
+  sweet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16c0-3 2-5 8-5s8 2 8 5-3 4-8 4-8-1-8-4z"/><path d="M9 11c0-3 1-6 3-6s3 3 3 6"/></svg>',
+  rice:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="16.5" rx="8" ry="3.6"/><path d="M6 16.5c0-5 2-10.5 6-12.5 4 2 6 7.5 6 12.5"/></svg>',
+  fritter:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.3"/></svg>',
+  gravy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14l-1.2 6.2a2 2 0 0 1-2 1.6H8.2a2 2 0 0 1-2-1.6z"/><path d="M9.5 11c0-2.6 1-4.5 2.5-5.5 1.5 1 2.5 2.9 2.5 5.5"/></svg>',
+  crepe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="13" rx="9" ry="3.3"/><path d="M3 13c0 1.8 0 3.4.3 4.2.6 1.5 4 2.5 8.7 2.5s8.1-1 8.7-2.5c.3-.8.3-2.4.3-4.2"/></svg>',
+  snack:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14M6.5 8l1 10a2 2 0 0 0 2 1.8h5a2 2 0 0 0 2-1.8l1-10"/><path d="M9 5c0 1.4 1.3 2.5 3 2.5S15 6.4 15 5"/></svg>',
+  beverage:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h10l-1 13.5a2 2 0 0 1-2 1.9h-4a2 2 0 0 1-2-1.9z"/><path d="M9 21h6M12 18.4V21"/></svg>',
+  roti:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.4"/><path d="M12 6.5v11M6.5 12h11" stroke-dasharray="1.5 2.4"/></svg>',
+  curry:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 13a8 8 0 0 0 16 0z"/><path d="M9 13V8M12 13V6M15 13V8"/></svg>',
+  papad:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.2"/><path d="M5.5 8.5c2 1.5 4 1 6.5-.5s4.5-2 6.5-.5M5.5 16c2-1.5 4-1 6.5.5s4.5 2 6.5.5"/></svg>',
+  pickle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="7" width="12" height="13" rx="2.4"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>',
+  fruit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9.5" cy="14" r="5.3"/><circle cx="16" cy="14" r="4"/><path d="M11 8.5c.5-2 1.8-3.4 3.3-4"/></svg>',
+  icecream:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 9.5a5 5 0 0 1 10 0z"/><path d="M8 9.5L12 20l4-10.5"/></svg>',
+  betel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4c4 1 6 5 6 9a6 6 0 0 1-12 0c0-4 2-8 6-9z"/></svg>',
+  spice:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4c2.2 3 3.6 5.7 3.6 8.3a3.6 3.6 0 1 1-7.2 0C8.4 9.7 9.8 7 12 4z"/></svg>'
 };
 
-function imgFail(img){
-  const wrap = img.parentElement;
-  const cat = wrap.dataset.cat;
-  wrap.outerHTML = icon(cat);
-}
-
-function media(cat, en){
-  const photo = CATEGORY_PHOTOS[cat];
-  if (photo){
-    return `<span class="thumb" data-cat="${cat}"><img src="${filePath(photo)}" alt="${en}" loading="lazy" onerror="imgFail(this)"></span>`;
-  }
-  return icon(cat);
-}
-
-// ---------- Data ----------
+// dish: [English, Tamil, fallbackIconCategory, imageFileBaseName|null]
 const MENUS = {
   reception: {
-    label: "Reception · 23 June",
-    breakfast: {
-      titleEn: "Breakfast", titleTa: "காலை உணவு (டிஃபன்)",
-      items: [
-        ["Karupatti Halwa","கருப்பட்டி அல்வா","sweet"],
-        ["Rava Pongal","ரவா பொங்கல்","rice"],
-        ["Mini Idly Sambhar","மினி இட்லி சாம்பார்","rice"],
-        ["Vadai","வடை","fritter"],
-        ["Uthappam","உத்தப்பம்","crepe"],
-        ["Sambar","சாம்பார்","gravy"],
-        ["Chutney","சட்னி","curry"]
-      ]
-    },
-    lunch: {
-      titleEn: "Lunch (Meals)", titleTa: "மதிய உணவு",
-      items: [
-        ["Sweet Jam Poli with Ghee","நெய் போளி (இனிப்பு ஜாம்)","sweet"],
-        ["Parupu Podi","பருப்பு பொடி","spice"],
-        ["Mukkani Payasam","முக்கனி பாயசம்","sweet"],
-        ["Karaboondhi Pachadi","கார பூந்தி பச்சடி","curry"],
-        ["Kootu","கூட்டு","curry"],
-        ["Avarai Karamathu","அவரை கரமத்து","curry"],
-        ["Vazhai Podimas","வாழைப்பூ பொடிமாஸ்","curry"],
-        ["Karunai Button Chips & Vadam","காரணை பட்டன் சிப்ஸ் & வடாம்","papad"],
-        ["Paruppu Vadai","பருப்பு வடை","fritter"],
-        ["Sambar & Vathakuzhambu","சாம்பார் & வத்தக்குழம்பு","gravy"],
-        ["Tomato Sathumadhu","தக்காளி சாதுமுது","gravy"],
-        ["Curd & Pickle","தயிர் & ஊறுகாய்","pickle"]
-      ]
-    },
-    chat: {
-      titleEn: "Chat Corner", titleTa: "சாட் கார்னர் (மாலை சிற்றுண்டி)",
-      items: [
-        ["Ilai Kozhukattai","இலை கொழுக்கட்டை","sweet"],
-        ["Pani Puri","பானி பூரி","snack"],
-        ["Cheese Ball","சீஸ் பால்","fritter"],
-        ["Dhokla","தோக்லா","snack"],
-        ["Mango Juice","மாம்பழ ஜூஸ்","beverage"],
-        ["Mocktails","மாக்டெயில்ஸ்","beverage"]
-      ]
-    },
-    dinner: {
-      titleEn: "Dinner", titleTa: "இரவு உணவு",
-      items: [
-        ["Malai Roll","மலாய் ரோல்","sweet"],
-        ["Ilaneer Payasam","இளநீர் பாயசம்","sweet"],
-        ["Potato Roast","பொட்டேட்டோ ரோஸ்ட்","curry"],
-        ["Cutlet","கட்லெட்","fritter"],
-        ["Babycorn Manchurian","பேபிகார்ன் மஞ்சூரியன்","curry"],
-        ["Rumali Roti","ருமாலி ரொட்டி","roti"],
-        ["Paneer Butter Masala","பன்னீர் பட்டர் மசாலா","gravy"],
-        ["Idiyappam & Kurma","இடியாப்பம் & குருமா","crepe"],
-        ["Veg Rice & Raitha","வெஜ் ரைஸ் & ரைதா","rice"],
-        ["Bisebelabath & Papad","பிசிபேளபாத் & பப்படம்","rice"],
-        ["Pineapple Sathumadhu","அன்னாசி சாதுமுது","gravy"],
-        ["Curd Rice","தயிர் சாதம்","rice"],
-        ["Pickle","ஊறுகாய்","pickle"],
-        ["Cassata","கசாட்டா","icecream"],
-        ["Kulfi","குல்பி","icecream"],
-        ["Beeda","பீடா","betel"],
-        ["Cut Fruits","வெட்டிய பழங்கள்","fruit"]
-      ]
-    }
+    label:"Reception", back:"view-meals-reception",
+    breakfast:{ t:"Breakfast", ta:"காலை உணவு", items:[
+      ["Karupatti Halwa","கருப்பட்டி அல்வா","sweet","karupatti-halwa"],
+      ["Rava Pongal","ரவா பொங்கல்","rice","rava-pongal"],
+      ["Mini Idly Sambhar","மினி இட்லி சாம்பார்","rice","mini-idly-sambar"],
+      ["Vadai","வடை","fritter","vadai"],
+      ["Uthappam","உத்தப்பம்","crepe","uthappam"],
+      ["Sambar","சாம்பார்","gravy","sambar"],
+      ["Chutney","சட்னி","curry","chutney"]
+    ]},
+    lunch:{ t:"Lunch", ta:"மதிய உணவு", items:[
+      ["Sweet Jam Poli with Ghee","நெய் போளி","sweet","poli"],
+      ["Parupu Podi","பருப்பு பொடி","spice",null],
+      ["Mukkani Payasam","முக்கனி பாயசம்","sweet","mukkani-payasam"],
+      ["Karaboondhi Pachadi","கார பூந்தி பச்சடி","curry",null],
+      ["Kootu","கூட்டு","curry",null],
+      ["Avarai Karamathu","அவரை கரமத்து","curry",null],
+      ["Vazhai Podimas","வாழைப்பூ பொடிமாஸ்","curry",null],
+      ["Karunai Chips & Vadam","காரணை சிப்ஸ் & வடாம்","papad",null],
+      ["Paruppu Vadai","பருப்பு வடை","fritter","paruppu-vadai"],
+      ["Sambar & Vathakuzhambu","சாம்பார் & வத்தக்குழம்பு","gravy","sambar"],
+      ["Tomato Sathumadhu","தக்காளி சாதுமுது","gravy",null],
+      ["Curd & Pickle","தயிர் & ஊறுகாய்","pickle","curd-pickle"]
+    ]},
+    chat:{ t:"Chat Corner", ta:"மாலை சிற்றுண்டி", items:[
+      ["Ilai Kozhukattai","இலை கொழுக்கட்டை","sweet",null],
+      ["Pani Puri","பானி பூரி","snack","panipuri"],
+      ["Cheese Ball","சீஸ் பால்","fritter",null],
+      ["Dhokla","தோக்லா","snack","dhokla"],
+      ["Mango Juice","மாம்பழ ஜூஸ்","beverage","mango-juice"],
+      ["Mocktails","மாக்டெயில்ஸ்","beverage",null]
+    ]},
+    dinner:{ t:"Dinner", ta:"இரவு உணவு", items:[
+      ["Malai Roll","மலாய் ரோல்","sweet",null],
+      ["Ilaneer Payasam","இளநீர் பாயசம்","sweet","mukkani-payasam"],
+      ["Potato Roast","பொட்டேட்டோ ரோஸ்ட்","curry","potato-roast"],
+      ["Cutlet","கட்லெட்","fritter","cutlet"],
+      ["Babycorn Manchurian","பேபிகார்ன் மஞ்சூரியன்","curry","babycorn-manchurian"],
+      ["Rumali Roti","ருமாலி ரொட்டி","roti","rumali-roti"],
+      ["Paneer Butter Masala","பன்னீர் பட்டர் மசாலா","gravy","paneer-butter-masala"],
+      ["Idiyappam & Kurma","இடியாப்பம் & குருமா","crepe","idiyappam"],
+      ["Veg Rice & Raitha","வெஜ் ரைஸ் & ரைதா","rice",null],
+      ["Bisebelabath & Papad","பிசிபேளபாத் & பப்படம்","rice","bisibelabath"],
+      ["Pineapple Sathumadhu","அன்னாசி சாதுமுது","gravy",null],
+      ["Curd Rice","தயிர் சாதம்","rice","curd-rice"],
+      ["Pickle","ஊறுகாய்","pickle",null],
+      ["Cassata","கசாட்டா","icecream",null],
+      ["Kulfi","குல்பி","icecream","kulfi"],
+      ["Beeda","பீடா","betel",null],
+      ["Cut Fruits","வெட்டிய பழங்கள்","fruit","cut-fruits"]
+    ]}
   },
   wedding: {
-    label: "Wedding · 24 June",
-    breakfast: {
-      titleEn: "Breakfast (Special Tiffin)", titleTa: "காலை உணவு",
-      items: [
-        ["Badham Halwa","பாதாம் அல்வா","sweet"],
-        ["Malpua","மால்பூவா","sweet"],
-        ["Stuffed Idly","ஸ்டப்டு இட்லி","rice"],
-        ["Medhu Vadai","மேது வடை","fritter"],
-        ["Venpongal","வென் பொங்கல்","rice"],
-        ["Poori","பூரி","roti"],
-        ["Dosai","தோசை","crepe"],
-        ["Sambar","சாம்பார்","gravy"],
-        ["Chutney","சட்னி","curry"],
-        ["Milagai Podi","மிளகாய் பொடி","spice"],
-        ["Masala","மசாலா","spice"]
-      ]
-    },
-    lunch: {
-      titleEn: "Lunch (Special Meals)", titleTa: "மதிய உணவு",
-      items: [
-        ["Fruit Salad","பழ சாலட்","fruit"],
-        ["Mango Roll & Jangiri","மாம்பழ ரோல் & ஜாங்கிரி","sweet"],
-        ["Poosani Pulippu Kootu","பூசணி புளிப்பு கூட்டு","curry"],
-        ["Vazhakkai Fry","வாழைக்காய் வறுவல்","curry"],
-        ["Beans Usili","பீன்ஸ் உசிலி","curry"],
-        ["Curd Vadai","தயிர் வடை","fritter"],
-        ["Carrot Corn Khosmari","கேரட் கார்ன் கோஸுமாரி","curry"],
-        ["Bhindi Fry & Appalam","வெண்டைக்காய் வறுவல் & அப்பளம்","papad"],
-        ["Kadhamba Sambar","கதம்ப சாம்பார்","gravy"],
-        ["More Kuzhambu","மோர் குழம்பு","gravy"],
-        ["Puliyodharai","புலியோதரை","rice"],
-        ["Akkaravadisal","அக்கரவடிசல்","sweet"],
-        ["Curd Rice & Pickle","தயிர் சாதம் & ஊறுகாய்","rice"],
-        ["Ice Cream & Beeda","ஐஸ்க்ரீம் & பீடா","icecream"]
-      ]
-    }
+    label:"Wedding", back:"view-meals-wedding",
+    breakfast:{ t:"Breakfast", ta:"காலை உணவு", items:[
+      ["Badham Halwa","பாதாம் அல்வா","sweet","badam-halwa"],
+      ["Malpua","மால்பூவா","sweet",null],
+      ["Stuffed Idly","ஸ்டப்டு இட்லி","rice","mini-idly-sambar"],
+      ["Medhu Vadai","மேது வடை","fritter","medu-vadai"],
+      ["Venpongal","வென் பொங்கல்","rice","venpongal"],
+      ["Poori","பூரி","roti","poori"],
+      ["Dosai","தோசை","crepe","dosai"],
+      ["Sambar","சாம்பார்","gravy","sambar"],
+      ["Chutney","சட்னி","curry","chutney"],
+      ["Milagai Podi","மிளகாய் பொடி","spice","milagai-podi"],
+      ["Masala","மசாலா","spice",null]
+    ]},
+    lunch:{ t:"Lunch", ta:"மதிய உணவு", items:[
+      ["Fruit Salad","பழ சாலட்","fruit","fruit-salad"],
+      ["Mango Roll & Jangiri","மாம்பழ ரோல் & ஜாங்கிரி","sweet","jangiri"],
+      ["Poosani Pulippu Kootu","பூசணி புளிப்பு கூட்டு","curry",null],
+      ["Vazhakkai Fry","வாழைக்காய் வறுவல்","curry",null],
+      ["Beans Usili","பீன்ஸ் உசிலி","curry","beans-usili"],
+      ["Curd Vadai","தயிர் வடை","fritter","curd-vadai"],
+      ["Carrot Corn Khosmari","கேரட் கார்ன் கோஸுமாரி","curry",null],
+      ["Bhindi Fry & Appalam","வெண்டைக்காய் & அப்பளம்","papad",null],
+      ["Kadhamba Sambar","கதம்ப சாம்பார்","gravy","sambar"],
+      ["More Kuzhambu","மோர் குழம்பு","gravy",null],
+      ["Puliyodharai","புலியோதரை","rice","puliyodharai"],
+      ["Akkaravadisal","அக்கரவடிசல்","sweet",null],
+      ["Curd Rice & Pickle","தயிர் சாதம் & ஊறுகாய்","rice","curd-rice"],
+      ["Ice Cream & Beeda","ஐஸ்க்ரீம் & பீடா","icecream","ice-cream"]
+    ]}
   }
 };
 
 function showView(id){
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function pic(cat, img, en){
+  if(img){
+    return '<span class="pic"><img src="images/'+img+'.jpg" alt="'+en+'" loading="lazy" '+
+           'onerror="this.parentElement.innerHTML=\'<span class=&quot;ph&quot;>'+ICON[cat].replace(/"/g,'&quot;')+'</span>\'"></span>';
+  }
+  return '<span class="pic"><span class="ph">'+ICON[cat]+'</span></span>';
 }
 
 function renderMenu(day, meal){
-  const dayData = MENUS[day];
-  const mealData = dayData[meal];
-  document.getElementById('menu-title-en').textContent = mealData.titleEn + " — " + (day === 'reception' ? 'Reception' : 'Wedding');
-  document.getElementById('menu-title-ta').textContent = mealData.titleTa;
-  document.getElementById('menu-crumb-label').textContent = dayData.label + " / " + mealData.titleEn;
+  const d = MENUS[day], m = d[meal];
+  document.getElementById('menu-title').textContent = d.label + ' · ' + m.t;
+  document.getElementById('menu-title-ta').textContent = m.ta;
+  document.getElementById('menu-back-label').textContent = d.label;
+  document.getElementById('menu-back').onclick = ()=>showView(d.back);
 
-  const backBtn = document.getElementById('menu-back-btn');
-  backBtn.onclick = () => showView(day === 'reception' ? 'view-day-reception' : 'view-day-wedding');
-
-  const list = document.getElementById('menu-list-body');
-  list.innerHTML = mealData.items.map(([en, ta, cat], i) => `
-    <div class="menu-row">
-      ${media(cat, en)}
-      <div class="names">
-        <span class="en">${en}</span>
-        <span class="ta">${ta}</span>
-      </div>
-      <span class="idx">${String(i+1).padStart(2,'0')}</span>
-    </div>
-  `).join('');
+  document.getElementById('menu-grid').innerHTML = m.items.map(([en,ta,cat,img])=>
+    '<div class="dish">'+pic(cat,img,en)+
+    '<div class="meta"><div class="en">'+en+'</div><div class="ta">'+ta+'</div></div></div>'
+  ).join('');
 
   showView('view-menu');
 }
 
-// ---------- Upload Memories: sends files to the Flask + Google Drive backend ----------
-// After you deploy backend/app.py (see backend/README.md), paste its URL below.
-const API_BASE = "https://as-thirumanam.onrender.com";
+// inject meal icons
+document.querySelectorAll('.meal .ic').forEach(el=>{
+  const k = el.textContent.trim().replace(/_/g,'');
+  if(MEAL_ICONS[k]) el.innerHTML = MEAL_ICONS[k];
+});
+
+// ---------- upload ----------
+function onPick(){
+  const f = document.getElementById('upload-files').files;
+  document.getElementById('chosen').textContent = f.length ? f.length+' file'+(f.length>1?'s':'')+' ready to share' : '';
+}
 
 async function uploadFiles(){
-  const filesInput = document.getElementById('upload-files');
-  const status = document.getElementById('upload-status');
+  const input = document.getElementById('upload-files');
+  const status = document.getElementById('status');
+  const btn = document.getElementById('go-btn');
+  if(!input.files.length){ status.textContent='Choose at least one photo or video first.'; return; }
 
-  if (!filesInput.files.length){
-    status.textContent = 'Please choose at least one photo or video first.';
-    return;
-  }
-  if (API_BASE.includes('YOUR-BACKEND-URL')){
-    status.textContent = 'Backend not connected yet — see backend/README.md to deploy it, then update API_BASE.';
-    return;
-  }
-
-  status.textContent = 'Uploading…';
-  let success = 0, failed = 0;
-
-  for (const file of filesInput.files){
+  btn.disabled = true;
+  let ok=0, bad=0, i=0, total=input.files.length;
+  for(const file of input.files){
+    i++;
+    status.textContent = 'Uploading '+i+' of '+total+'…';
     const form = new FormData();
     form.append('file', file);
     try{
-      const res = await fetch(API_BASE + '/api/upload', { method: 'POST', body: form });
-      if (res.ok) success++; else failed++;
-    }catch(e){
-      failed++;
-    }
+      const res = await fetch(API_BASE+'/api/upload',{method:'POST',body:form});
+      res.ok ? ok++ : bad++;
+    }catch(e){ bad++; }
   }
-
-  status.textContent = failed
-    ? `Uploaded ${success} file(s) — ${failed} failed. Please try again for the failed ones.`
-    : `All set! ${success} file(s) uploaded to the wedding album. Thank you!`;
-  filesInput.value = '';
+  status.textContent = bad
+    ? ('Shared '+ok+', but '+bad+' didn\u2019t go through. Please try those again.')
+    : ('All done — '+ok+' added to the album. Thank you! \u2764');
+  input.value=''; document.getElementById('chosen').textContent=''; btn.disabled=false;
 }
 </script>
 </body>
