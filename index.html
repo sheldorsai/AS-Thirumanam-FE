@@ -13,7 +13,12 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swathi & Adithyaa</title>
+<title>SwAdi Wedding</title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
@@ -30,6 +35,9 @@
     --olive:#6e7449;          /* olive secondary */
     --olive-deep:#545936;
     --ochre:#d99a3e;          /* warm ochre accent */
+    --ochre-deep:#a86f23;
+    --rose:#9c4f56;           /* deep dusty rose for Agenda */
+    --rose-deep:#723a3f;
     --line:#e3d6c2;           /* hairline */
     --shadow:38 27 16;        /* rgb for shadows */
   }
@@ -121,28 +129,39 @@
   /* hand-drawn divider */
   .sprig{ margin:30px auto 0; display:block; width:60px; height:auto; color:var(--olive); opacity:.8; }
 
+  .caricature-row{
+    display:flex; justify-content:center; align-items:flex-end; gap:10px;
+    margin:0 0 14px;
+  }
   .caricature{
     display:block;
-    width:104px;
-    height:auto;
-    margin:0 auto 14px;
+    height:128px;
+    width:auto;
+    margin:0;
     filter:drop-shadow(0 14px 22px rgba(38,27,16,.18));
     position:relative;
     z-index:2;
   }
   @media(min-width:760px){
+    .caricature-row{ display:contents; }
     .caricature{
       position:absolute;
       top:50%;
       margin:0;
-      width:clamp(190px, 17vw, 320px);
+      height:clamp(190px, 19vw, 330px);
+      width:auto;
       transform:translateY(-44%) rotate(-2deg);
     }
     .caricature-left{ left:clamp(2%, 6vw, 9%); }
+    .caricature-right{
+      right:clamp(1%, 4vw, 6%);
+      height:clamp(120px, 11.5vw, 200px);
+      transform:translateY(-44%) rotate(2deg);
+    }
   }
   @media(min-width:1300px){
-    .caricature{ width:clamp(260px, 18vw, 380px); }
-    .caricature-left{ left:clamp(4%, 7vw, 10%); }
+    .caricature-left{ height:clamp(240px, 20vw, 380px); left:clamp(4%, 7vw, 10%); }
+    .caricature-right{ height:clamp(150px, 12.5vw, 230px); right:clamp(3%, 5vw, 7%); }
   }
 
   .hero-venue{
@@ -216,8 +235,8 @@
 
   .m-watch{ background:linear-gradient(150deg,#c0633b,#9e4a28); color:#fff7ef; }
   .m-upload{ background:linear-gradient(150deg,#6e7449,#545936); color:#f6f4e6; }
-  .m-food{ background:var(--card); color:var(--ink); }
-  .m-agenda{ background:var(--card); color:var(--ink); }
+  .m-food{ background:linear-gradient(150deg,var(--ochre),var(--ochre-deep)); color:#fff8ec; }
+  .m-agenda{ background:linear-gradient(150deg,var(--rose),var(--rose-deep)); color:#fbeeee; }
 
   .module .top{ display:flex; align-items:flex-start; justify-content:space-between; }
   .module .ic{
@@ -227,16 +246,12 @@
     animation:icPulse 2.8s ease-in-out infinite;
   }
   @keyframes icPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.08); } }
-  .m-food .ic{ background:linear-gradient(150deg,var(--clay),var(--clay-deep)); color:#fff; }
-  .m-agenda .ic{ background:linear-gradient(150deg,var(--olive),var(--olive-deep)); color:#fff; }
   .module .ic svg{ width:26px; height:26px; }
   .pill{
     font-size:10px; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
     padding:5px 11px; border-radius:100px;
     background:rgba(255,255,255,.2); color:inherit;
   }
-  .m-food .pill{ background:var(--paper-2); color:var(--clay-deep); }
-  .m-agenda .pill{ background:var(--paper-2); color:var(--olive-deep); }
   .module{ text-align:left; }
   .module h3{
     font-family:'Fraunces', serif; font-weight:400;
@@ -252,7 +267,40 @@
   .module:hover .go svg{ animation:none; transform:translateX(5px); }
   /* decorative blob */
   .module .blob{ position:absolute; right:-50px; bottom:-60px; width:170px; height:170px; border-radius:50%; background:rgba(255,255,255,.07); }
-  .m-food .blob{ background:radial-gradient(circle,var(--ochre),transparent 68%); opacity:.16; }
+
+  /* Drawing-in photos on the right edge of each home button, curved to
+     blend into the card rather than sit as a hard rectangle. */
+  .lp-photo{
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+  }
+  .lp-share, .lp-agenda{
+    top:0; right:0; bottom:0;
+    width:46%;
+    height:100%;
+    object-fit:cover;
+    border-radius:38% 0 0 38% / 50% 0 0 50%;
+    -webkit-mask-image:linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+    mask-image:linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+    opacity:.92;
+  }
+  .lp-live, .lp-cooking{
+    top:50%; right:4%;
+    width:46%;
+    transform:translateY(-50%);
+    object-fit:contain;
+    -webkit-mask-image:linear-gradient(to left, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    mask-image:linear-gradient(to left, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    filter:drop-shadow(0 10px 18px rgba(0,0,0,.25));
+  }
+  @media(max-width:480px){
+    .lp-share, .lp-agenda{ width:42%; }
+    .lp-live, .lp-cooking{ width:42%; right:2%; }
+  }
+  /* keep text readable above the photo on every card */
+  .module .top, .module h3, .module .ta, .module .go{ position:relative; z-index:1; }
+
   /* corner shimmer sweep to draw the eye */
   .module .shine{
     position:absolute; top:0; left:-60%; width:40%; height:100%;
@@ -373,6 +421,18 @@
     display:flex; align-items:center; justify-content:center; color:#fff;
   }
   .panel.watch .ic{ background:linear-gradient(150deg,#c0633b,#9e4a28); }
+
+  .watch-embed{
+    position:relative; width:100%; max-width:720px; margin:0 auto;
+    aspect-ratio:16/9; border-radius:18px; overflow:hidden;
+    background:#000; box-shadow:0 24px 46px -22px rgb(var(--shadow)/.5);
+  }
+  .watch-embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .yt-fallback{
+    display:block; text-align:center; margin:16px auto 0;
+    font-size:13px; font-weight:600; color:var(--clay-deep);
+    text-decoration:underline;
+  }
   .panel.upload .ic{ background:linear-gradient(150deg,#6e7449,#545936); }
   .panel .ic svg{ width:32px; height:32px; }
   .panel h2{ font-family:'Fraunces',serif; font-weight:400; font-size:27px; margin:0 0 8px; }
@@ -443,7 +503,6 @@
     border-radius:22px; overflow:hidden;
     background:#000;
     box-shadow:0 24px 46px -22px rgb(var(--shadow)/.5);
-    cursor:pointer;
   }
   .carousel-head{ text-align:center; margin:0 0 14px; }
   .carousel-head h3{
@@ -459,16 +518,18 @@
     padding:4px 12px;
   }
   .video-wrap video{ display:block; width:100%; max-height:560px; }
-  .mute-btn{
-    position:absolute; right:14px; bottom:14px;
+  .mute-btn, .fullscreen-btn{
+    position:absolute; bottom:14px;
     width:42px; height:42px; border-radius:50%;
     border:none; background:rgba(20,16,10,.55);
     color:#fff; display:flex; align-items:center; justify-content:center;
     cursor:pointer; backdrop-filter:blur(3px);
     transition:background .2s ease, transform .2s ease;
   }
-  .mute-btn:hover{ background:rgba(20,16,10,.75); transform:scale(1.06); }
-  .mute-btn svg{ width:20px; height:20px; }
+  .mute-btn{ right:14px; }
+  .fullscreen-btn{ right:64px; }
+  .mute-btn:hover, .fullscreen-btn:hover{ background:rgba(20,16,10,.75); transform:scale(1.06); }
+  .mute-btn svg, .fullscreen-btn svg{ width:20px; height:20px; }
   #mute-slash{ transition:opacity .15s ease; }
 
   .carousel{
@@ -477,9 +538,7 @@
     aspect-ratio:4/3;
     overflow:hidden;
     border-radius:20px;
-    cursor:pointer;
     box-shadow:0 18px 36px -18px rgb(var(--shadow)/.4);
-    touch-action:pan-y;
   }
   .carousel .layer{
     position:absolute; inset:0;
@@ -489,6 +548,32 @@
     transition:opacity .55s ease;
   }
   .carousel .layer.front{ opacity:1; }
+
+  .car-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:38px; height:38px; border-radius:50%;
+    border:none; background:rgba(20,16,10,.45);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; backdrop-filter:blur(2px);
+    transition:background .2s ease, transform .2s ease;
+    z-index:2;
+  }
+  .car-arrow:hover{ background:rgba(20,16,10,.7); }
+  .car-arrow svg{ width:18px; height:18px; }
+  .car-prev{ left:10px; }
+  .car-next{ right:10px; }
+
+  .car-expand{
+    position:absolute; top:10px; right:10px;
+    width:34px; height:34px; border-radius:50%;
+    border:none; background:rgba(20,16,10,.45);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; backdrop-filter:blur(2px);
+    transition:background .2s ease, transform .2s ease;
+    z-index:2;
+  }
+  .car-expand:hover{ background:rgba(20,16,10,.7); transform:scale(1.06); }
+  .car-expand svg{ width:16px; height:16px; }
 
   .lightbox{
     position:fixed; inset:0; z-index:200;
@@ -537,7 +622,10 @@
 
   <header class="hero">
     <span class="hero-tag">Together with our families</span>
-    <img class="caricature caricature-left" src="images/caricature-couple.png" alt="Swathi and Adithyaa caricature">
+    <div class="caricature-row">
+      <img class="caricature caricature-left" src="images/caricature-couple.png" alt="Swathi and Adithyaa caricature">
+      <img class="caricature caricature-right" src="images/caricature-family.png" alt="Family caricature">
+    </div>
     <h1 class="names">Swathi<span class="and">&amp;</span>Adithyaa</h1>
     <p class="tamil-names">ஸ்வாதி &amp; ஆதித்யா</p>
     <p class="hero-when"><b>23 &amp; 24 June 2026</b> · Reception &amp; Wedding</p>
@@ -561,6 +649,7 @@
 
         <button class="module m-watch" onclick="showView('view-watch')">
           <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-live" src="images/buttons/live.png" alt="">
           <div class="top">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>
             <span class="pill">Live soon</span>
@@ -574,6 +663,7 @@
 
         <button class="module m-upload" onclick="showView('view-upload')">
           <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-share" src="images/buttons/share.jpg" alt="">
           <div class="top">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9a2 2 0 0 1 2-2h1.5l1-1.6A1.5 1.5 0 0 1 9.8 4.7h4.4a1.5 1.5 0 0 1 1.3.7l1 1.6H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M12 16V10M9.4 12.3L12 9.7l2.6 2.6"/></svg></span>
             <span class="pill">Open now</span>
@@ -587,6 +677,7 @@
 
         <button class="module m-food" onclick="showView('view-days')">
           <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-cooking" src="images/buttons/cooking.png" alt="">
           <div class="top">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v6.5a2.2 2.2 0 0 0 4.4 0V3M8.2 9.6V21M16.5 3c-1.8.6-2.8 2.6-2.8 5.2 0 2 1.1 3.4 2.8 3.6V21"/></svg></span>
             <span class="pill">The menu</span>
@@ -600,6 +691,7 @@
 
         <button class="module m-agenda" onclick="showView('view-agenda')">
           <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-agenda" src="images/buttons/agenda.jpg" alt="">
           <div class="top">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="4.5" width="17" height="16" rx="3"/><path d="M8 3v3M16 3v3M3.5 9.5h17"/><path d="M7.5 13h2M7.5 16.3h5"/></svg></span>
             <span class="pill">The schedule</span>
@@ -619,8 +711,11 @@
           <p class="tamil">எங்கள் கதை</p>
         </div>
 
-        <div class="video-wrap" id="video-wrap" onclick="toggleMute()">
+        <div class="video-wrap" id="video-wrap">
           <video id="eng-video" src="videos/engagement.mp4" playsinline webkit-playsinline autoplay loop muted></video>
+          <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen(event)" aria-label="Watch fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
+          </button>
           <button class="mute-btn" id="mute-btn" onclick="toggleMute(event)">
             <svg id="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5z"/><path d="M16.5 8.5a4 4 0 0 1 0 7M19 6a7.5 7.5 0 0 1 0 12" opacity=".4"/><line x1="3" y1="3" x2="21" y2="21" id="mute-slash"/></svg>
           </button>
@@ -633,6 +728,15 @@
         <div class="carousel" id="carousel">
           <img class="layer front" id="layer-a" src="" alt="Engagement photo">
           <img class="layer" id="layer-b" src="" alt="Engagement photo">
+          <button class="car-arrow car-prev" onclick="manualAdvance(-1)" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="car-arrow car-next" onclick="manualAdvance(1)" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button class="car-expand" onclick="carouselTapped()" aria-label="View fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -719,11 +823,28 @@
     <!-- WATCH -->
     <section id="view-watch" class="view">
       <button class="back" onclick="showView('view-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Home</button>
-      <div class="panel watch">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>
-        <h2>Watch the Live Stream</h2>
-        <p class="say">We'll go live right here during the ceremony. Come back closer to the day to tune in from wherever you are.</p>
+      <div class="lead"><h2>Watch Live</h2><p class="tamil">நேரலை — நாளைத் தேர்ந்தெடுக்கவும்</p></div>
+      <div class="days">
+        <button class="day reception" onclick="renderWatch('reception')">
+          <span class="num">01</span>
+          <span class="lbl">Day One</span>
+          <h3>Reception</h3>
+          <span class="date">23 June 2026 · வரவேற்பு</span>
+        </button>
+        <button class="day wedding" onclick="renderWatch('wedding')">
+          <span class="num">02</span>
+          <span class="lbl">Day Two</span>
+          <h3>Wedding</h3>
+          <span class="date">24 June 2026 · திருமணம்</span>
+        </button>
       </div>
+    </section>
+
+    <!-- WATCH PLAYER -->
+    <section id="view-watch-player" class="view">
+      <button class="back" onclick="showView('view-watch')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Watch Live</button>
+      <div class="lead"><h2 id="watch-title"></h2></div>
+      <div id="watch-body"></div>
     </section>
 
     <!-- UPLOAD -->
@@ -946,7 +1067,14 @@ let suppressPush = false;
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(id === 'view-home'){
+    window.scrollTo({top:0, behavior:'smooth'});
+  } else {
+    const mainTop = document.querySelector('main').getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({top: mainTop - 8, behavior:'smooth'});
+  }
+
   if(!suppressPush){
     viewStack.push(id);
     history.pushState({depth: viewStack.length}, '', '#nav-'+id);
@@ -1003,6 +1131,37 @@ function pic(cat, img, en){
            'onerror="this.parentElement.innerHTML=\'<span class=&quot;ph&quot;>'+ICON[cat].replace(/"/g,'&quot;')+'</span>\'"></span>';
   }
   return '<span class="pic"><span class="ph">'+ICON[cat]+'</span></span>';
+}
+
+// ---------- Watch Live ----------
+// Paste just the YouTube video ID here for each day (the part after
+// "/live/" or "watch?v=" in the link, before any "?" or "&").
+// Reception's is already in. Add Wedding's the same way once you have it.
+const WATCH_LINKS = {
+  reception: "-o1y4xKZt6s",   // https://www.youtube.com/live/-o1y4xKZt6s
+  wedding: ""                 // <-- paste the Wedding day video ID here
+};
+
+function renderWatch(day){
+  const id = WATCH_LINKS[day];
+  const label = day === 'reception' ? 'Reception' : 'Wedding';
+  document.getElementById('watch-title').textContent = label + ' — Live Stream';
+
+  const body = document.getElementById('watch-body');
+  if(id){
+    body.innerHTML =
+      '<div class="watch-embed"><iframe src="https://www.youtube.com/embed/'+id+'" '+
+      'title="'+label+' live stream" frameborder="0" '+
+      'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'+
+      '<a class="yt-fallback" href="https://www.youtube.com/watch?v='+id+'" target="_blank" rel="noopener">'+
+      'Having trouble? Open directly on YouTube</a>';
+  } else {
+    body.innerHTML =
+      '<div class="panel watch"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">'+
+      '<rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>'+
+      '<h2>Link coming soon</h2><p class="say">We\'ll add the '+label+' livestream link here closer to the day.</p></div>';
+  }
+  showView('view-watch-player');
 }
 
 function renderMenu(day, meal){
@@ -1069,42 +1228,51 @@ async function uploadFiles(){
 }
 
 // ---------- Engagement memories: video mute toggle ----------
-let audioUnlocked = false;
-
+// Sound is controlled ONLY by the explicit mute button — nothing else on
+// the page (not a click on the video, not any other tap) ever changes it.
 function toggleMute(e){
   if(e) e.stopPropagation();
-  audioUnlocked = true;
   const v = document.getElementById('eng-video');
   v.muted = !v.muted;
   document.getElementById('mute-slash').style.opacity = v.muted ? '1' : '0';
 }
 
-// Audio is muted by default (required for autoplay to work at all in every
-// browser), but the very first interaction anywhere on the page counts as
-// a user gesture — so we use it to turn sound on automatically, meaning
-// most guests hear it without ever touching the mute button themselves.
-(function(){
-  function firstGesture(){
-    if(audioUnlocked) return;
-    audioUnlocked = true;
-    const v = document.getElementById('eng-video');
-    v.muted = false;
-    const slash = document.getElementById('mute-slash');
-    if(slash) slash.style.opacity = '0';
-  }
-  window.addEventListener('touchstart', firstGesture, {passive:true, once:true});
-  window.addEventListener('click', firstGesture, {once:true});
-})();
+function toggleFullscreen(e){
+  if(e) e.stopPropagation();
+  const v = document.getElementById('eng-video');
+  if(v.requestFullscreen) v.requestFullscreen();
+  else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen(); // iOS Safari
+  else if(v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+}
 
-// Belt-and-suspenders looping: some mobile browsers (notably iOS Safari)
-// can silently stop honoring the native `loop` attribute, especially
-// after the video has been paused/resumed or muted state changed via JS.
-// Forcing a restart on 'ended' guarantees it always keeps playing.
 (function(){
   const v = document.getElementById('eng-video');
+  let firstPlayDone = false;
+
+  // Try to play with sound on the very first play-through. Browsers may
+  // block this outright (autoplay-with-sound policy) — if so it silently
+  // falls back to muted, which is required for autoplay to work at all.
+  v.muted = false;
+  v.play().then(function(){
+    document.getElementById('mute-slash').style.opacity = '0';
+  }).catch(function(){
+    v.muted = true;
+    document.getElementById('mute-slash').style.opacity = '1';
+    v.play().catch(function(){});
+  });
+
+  // Reliable looping (some browsers silently stop honoring the native
+  // `loop` attribute), and: after the first play-through, audio resets to
+  // muted automatically — from then on, sound only comes back if the
+  // guest presses the mute button again for that next loop.
   v.addEventListener('ended', function(){
+    if(firstPlayDone){
+      v.muted = true;
+      document.getElementById('mute-slash').style.opacity = '1';
+    }
+    firstPlayDone = true;
     v.currentTime = 0;
-    v.play().catch(function(){ /* ignore — will retry on next user interaction */ });
+    v.play().catch(function(){});
   });
 })();
 
@@ -1148,29 +1316,14 @@ function carouselTapped(){
   openLightbox(realIndex);
 }
 
-// swipe directly on the carousel — swipe to advance/retreat, tap (no real
-// movement) opens the lightbox instead
-(function(){
-  const el = document.getElementById('carousel');
-  let startX = null, dragged = false;
-  el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragged = false; }, {passive:true});
-  el.addEventListener('touchmove', e => {
-    if(startX !== null && Math.abs(e.touches[0].clientX - startX) > 12) dragged = true;
-  }, {passive:true});
-  el.addEventListener('touchend', e => {
-    if(startX === null) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    if(Math.abs(dx) > 40){
-      stopCarousel();
-      advanceCarousel(dx < 0 ? 1 : -1);
-      startCarousel();
-    } else if(!dragged){
-      carouselTapped();
-    }
-    startX = null;
-  }, {passive:true});
-  el.addEventListener('click', () => { if(!dragged) carouselTapped(); });
-})();
+// Manual prev/next via the visible arrow buttons — pauses autoplay
+// briefly so a deliberate click doesn't get immediately overridden by
+// the timer, then resumes the automatic carousel as before.
+function manualAdvance(step){
+  stopCarousel();
+  advanceCarousel(step);
+  startCarousel();
+}
 
 initCarousel();
 startCarousel();
