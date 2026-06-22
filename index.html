@@ -125,14 +125,14 @@
       position:absolute;
       top:50%;
       margin:0;
-      width:170px;
-      transform:translateY(-46%) rotate(-2deg);
+      width:clamp(190px, 17vw, 320px);
+      transform:translateY(-44%) rotate(-2deg);
     }
-    .caricature-left{ left:3%; }
+    .caricature-left{ left:clamp(2%, 6vw, 9%); }
   }
-  @media(min-width:1040px){
-    .caricature{ width:200px; }
-    .caricature-left{ left:7%; }
+  @media(min-width:1300px){
+    .caricature{ width:clamp(260px, 18vw, 380px); }
+    .caricature-left{ left:clamp(4%, 7vw, 10%); }
   }
 
   .hero-venue{
@@ -670,27 +670,27 @@ const MENUS = {
   reception: {
     label:"Reception", back:"view-meals-reception",
     breakfast:{ t:"Breakfast", ta:"காலை உணவு", items:[
-      ["Karupatti Halwa","கருப்பட்டி அல்வா","sweet","karupatti-halwa"],
-      ["Rava Pongal","ரவா பொங்கல்","rice","rava-pongal"],
+      ["Karupatti Halwa","கருப்பட்டி அல்வா","sweet","Menu/RB_KarupattiHalwa.png"],
+      ["Rava Pongal","ரவா பொங்கல்","rice","Menu/RB_RavaPongal.jpg"],
       ["Mini Idly Sambhar","மினி இட்லி சாம்பார்","rice","mini-idly-sambar"],
-      ["Vadai","வடை","fritter","vadai"],
-      ["Uthappam","உத்தப்பம்","crepe","uthappam"],
-      ["Sambar","சாம்பார்","gravy","sambar"],
-      ["Chutney","சட்னி","curry","chutney"]
+      ["Vadai","வடை","fritter","Menu/RB_Vadai.jpg"],
+      ["Uthappam","உத்தப்பம்","crepe","Menu/RB_Uthappam.jpg"],
+      ["Sambar","சாம்பார்","gravy","Menu/RB_Sambar.jpg"],
+      ["Chutney","சட்னி","curry","Menu/RB_Chutney.jpg"]
     ]},
     lunch:{ t:"Lunch", ta:"மதிய உணவு", items:[
-      ["Sweet Jam Poli with Ghee","நெய் போளி","sweet","poli"],
-      ["Parupu Podi","பருப்பு பொடி","spice",null],
-      ["Mukkani Payasam","முக்கனி பாயசம்","sweet","mukkani-payasam"],
-      ["Karaboondhi Pachadi","கார பூந்தி பச்சடி","curry",null],
-      ["Kootu","கூட்டு","curry",null],
-      ["Avarai Karamathu","அவரை கரமத்து","curry",null],
-      ["Vazhai Podimas","வாழைப்பூ பொடிமாஸ்","curry",null],
-      ["Karunai Chips & Vadam","காரணை சிப்ஸ் & வடாம்","papad",null],
-      ["Paruppu Vadai","பருப்பு வடை","fritter","paruppu-vadai"],
-      ["Sambar & Vathakuzhambu","சாம்பார் & வத்தக்குழம்பு","gravy","sambar"],
-      ["Tomato Sathumadhu","தக்காளி சாதுமுது","gravy",null],
-      ["Curd & Pickle","தயிர் & ஊறுகாய்","pickle","curd-pickle"]
+      ["Sweet Jam Poli with Ghee","நெய் போளி","sweet","Menu/RL_SweetJamPoliwithGhee.jpg"],
+      ["Parupu Podi","பருப்பு பொடி","spice","Menu/RL_ParupuPodi.jpg"],
+      ["Mukkani Payasam","முக்கனி பாயசம்","sweet","Menu/RL_MukkaniPayasam.jpg"],
+      ["Karaboondhi Pachadi","கார பூந்தி பச்சடி","curry","Menu/RL_KaraboondhiPachadi.jpg"],
+      ["Kootu","கூட்டு","curry","Menu/RL_Kootu.jpg"],
+      ["Avarai Karamathu","அவரை கரமத்து","curry","Menu/RL_AvaraiKaramathu.jpg"],
+      ["Vazhai Podimas","வாழைப்பூ பொடிமாஸ்","curry","Menu/RL_VazhaiPodimas.jpg"],
+      ["Karunai Chips & Vadam","காரணை சிப்ஸ் & வடாம்","papad","Menu/RL_KarunaiChips&Vadam.jpg"],
+      ["Paruppu Vadai","பருப்பு வடை","fritter","Menu/RL_ParuppuVadai.jpg"],
+      ["Sambar & Vathakuzhambu","சாம்பார் & வத்தக்குழம்பு","gravy","Menu/RL_Sambar&Vathakuzhambu.jpg"],
+      ["Tomato Sathumadhu","தக்காளி சாதுமுது","gravy","Menu/RL_TomatoSathumadhu.jpg"],
+      ["Curd & Pickle","தயிர் & ஊறுகாய்","pickle","Menu/RL_Curd&Pickle.jpg"]
     ]},
     chat:{ t:"Chat Corner", ta:"மாலை சிற்றுண்டி", items:[
       ["Ilai Kozhukattai","இலை கொழுக்கட்டை","sweet",null],
@@ -754,15 +754,59 @@ const MENUS = {
   }
 };
 
+let viewStack = ['view-home'];
+let suppressPush = false;
+
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  if(!suppressPush){
+    viewStack.push(id);
+    history.pushState({depth: viewStack.length}, '', '#'+id);
+  }
 }
+
+function goBack(){
+  if(viewStack.length > 1) history.back();
+}
+
+window.addEventListener('popstate', function(){
+  if(viewStack.length > 1){
+    viewStack.pop();
+    const prev = viewStack[viewStack.length-1];
+    suppressPush = true;
+    showView(prev);
+    suppressPush = false;
+  }
+});
+
+history.replaceState({depth:1}, '', '#view-home');
+
+// swipe left anywhere on the page (outside the lightbox) goes back one step
+(function(){
+  let startX = null, startY = null;
+  document.addEventListener('touchstart', function(e){
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(startX === null) return;
+    const lb = document.getElementById('lightbox');
+    if(lb.classList.contains('open')){ startX = null; return; } // lightbox handles its own swipe
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if(Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy)*1.5 && dx < 0){
+      goBack();
+    }
+    startX = null;
+  }, {passive:true});
+})();
 
 function pic(cat, img, en){
   if(img){
-    return '<span class="pic"><img src="images/'+img+'.jpg" alt="'+en+'" loading="lazy" '+
+    const src = img.indexOf('/') > -1 ? img : 'images/'+img+'.jpg';
+    return '<span class="pic"><img src="'+src+'" alt="'+en+'" loading="lazy" '+
            'onerror="this.parentElement.innerHTML=\'<span class=&quot;ph&quot;>'+ICON[cat].replace(/"/g,'&quot;')+'</span>\'"></span>';
   }
   return '<span class="pic"><span class="ph">'+ICON[cat]+'</span></span>';
