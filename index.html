@@ -58,6 +58,16 @@
     --line:#e3d6c2;           /* hairline */
     --shadow:38 27 16;        /* rgb for shadows */
   }
+  html[data-theme="dark"]{
+    --paper:#211a14;
+    --paper-2:#2b2219;
+    --card:#2c241b;
+    --ink:#f3e9da;
+    --ink-soft:#bba98e;
+    --line:#473a2a;
+    --shadow:0 0 0;
+  }
+  html, body{ transition: background-color .35s ease, color .35s ease; }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
@@ -86,6 +96,58 @@
   .app{position:relative; z-index:1;}
 
   /* ---------- Hero ---------- */
+  /* ---------- Sticky top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px;
+    background:rgba(247,241,232,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  html[data-theme="dark"] .topbar{ background:rgba(33,26,20,.86); }
+  .tb-home{
+    border:none; background:none; cursor:pointer;
+    font-family:'Fraunces', serif; font-weight:600; font-style:italic;
+    font-size:19px; color:var(--clay-deep);
+    padding:4px 2px;
+  }
+  .tb-right{ display:flex; align-items:center; gap:8px; }
+
+  .tz-picker{ position:relative; }
+  .tz-btn{
+    display:flex; align-items:center; gap:6px;
+    border:1px solid var(--line); background:var(--card);
+    color:var(--ink); border-radius:100px;
+    padding:7px 13px; font-size:12px; font-weight:600;
+    cursor:pointer; white-space:nowrap;
+  }
+  .tz-btn svg{ width:14px; height:14px; color:var(--clay-deep); flex:0 0 auto; }
+  .tz-menu{
+    display:none; position:absolute; top:calc(100% + 8px); right:0;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    box-shadow:0 18px 36px -16px rgb(var(--shadow)/.4);
+    padding:6px; min-width:190px; z-index:101;
+  }
+  .tz-menu.open{ display:block; }
+  .tz-opt{
+    display:block; width:100%; text-align:left;
+    border:none; background:none; cursor:pointer;
+    padding:9px 11px; border-radius:9px;
+    font-size:13px; font-weight:600; color:var(--ink);
+  }
+  .tz-opt:hover{ background:var(--paper-2); }
+  .tz-opt.active{ color:var(--clay-deep); background:var(--paper-2); }
+
+  .theme-btn{
+    width:36px; height:36px; border-radius:50%;
+    border:1px solid var(--line); background:var(--card);
+    color:var(--clay-deep); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    flex:0 0 auto;
+  }
+  .theme-btn svg{ width:17px; height:17px; }
+
   header.hero{
     position:relative;
     text-align:center;
@@ -346,6 +408,7 @@
   .day .lbl{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; opacity:.85; }
   .day h3{ font-family:'Fraunces',serif; font-weight:400; font-size:34px; margin:4px 0 4px; }
   .day .date{ font-size:13.5px; opacity:.9; font-weight:500; }
+  .day .date-time{ display:block; font-size:12.5px; opacity:.85; font-weight:600; margin-top:3px; }
 
   /* ---------- Meal chips ---------- */
   .meals{ display:grid; gap:14px; grid-template-columns:1fr 1fr; max-width:680px; margin:0 auto; }
@@ -639,6 +702,22 @@
 <body>
 <div class="app">
 
+  <header class="topbar">
+    <button class="tb-home" onclick="showView('view-home')" aria-label="Home">A&amp;S</button>
+    <div class="tb-right">
+      <div class="tz-picker">
+        <button class="tz-btn" id="tz-btn" onclick="toggleTzMenu()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <span id="tz-label">India · IST</span>
+        </button>
+        <div class="tz-menu" id="tz-menu"></div>
+      </div>
+      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.5A7 7 0 0 1 12 3z"/></svg>
+      </button>
+    </div>
+  </header>
+
   <header class="hero">
     <span class="hero-tag">Together with our families</span>
     <div class="caricature-row">
@@ -848,19 +927,22 @@
           <span class="num">01</span>
           <span class="lbl">23 June</span>
           <h3>Engagement</h3>
-          <span class="date">23 June 2026 · நிச்சயதார்த்தம்</span>
+          <span class="date">நிச்சயதார்த்தம்</span>
+          <span class="date-time" id="wl-time-engagement"></span>
         </button>
         <button class="day reception" onclick="renderWatch('reception')">
           <span class="num">02</span>
           <span class="lbl">23 June</span>
           <h3>Reception</h3>
-          <span class="date">23 June 2026 · வரவேற்பு</span>
+          <span class="date">வரவேற்பு</span>
+          <span class="date-time" id="wl-time-reception"></span>
         </button>
         <button class="day wedding" onclick="renderWatch('wedding')">
           <span class="num">03</span>
           <span class="lbl">24 June</span>
           <h3>Wedding</h3>
-          <span class="date">24 June 2026 · திருமணம்</span>
+          <span class="date">திருமணம்</span>
+          <span class="date-time" id="wl-time-wedding"></span>
         </button>
       </div>
     </section>
@@ -1026,6 +1108,97 @@ const MENUS = {
   }
 };
 
+// ---------- Timezone engine ----------
+// Fixed UTC offsets for June 2026 (so daylight saving is already baked
+// in correctly for that time of year — no live DST calculation needed).
+const TZ_OFFSETS = { IST:5.5, UK:1, AU:10, EST:-4, CST:-5, MDT:-6, PST:-7 };
+const TZ_LABELS = {
+  IST:"India · IST", UK:"UK · GMT+1", AU:"Australia · AEST",
+  EST:"USA East · EST", CST:"USA Central · CST",
+  MDT:"USA Mountain · MDT", PST:"USA West · PST"
+};
+const TZ_LIST = ["IST","UK","AU","EST","CST","MDT","PST"];
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+let currentTz = localStorage.getItem('swadi_tz') || 'IST';
+
+function fmtInTz(isoString){
+  const instant = new Date(isoString); // absolute instant, correctly parsed via the +05:30 suffix
+  const shiftedMs = instant.getTime() + TZ_OFFSETS[currentTz]*3600000;
+  const d = new Date(shiftedMs);
+  let h = d.getUTCHours(), m = d.getUTCMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  let h12 = h % 12; if(h12 === 0) h12 = 12;
+  const mm = String(m).padStart(2,'0');
+  return {
+    time: h12 + ':' + mm + ' ' + ampm,
+    dateKey: d.getUTCFullYear()+'-'+d.getUTCMonth()+'-'+d.getUTCDate(),
+    dayLabel: d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()]
+  };
+}
+
+function buildTzMenu(){
+  document.getElementById('tz-menu').innerHTML = TZ_LIST.map(k =>
+    '<button class="tz-opt'+(k===currentTz?' active':'')+'" onclick="selectTz(\''+k+'\')">'+TZ_LABELS[k]+'</button>'
+  ).join('');
+}
+function toggleTzMenu(){ document.getElementById('tz-menu').classList.toggle('open'); }
+function selectTz(k){
+  currentTz = k;
+  localStorage.setItem('swadi_tz', k);
+  document.getElementById('tz-label').textContent = TZ_LABELS[k];
+  document.getElementById('tz-menu').classList.remove('open');
+  buildTzMenu();
+  renderAgenda();
+  refreshWatchTimes();
+}
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.tz-picker')) document.getElementById('tz-menu').classList.remove('open');
+});
+document.getElementById('tz-label').textContent = TZ_LABELS[currentTz];
+buildTzMenu();
+
+// ---------- Watch Live: dynamic times per timezone ----------
+const WATCH_TIMES_IST = {
+  engagement: "2026-06-23T14:00:00+05:30",
+  reception:  "2026-06-23T18:30:00+05:30",
+  wedding:    "2026-06-24T06:00:00+05:30"
+};
+function refreshWatchTimes(){
+  for(const key of Object.keys(WATCH_TIMES_IST)){
+    const el = document.getElementById('wl-time-'+key);
+    if(!el) continue;
+    const f = fmtInTz(WATCH_TIMES_IST[key]);
+    el.textContent = f.dayLabel + ', ' + f.time + ' (' + currentTz + ')';
+  }
+}
+refreshWatchTimes();
+
+// ---------- Theme: light/dark, auto-detect by IST time, manual override ----------
+const SUN_ICON = '<path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.5A7 7 0 0 1 12 3z"/>';
+const MOON_ICON = '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M5.2 18.8l1.6-1.6M17.2 6.8l1.6-1.6"/>';
+
+function istHourNow(){
+  const now = new Date();
+  const utcMs = now.getTime() + now.getTimezoneOffset()*60000;
+  const ist = new Date(utcMs + 5.5*3600000);
+  return ist.getUTCHours();
+}
+function autoTheme(){
+  const h = istHourNow();
+  return (h >= 19 || h < 5) ? 'dark' : 'light';
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('theme-icon').innerHTML = t === 'dark' ? SUN_ICON : MOON_ICON;
+}
+function toggleTheme(){
+  const next = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+  localStorage.setItem('swadi_theme', next);
+  applyTheme(next);
+}
+applyTheme(localStorage.getItem('swadi_theme') || autoTheme());
+
 // ---------- Agenda ----------
 const AGENDA_ICONS = {
   baby: '<svg viewBox="0 0 24 24"><circle cx="12" cy="11" r="6" fill="#e8b27e"/><path d="M6.5 9c1-3 3-4.6 5.5-4.6s4.5 1.6 5.5 4.6" fill="none" stroke="#6e4a2c" stroke-width="1.6" stroke-linecap="round"/><circle cx="9.5" cy="11.5" r="1" fill="#3a2a1a"/><circle cx="14.5" cy="11.5" r="1" fill="#3a2a1a"/><circle cx="9" cy="14" r="1.1" fill="#e08a6a" opacity=".6"/><circle cx="15" cy="14" r="1.1" fill="#e08a6a" opacity=".6"/><path d="M9.5 15.5c1 1 4 1 5 0" fill="none" stroke="#6e4a2c" stroke-width="1.3" stroke-linecap="round"/></svg>',
@@ -1043,37 +1216,49 @@ const AGENDA_ICONS = {
   leaf: '<svg viewBox="0 0 24 24"><path d="M3.5 12.5c3 5.5 14 5.5 17 0-3-6.5-14-6.5-17 0z" fill="#6e7449"/><path d="M12 8.5v8" stroke="#3f5c30" stroke-width="1.1"/><ellipse cx="10.5" cy="13" rx="2.6" ry="1.7" fill="#f3e8d8"/><circle cx="14.5" cy="12.3" r=".9" fill="#c0633b"/><circle cx="16.2" cy="13.6" r=".7" fill="#d99a3e"/></svg>'
 };
 
-const AGENDA = [
-  { date:"23rd June", items:[
-    ["Jathakarma Namakarama for Bride","7.30 am","8.30 am","baby"],
-    ["Viradham for Groom","10.30 am","12.30 pm","kalasam"],
-    ["Nichayathartham","2.00 pm","3.30 pm","handshake"],
-    ["Perumal Temple Visit by Groom","4.30 pm","5.30 pm","temple"],
-    ["Reception Arrival by Bride and Groom","6.30 pm","9.30 pm","couple"]
-  ]},
-  { date:"24th June", items:[
-    ["Bride (Mai Eduthal Event)","4.00 am","5.00 am","bride"],
-    ["Kasi Yatra and Oonjal","5.00 am","5.45 am","scale"],
-    ["Bride and Groom Arrival at Manapandhal","5.50 am","12.00 pm","gate"],
-    ["Muhurtham","6.00 am","7.00 am","crown"],
-    ["Nalangu","5.00 pm","6.00 pm","hand"],
-    ["Paalum Pazhamum visit to Groom Home","7.00 pm","8.00 pm","glass"],
-    ["Paalum Pazhamum visit to Bride Home","8.00 pm","9.00 pm","fruit"]
-  ]},
-  { date:"25th June", items:[
-    ["Kattu Sadham","10.30 am","11.30 am","leaf"]
-  ]}
+// Every item stored as its real IST date+time (with explicit +05:30 so it
+// parses to the correct absolute instant regardless of viewer's browser).
+const AGENDA_ITEMS = [
+  ["Jathakarma Namakarama for Bride","2026-06-23T07:30:00+05:30","2026-06-23T08:30:00+05:30","baby"],
+  ["Viradham for Groom","2026-06-23T10:30:00+05:30","2026-06-23T12:30:00+05:30","kalasam"],
+  ["Nichayathartham","2026-06-23T14:00:00+05:30","2026-06-23T15:30:00+05:30","handshake"],
+  ["Perumal Temple Visit by Groom","2026-06-23T16:30:00+05:30","2026-06-23T17:30:00+05:30","temple"],
+  ["Reception Arrival by Bride and Groom","2026-06-23T18:30:00+05:30","2026-06-23T21:30:00+05:30","couple"],
+  ["Bride (Mai Eduthal Event)","2026-06-24T04:00:00+05:30","2026-06-24T05:00:00+05:30","bride"],
+  ["Kasi Yatra and Oonjal","2026-06-24T05:00:00+05:30","2026-06-24T05:45:00+05:30","scale"],
+  ["Bride and Groom Arrival at Manapandhal","2026-06-24T05:50:00+05:30","2026-06-24T12:00:00+05:30","gate"],
+  ["Muhurtham","2026-06-24T06:00:00+05:30","2026-06-24T07:00:00+05:30","crown"],
+  ["Nalangu","2026-06-24T17:00:00+05:30","2026-06-24T18:00:00+05:30","hand"],
+  ["Paalum Pazhamum visit to Groom Home","2026-06-24T19:00:00+05:30","2026-06-24T20:00:00+05:30","glass"],
+  ["Paalum Pazhamum visit to Bride Home","2026-06-24T20:00:00+05:30","2026-06-24T21:00:00+05:30","fruit"],
+  ["Kattu Sadham","2026-06-25T10:30:00+05:30","2026-06-25T11:30:00+05:30","leaf"]
 ];
 
 function renderAgenda(){
-  document.getElementById('agenda-body').innerHTML = AGENDA.map(day => `
+  // group items by their calendar date IN THE CURRENTLY SELECTED timezone —
+  // this matters because converting timezones can shift an item to a
+  // different day (e.g. a 5am IST event lands the evening before in US zones).
+  const groups = [];
+  let lastKey = null;
+  for(const [ev, startIso, endIso, icon] of AGENDA_ITEMS){
+    const start = fmtInTz(startIso);
+    const end = fmtInTz(endIso);
+    const key = start.dateKey;
+    if(key !== lastKey){
+      groups.push({ label: start.dayLabel, items: [] });
+      lastKey = key;
+    }
+    groups[groups.length-1].items.push({ ev, start: start.time, end: end.time, icon });
+  }
+
+  document.getElementById('agenda-body').innerHTML = groups.map(day => `
     <div class="agenda-day">
       <div class="agenda-day-head">
-        <span class="big">${day.date}</span>
-        <span class="lbl">2026</span>
+        <span class="big">${day.label}</span>
+        <span class="lbl">2026 · ${TZ_LABELS[currentTz]}</span>
       </div>
       <div class="agenda-list">
-        ${day.items.map(([ev, start, end, icon]) => `
+        ${day.items.map(({ev, start, end, icon}) => `
           <div class="agenda-row">
             <span class="ic">${AGENDA_ICONS[icon]}</span>
             <div class="body"><div class="ev">${ev}</div></div>
@@ -1169,7 +1354,8 @@ const WATCH_LABELS = { engagement: "Engagement", reception: "Reception", wedding
 function renderWatch(day){
   const id = WATCH_LINKS[day];
   const label = WATCH_LABELS[day];
-  document.getElementById('watch-title').textContent = label + ' — Live Stream';
+  const f = fmtInTz(WATCH_TIMES_IST[day]);
+  document.getElementById('watch-title').textContent = label + ' — ' + f.dayLabel + ', ' + f.time + ' (' + currentTz + ')';
 
   const body = document.getElementById('watch-body');
   if(id){
