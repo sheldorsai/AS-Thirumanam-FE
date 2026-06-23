@@ -108,10 +108,11 @@
   html[data-theme="dark"] .topbar{ background:rgba(33,26,20,.86); }
   .tb-home{
     border:none; background:none; cursor:pointer;
-    font-family:'Fraunces', serif; font-weight:600; font-style:italic;
-    font-size:19px; color:var(--clay-deep);
-    padding:4px 2px;
+    padding:2px; display:flex; align-items:center;
+    transition:transform .2s ease;
   }
+  .tb-home:hover{ transform:scale(1.06); }
+  .tb-home img{ height:34px; width:auto; display:block; }
   .tb-right{ display:flex; align-items:center; gap:8px; }
 
   .tz-picker{ position:relative; }
@@ -703,7 +704,7 @@
 <div class="app">
 
   <header class="topbar">
-    <button class="tb-home" onclick="showView('view-home')" aria-label="Home">A&amp;S</button>
+    <button class="tb-home" onclick="showView('view-home')" aria-label="Home"><img src="images/logo-as.png" alt="A&amp;S — Home"></button>
     <div class="tb-right">
       <div class="tz-picker">
         <button class="tz-btn" id="tz-btn" onclick="toggleTzMenu()">
@@ -1151,6 +1152,7 @@ function selectTz(k){
   buildTzMenu();
   renderAgenda();
   refreshWatchTimes();
+  refreshWatchPlayerTitle();
 }
 document.addEventListener('click', function(e){
   if(!e.target.closest('.tz-picker')) document.getElementById('tz-menu').classList.remove('open');
@@ -1197,7 +1199,11 @@ function toggleTheme(){
   localStorage.setItem('swadi_theme', next);
   applyTheme(next);
 }
-applyTheme(localStorage.getItem('swadi_theme') || autoTheme());
+// Always start in light theme unless the visitor has explicitly chosen
+// dark before (remembered via localStorage). No more auto-switching based
+// on the current IST hour — that auto-detect default was removed per
+// request; dark mode is now purely opt-in via the toggle button.
+applyTheme(localStorage.getItem('swadi_theme') || 'light');
 
 // ---------- Agenda ----------
 const AGENDA_ICONS = {
@@ -1350,8 +1356,10 @@ const WATCH_LINKS = {
   wedding:    "OdXc39iTX4A"   // https://youtube.com/live/OdXc39iTX4A — 24 June
 };
 const WATCH_LABELS = { engagement: "Engagement", reception: "Reception", wedding: "Wedding" };
+let currentWatchDay = null;
 
 function renderWatch(day){
+  currentWatchDay = day;
   const id = WATCH_LINKS[day];
   const label = WATCH_LABELS[day];
   const f = fmtInTz(WATCH_TIMES_IST[day]);
@@ -1372,6 +1380,16 @@ function renderWatch(day){
       '<h2>Link coming soon</h2><p class="say">We\'ll add the '+label+' livestream link here closer to the day.</p></div>';
   }
   showView('view-watch-player');
+}
+
+// Updates just the title text on the watch-player page when the timezone
+// changes — deliberately does NOT touch watch-body, so an already-playing
+// embedded video never gets reloaded/restarted just from a timezone switch.
+function refreshWatchPlayerTitle(){
+  if(!currentWatchDay) return;
+  const f = fmtInTz(WATCH_TIMES_IST[currentWatchDay]);
+  document.getElementById('watch-title').textContent =
+    WATCH_LABELS[currentWatchDay] + ' — ' + f.dayLabel + ', ' + f.time + ' (' + currentTz + ')';
 }
 
 function renderMenu(day, meal){
