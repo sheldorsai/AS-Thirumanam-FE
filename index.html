@@ -331,6 +331,7 @@
   /* ---------- Day cards ---------- */
   .days{ display:grid; gap:18px; max-width:720px; margin:0 auto; }
   @media(min-width:620px){ .days{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:860px){ .days-three{ grid-template-columns:1fr 1fr 1fr; max-width:980px; } }
   .day{
     position:relative; border-radius:22px; overflow:hidden; cursor:pointer;
     padding:34px 26px; color:#fff;
@@ -338,6 +339,7 @@
     min-height:170px; display:flex; flex-direction:column; justify-content:flex-end;
   }
   .day:hover{ transform:translateY(-5px); box-shadow:0 26px 46px -20px rgb(var(--shadow)/.55); }
+  .day.engagement{ background:linear-gradient(155deg,#d99a3e,#a86f23); }
   .day.reception{ background:linear-gradient(155deg,#c0633b,#8a3f22); }
   .day.wedding{ background:linear-gradient(155deg,#6e7449,#444828); }
   .day .num{ position:absolute; top:22px; right:26px; font-family:'Fraunces',serif; font-style:italic; font-size:46px; opacity:.32; }
@@ -841,16 +843,22 @@
     <section id="view-watch" class="view">
       <button class="back" onclick="showView('view-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H6M12 6l-6 6 6 6"/></svg>Home</button>
       <div class="lead"><h2>Watch Live</h2><p class="tamil">நேரலை — நாளைத் தேர்ந்தெடுக்கவும்</p></div>
-      <div class="days">
-        <button class="day reception" onclick="renderWatch('reception')">
+      <div class="days days-three">
+        <button class="day engagement" onclick="renderWatch('engagement')">
           <span class="num">01</span>
-          <span class="lbl">Day One</span>
+          <span class="lbl">23 June</span>
+          <h3>Engagement</h3>
+          <span class="date">23 June 2026 · நிச்சயதார்த்தம்</span>
+        </button>
+        <button class="day reception" onclick="renderWatch('reception')">
+          <span class="num">02</span>
+          <span class="lbl">23 June</span>
           <h3>Reception</h3>
           <span class="date">23 June 2026 · வரவேற்பு</span>
         </button>
         <button class="day wedding" onclick="renderWatch('wedding')">
-          <span class="num">02</span>
-          <span class="lbl">Day Two</span>
+          <span class="num">03</span>
+          <span class="lbl">24 June</span>
           <h3>Wedding</h3>
           <span class="date">24 June 2026 · திருமணம்</span>
         </button>
@@ -1151,17 +1159,16 @@ function pic(cat, img, en){
 }
 
 // ---------- Watch Live ----------
-// Paste just the YouTube video ID here for each day (the part after
-// "/live/" or "watch?v=" in the link, before any "?" or "&").
-// Reception's is already in. Add Wedding's the same way once you have it.
 const WATCH_LINKS = {
-  reception: "-o1y4xKZt6s",   // https://www.youtube.com/live/-o1y4xKZt6s
-  wedding: ""                 // <-- paste the Wedding day video ID here
+  engagement: "TPPO5qiNl_I",  // https://youtube.com/live/TPPO5qiNl_I — 23 June
+  reception:  "aq3R2wJ0C48",  // https://youtube.com/live/aq3R2wJ0C48 — 23 June
+  wedding:    "OdXc39iTX4A"   // https://youtube.com/live/OdXc39iTX4A — 24 June
 };
+const WATCH_LABELS = { engagement: "Engagement", reception: "Reception", wedding: "Wedding" };
 
 function renderWatch(day){
   const id = WATCH_LINKS[day];
-  const label = day === 'reception' ? 'Reception' : 'Wedding';
+  const label = WATCH_LABELS[day];
   document.getElementById('watch-title').textContent = label + ' — Live Stream';
 
   const body = document.getElementById('watch-body');
