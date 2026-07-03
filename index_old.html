@@ -575,12 +575,10 @@
   .memories{ margin-top:54px; }
   .memories-head{ text-align:center; margin-bottom:24px; }
   .memories-head h2{
-    font-family:'Fraunces', serif; font-weight:500;
-    font-size:clamp(28px,7vw,48px); margin:6px 0 0; color:var(--ink);
-    line-height:1.12; letter-spacing:-.02em;
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:clamp(24px,5.5vw,32px); margin:0 0 4px; color:var(--ink);
   }
-  .mem-and{ font-style:italic; color:var(--clay); font-weight:400; }
-  .memories-head .tamil{ display:none; }
+  .memories-head .tamil{ color:var(--ink-soft); font-size:14px; }
 
   .video-wrap{
     position:relative;
@@ -700,108 +698,6 @@
     color:var(--ink-soft); font-weight:600;
   }
   footer .heart{ color:var(--clay); }
-
-  /* ---------- Sneak Peek ---------- */
-  .sneak-peek{ margin-bottom:50px; }
-  .sneak-head{ text-align:center; margin-bottom:22px; }
-  .sneak-head h2{
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:clamp(24px,5.5vw,32px); margin:0 0 4px; color:var(--ink);
-  }
-  .sneak-head .tamil{ color:var(--ink-soft); font-size:14px; margin:0; }
-  .sneak-tag{
-    display:inline-block; margin-bottom:10px;
-    font-size:10.5px; letter-spacing:.28em; text-transform:uppercase;
-    color:var(--clay); font-weight:700;
-  }
-  .sneak-cooking{
-    text-align:center; margin-top:20px;
-    font-size:13.5px; color:var(--ink-soft); font-weight:500;
-    font-style:italic;
-  }
-  .sneak-cooking::before{
-    content:"● "; color:var(--clay); font-style:normal; font-size:9px;
-    vertical-align:middle; margin-right:4px;
-  }
-
-  /* Polaroid multi-card slider */
-  .sneak-scroll{
-    position:relative;
-    overflow:hidden;
-    margin:0 -18px;
-    padding:22px 0 26px;
-  }
-  .sneak-track{
-    display:flex;
-    gap:16px;
-    padding:0 18px;
-    transition:transform .52s cubic-bezier(.22,.7,.2,1);
-    will-change:transform;
-    align-items:center;
-  }
-  .polaroid{
-    flex:0 0 clamp(180px,62vw,214px);
-    background:#fff;
-    padding:10px 10px 38px;
-    border:none; cursor:pointer;
-    box-shadow:0 6px 22px -8px rgba(38,27,16,.28), 0 1px 4px rgba(38,27,16,.08);
-    transition:transform .3s ease, box-shadow .3s ease;
-    transform:rotate(var(--rot,0deg));
-  }
-  html[data-theme="dark"] .polaroid{
-    background:#f5f0ea;
-    box-shadow:0 8px 28px -10px rgba(0,0,0,.65), 0 2px 6px rgba(0,0,0,.18);
-  }
-  .polaroid:hover{
-    transform:rotate(0deg) scale(1.04);
-    box-shadow:0 18px 40px -12px rgba(38,27,16,.42), 0 3px 8px rgba(38,27,16,.1);
-  }
-  .polaroid img{
-    display:block; width:100%;
-    aspect-ratio:4/3; object-fit:cover;
-    background:var(--paper-2);
-  }
-  .sneak-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:38px; height:38px; border-radius:50%;
-    border:1px solid var(--line); background:var(--card);
-    color:var(--ink); display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    box-shadow:0 4px 14px -8px rgb(var(--shadow)/.4);
-    transition:transform .2s ease, box-shadow .2s ease;
-    z-index:2;
-  }
-  .sneak-arrow:hover{ transform:translateY(-50%) scale(1.06); box-shadow:0 8px 20px -8px rgb(var(--shadow)/.5); }
-  .sneak-arrow svg{ width:16px; height:16px; }
-  .sneak-prev{ left:4px; }
-  .sneak-next{ right:4px; }
-
-  /* ---------- The Wedding Week (wraps original modules) ---------- */
-  .wedding-week{ margin-top:12px; }
-  .ww-head{ text-align:center; margin-bottom:24px; }
-  .ww-tag{
-    display:inline-block;
-    font-size:10.5px; letter-spacing:.32em; text-transform:uppercase;
-    color:var(--clay); font-weight:700;
-    padding:6px 14px; border-radius:100px;
-    background:rgba(192,99,59,.1);
-    border:1px solid rgba(192,99,59,.3);
-    margin-bottom:12px;
-  }
-  .ww-head h2{
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:clamp(26px, 5.5vw, 36px);
-    margin:0 0 4px; color:var(--ink); letter-spacing:-.01em;
-  }
-  .ww-head .tamil{ color:var(--ink-soft); font-size:14.5px; margin:0 0 10px; }
-  .ww-sub{
-    color:var(--ink-soft);
-    max-width:460px; margin:0 auto;
-    font-size:14px; line-height:1.6;
-  }
-
-  /* extra breathing room between the engagement carousel and the wedding-week bucket */
-  .memories + .wedding-week{ margin-top:50px; }
 </style>
 </head>
 <body>
@@ -848,30 +744,70 @@
 
     <!-- HOME -->
     <section id="view-home" class="view active">
+      <div class="modules">
 
-      <!-- SNEAK PEEK — wedding photos from the photographer -->
-      <div class="sneak-peek">
-        <div class="sneak-head">
-          <span class="sneak-tag">Just dropped ✨</span>
-          <h2>Sneak Peek</h2>
-          <p class="tamil">முதல் பார்வை</p>
-        </div>
-        <div class="sneak-scroll">
-          <button class="sneak-arrow sneak-prev" onclick="sneakStep(-1)" aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="sneak-track" id="sneak-track"></div>
-          <button class="sneak-arrow sneak-next" onclick="sneakStep(1)" aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-        <p class="sneak-cooking">The full album &amp; wedding film are currently cooking. Stay tuned.</p>
+        <button class="module m-watch" onclick="showView('view-watch')">
+          <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-live" src="images/buttons/live.png" alt="">
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>
+            <span class="pill">Live soon</span>
+          </div>
+          <div>
+            <h3>Watch Live</h3>
+            <div class="ta">நேரலை</div>
+            <span class="go">Tune in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
+
+        <button class="module m-upload" onclick="showView('view-upload')">
+          <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-share" src="images/buttons/share.jpg" alt="">
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9a2 2 0 0 1 2-2h1.5l1-1.6A1.5 1.5 0 0 1 9.8 4.7h4.4a1.5 1.5 0 0 1 1.3.7l1 1.6H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M12 16V10M9.4 12.3L12 9.7l2.6 2.6"/></svg></span>
+            <span class="pill">Open now</span>
+          </div>
+          <div>
+            <h3>Share Photos</h3>
+            <div class="ta">புகைப்படங்கள்</div>
+            <span class="go">Add yours <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
+
+        <button class="module m-food" onclick="showView('view-days')">
+          <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-cooking" src="images/buttons/cooking.png" alt="">
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v6.5a2.2 2.2 0 0 0 4.4 0V3M8.2 9.6V21M16.5 3c-1.8.6-2.8 2.6-2.8 5.2 0 2 1.1 3.4 2.8 3.6V21"/></svg></span>
+            <span class="pill">The menu</span>
+          </div>
+          <div>
+            <h3>What's Cooking</h3>
+            <div class="ta">உணவு பட்டியல்</div>
+            <span class="go">See every dish <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
+
+        <button class="module m-agenda" onclick="showView('view-agenda')">
+          <div class="blob"></div><span class="shine"></span>
+          <img class="lp-photo lp-agenda" src="images/buttons/agenda.jpg" alt="">
+          <div class="top">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="4.5" width="17" height="16" rx="3"/><path d="M8 3v3M16 3v3M3.5 9.5h17"/><path d="M7.5 13h2M7.5 16.3h5"/></svg></span>
+            <span class="pill">The schedule</span>
+          </div>
+          <div>
+            <h3>The Agenda</h3>
+            <div class="ta">நிகழ்ச்சி நிரல்</div>
+            <span class="go">See the full schedule <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
+          </div>
+        </button>
+
       </div>
 
       <div class="memories">
         <div class="memories-head">
-          <span class="sneak-tag">Our Story So Far</span>
-          <h2>How we said yes <em class="mem-and">and</em> everything after</h2>
+          <h2>Our Story So Far</h2>
+          <p class="tamil">எங்கள் கதை</p>
         </div>
 
         <div class="video-wrap" id="video-wrap">
@@ -900,75 +836,6 @@
           <button class="car-expand" onclick="carouselTapped()" aria-label="View fullscreen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
           </button>
-        </div>
-      </div>
-
-      <!-- THE WEDDING WEEK — archive of live content from the two days -->
-      <div class="wedding-week">
-        <div class="ww-head">
-          <span class="ww-tag">Rewind</span>
-          <h2>The Wedding Week</h2>
-          <p class="tamil">திருமண வாரம்</p>
-        </div>
-
-        <div class="modules">
-
-          <button class="module m-watch" onclick="showView('view-watch')">
-            <div class="blob"></div><span class="shine"></span>
-            <img class="lp-photo lp-live" src="images/buttons/live.png" alt="">
-            <div class="top">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.3l5 2.7-5 2.7z" fill="currentColor" stroke="none"/></svg></span>
-              <span class="pill">Replay</span>
-            </div>
-            <div>
-              <h3>Watch Again</h3>
-              <div class="ta">நேரலை</div>
-              <span class="go">Rewatch the day <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
-            </div>
-          </button>
-
-          <button class="module m-upload" onclick="showView('view-upload')">
-            <div class="blob"></div><span class="shine"></span>
-            <img class="lp-photo lp-share" src="images/buttons/share.jpg" alt="">
-            <div class="top">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9a2 2 0 0 1 2-2h1.5l1-1.6A1.5 1.5 0 0 1 9.8 4.7h4.4a1.5 1.5 0 0 1 1.3.7l1 1.6H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M12 16V10M9.4 12.3L12 9.7l2.6 2.6"/></svg></span>
-              <span class="pill">Still open</span>
-            </div>
-            <div>
-              <h3>Share Photos</h3>
-              <div class="ta">புகைப்படங்கள்</div>
-              <span class="go">Add yours <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
-            </div>
-          </button>
-
-          <button class="module m-food" onclick="showView('view-days')">
-            <div class="blob"></div><span class="shine"></span>
-            <img class="lp-photo lp-cooking" src="images/buttons/cooking.png" alt="">
-            <div class="top">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v6.5a2.2 2.2 0 0 0 4.4 0V3M8.2 9.6V21M16.5 3c-1.8.6-2.8 2.6-2.8 5.2 0 2 1.1 3.4 2.8 3.6V21"/></svg></span>
-              <span class="pill">The menu</span>
-            </div>
-            <div>
-              <h3>What's Cooking</h3>
-              <div class="ta">உணவு பட்டியல்</div>
-              <span class="go">See every dish <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
-            </div>
-          </button>
-
-          <button class="module m-agenda" onclick="showView('view-agenda')">
-            <div class="blob"></div><span class="shine"></span>
-            <img class="lp-photo lp-agenda" src="images/buttons/agenda.jpg" alt="">
-            <div class="top">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="4.5" width="17" height="16" rx="3"/><path d="M8 3v3M16 3v3M3.5 9.5h17"/><path d="M7.5 13h2M7.5 16.3h5"/></svg></span>
-              <span class="pill">The schedule</span>
-            </div>
-            <div>
-              <h3>The Agenda</h3>
-              <div class="ta">நிகழ்ச்சி நிரல்</div>
-              <span class="go">See the full schedule <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span>
-            </div>
-          </button>
-
         </div>
       </div>
     </section>
@@ -1690,101 +1557,29 @@ initCarousel();
 startCarousel();
 
 
-// ---------- Sneak Peek polaroid slider ----------
-const SNEAK_IMAGES = [
-  'Sneak%20Peak/DSC08652.jpg',
-  'Sneak%20Peak/DSC08722.jpg',
-  'Sneak%20Peak/DSC08843.jpg',
-  'Sneak%20Peak/DSC08882.jpg',
-  'Sneak%20Peak/DSC09153.jpg',
-  'Sneak%20Peak/DSC09198.jpg',
-  'Sneak%20Peak/DSC09203.jpg',
-  'Sneak%20Peak/DSC09326.jpg',
-  'Sneak%20Peak/DSC09459.jpg',
-  'Sneak%20Peak/DSC09544.jpg',
-  'Sneak%20Peak/DSC09560.jpg',
-  'Sneak%20Peak/DSC09574.jpg',
-  'Sneak%20Peak/DSC09613.jpg',
-  'Sneak%20Peak/DSC09656.jpg',
-  'Sneak%20Peak/DSC09896.jpg',
-  'Sneak%20Peak/DSC09946.jpg',
-  'Sneak%20Peak/A7309624-2.jpg',
-  'Sneak%20Peak/A7309624.jpg',
-  'Sneak%20Peak/A7309760.jpg'
-];
-// Fixed rotations so each card always tilts the same way
-const SNEAK_ROTS = [-2,1.5,-1.2,2.2,-1.8,0.8,-2.4,1.1,-0.6,2,-1.5,0.7,-2.1,1.6,-0.9,2.3,-1.4,0.5,-2.2];
-
-let sneakTx = 0;
-
-(function buildSneakSlider(){
-  const track = document.getElementById('sneak-track');
-  track.innerHTML = SNEAK_IMAGES.map((src,i)=>
-    '<button class="polaroid" style="--rot:'+SNEAK_ROTS[i]+'deg" onclick="openSneakLightbox('+i+')" aria-label="Photo '+(i+1)+'">'+
-    '<img src="'+src+'" alt="Wedding photo '+(i+1)+'" loading="lazy"></button>'
-  ).join('');
-})();
-
-function sneakStep(dir){
-  const track = document.getElementById('sneak-track');
-  const scroll = track.parentElement;
-  const card = track.querySelector('.polaroid');
-  if(!card) return;
-  const step = card.offsetWidth + 16; // 16 = CSS gap
-  const maxTx = Math.max(0, track.scrollWidth - scroll.offsetWidth);
-  sneakTx = Math.max(0, Math.min(sneakTx + dir * step, maxTx));
-  track.style.transform = 'translateX(-'+sneakTx+'px)';
-}
-
-// swipe on the polaroid strip
-(function(){
-  const wrap = document.querySelector('.sneak-scroll');
-  if(!wrap) return;
-  let sx = null;
-  wrap.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; },{passive:true});
-  wrap.addEventListener('touchend', e=>{
-    if(sx===null) return;
-    const dx = e.changedTouches[0].clientX - sx;
-    if(Math.abs(dx) > 40) sneakStep(dx > 0 ? -1 : 1);
-    sx = null;
-  },{passive:true});
-})();
-
 // ---------- Lightbox ----------
 let lbIndex = 0;
-let activeLbSet = null;
-
 function openLightbox(i){
-  activeLbSet = engImgs;
   lbIndex = i;
   stopCarousel();
   renderLightbox();
   document.getElementById('lightbox').classList.add('open');
 }
-function openSneakLightbox(i){
-  activeLbSet = SNEAK_IMAGES;
-  lbIndex = i;
-  renderLightbox();
-  document.getElementById('lightbox').classList.add('open');
-}
 function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
-  if(activeLbSet === engImgs) startCarousel();
-  activeLbSet = null;
+  startCarousel();
 }
 function lightboxBackdropClick(e){
   if(e.target.id === 'lightbox') closeLightbox();
 }
 function lbStep(d, e){
   if(e) e.stopPropagation();
-  if(!activeLbSet) return;
-  lbIndex = (lbIndex + d + activeLbSet.length) % activeLbSet.length;
+  lbIndex = (lbIndex + d + engImgs.length) % engImgs.length;
   renderLightbox();
 }
 function renderLightbox(){
-  if(!activeLbSet) return;
-  document.getElementById('lb-img').src = activeLbSet[lbIndex];
-  document.getElementById('lb-count').textContent = (lbIndex+1) + ' / ' + activeLbSet.length;
+  document.getElementById('lb-img').src = engImgs[lbIndex];
+  document.getElementById('lb-count').textContent = (lbIndex+1) + ' / ' + engImgs.length;
 }
 // swipe support
 (function(){
