@@ -115,6 +115,24 @@
   .tb-home img{ height:34px; width:auto; display:block; }
   .tb-right{ display:flex; align-items:center; gap:8px; }
 
+  .tb-hearts{
+    display:flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:700; color:var(--ink-soft);
+    white-space:nowrap; flex:1; justify-content:center;
+  }
+  .hearts-label{
+    display:none;
+    font-size:11px; letter-spacing:.04em; text-transform:uppercase;
+    font-weight:700; color:var(--ink-soft);
+  }
+  @media(min-width:420px){ .hearts-label{ display:inline; } }
+  .hearts-num{
+    font-family:'Fraunces', serif; font-weight:600; font-style:italic;
+    font-size:15px; color:var(--clay-deep);
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes heartsPop{ 0%{transform:scale(1)} 40%{transform:scale(1.35)} 100%{transform:scale(1)} }
+
   .tz-picker{ position:relative; }
   .tz-btn{
     display:flex; align-items:center; gap:6px;
@@ -809,6 +827,10 @@
 
   <header class="topbar">
     <button class="tb-home" onclick="showView('view-home')" aria-label="Home"><img src="images/logo-as.png" alt="A&amp;S — Home"></button>
+    <div class="tb-hearts">
+      <span class="hearts-label">Hearts Reached</span>
+      <span class="hearts-num" id="hearts-num">—</span>
+    </div>
     <div class="tb-right">
       <div class="tz-picker">
         <button class="tz-btn" id="tz-btn" onclick="toggleTzMenu()">
@@ -1125,6 +1147,38 @@
 
 <script>
 const API_BASE = "https://as-thirumanam.onrender.com";
+const HEARTS_OFFSET = 670; // shown count = real count + this offset
+
+// ---------- Hearts Reached — visitor ping ----------
+(function pingOnce(){
+  const el = document.getElementById('hearts-num');
+  if(!el) return;
+
+  // Show current count immediately (doesn't wait for ping)
+  fetch(API_BASE + '/api/visits/count')
+    .then(r => r.json())
+    .then(d => { if(d.unique_visitors != null) setHeartsCount(el, d.unique_visitors); })
+    .catch(() => {});
+
+  // Ping once per browser session — sessionStorage prevents duplicate
+  // counts when someone navigates around the same-page app.
+  if(sessionStorage.getItem('swadi_pinged')) return;
+  sessionStorage.setItem('swadi_pinged', '1');
+
+  fetch(API_BASE + '/api/ping', { method: 'POST' })
+    .then(r => r.json())
+    .then(d => { if(d.unique_visitors != null) setHeartsCount(el, d.unique_visitors); })
+    .catch(() => {});
+})();
+
+function setHeartsCount(el, n){
+  const shown = n + HEARTS_OFFSET;
+  if(parseInt(el.textContent) === shown) return;
+  el.textContent = shown;
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = 'heartsPop .45s cubic-bezier(.2,.8,.2,1)';
+}
 
 // ---------- meal-time icons ----------
 const MEAL_ICONS = {
