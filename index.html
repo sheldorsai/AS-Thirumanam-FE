@@ -127,11 +127,31 @@
   }
   @media(min-width:420px){ .hearts-label{ display:inline; } }
   .hearts-num{
+    display:none;
     font-family:'Fraunces', serif; font-weight:600; font-style:italic;
     font-size:15px; color:var(--clay-deep);
     transition:transform .3s cubic-bezier(.2,.8,.2,1);
   }
+  @media(min-width:420px){ .hearts-num{ display:inline; } }
   @keyframes heartsPop{ 0%{transform:scale(1)} 40%{transform:scale(1.35)} 100%{transform:scale(1)} }
+
+  /* mobile-only: heart emoji + individual digit "tiles" that grow as the
+     count gains digits (e.g. 999 -> 1000 adds a 4th tile automatically) */
+  .hearts-mobile{
+    display:inline-flex; align-items:center; gap:5px;
+  }
+  @media(min-width:420px){ .hearts-mobile{ display:none; } }
+  .heart-emoji{ font-size:13px; line-height:1; }
+  .digit-boxes{ display:inline-flex; gap:2px; }
+  .digit-box{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:15px; height:18px; padding:0 2px;
+    background:#1a130c; color:#fff;
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-size:11px; font-weight:700; line-height:1;
+    border-radius:4px;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);
+  }
 
   .tz-picker{ position:relative; }
   .tz-btn{
@@ -830,6 +850,10 @@
     <div class="tb-hearts">
       <span class="hearts-label">Hearts Reached</span>
       <span class="hearts-num" id="hearts-num">—</span>
+      <span class="hearts-mobile" id="hearts-mobile" aria-label="Hearts reached">
+        <span class="heart-emoji">❤️</span>
+        <span class="digit-boxes" id="digit-boxes"><span class="digit-box">—</span></span>
+      </span>
     </div>
     <div class="tb-right">
       <div class="tz-picker">
@@ -1173,11 +1197,32 @@ const HEARTS_OFFSET = 670; // shown count = real count + this offset
 
 function setHeartsCount(el, n){
   const shown = n + HEARTS_OFFSET;
-  if(parseInt(el.textContent) === shown) return;
-  el.textContent = shown;
-  el.style.animation = 'none';
-  el.offsetHeight;
-  el.style.animation = 'heartsPop .45s cubic-bezier(.2,.8,.2,1)';
+  const changed = parseInt(el.textContent) !== shown;
+  if(changed){
+    el.textContent = shown;
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = 'heartsPop .45s cubic-bezier(.2,.8,.2,1)';
+  }
+  renderDigitBoxes(shown, changed);
+}
+
+// Mobile digit tiles: one box per digit of the shown count. Rebuilding the
+// list of boxes each time means a new tile appears on its own the moment
+// the count gains a digit (e.g. 999 -> 1000), no extra logic needed.
+function renderDigitBoxes(shown, animate){
+  const wrap = document.getElementById('digit-boxes');
+  if(!wrap) return;
+  const digits = String(shown).split('');
+  const sameLength = wrap.children.length === digits.length;
+  wrap.innerHTML = digits.map(d => '<span class="digit-box">'+d+'</span>').join('');
+  if(animate || !sameLength){
+    wrap.querySelectorAll('.digit-box').forEach(box=>{
+      box.style.animation = 'none';
+      box.offsetHeight;
+      box.style.animation = 'heartsPop .45s cubic-bezier(.2,.8,.2,1)';
+    });
+  }
 }
 
 // ---------- meal-time icons ----------
