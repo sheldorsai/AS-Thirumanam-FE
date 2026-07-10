@@ -41,39 +41,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Botanical dusk — muted sage, dusty rose, warm off-white */
-    --paper:#f2ede4;          /* warm off-white */
-    --paper-2:#e8e0d1;        /* deeper linen */
-    --card:#faf6ee;           /* card surface */
-    --ink:#2a2620;            /* near-black warm */
-    --ink-soft:#6b6459;       /* muted stone text */
-    --clay:#7d8a6b;           /* sage — primary botanical */
-    --clay-deep:#4a5a3e;      /* deep foliage */
-    --olive:#8a6b74;          /* muted plum secondary */
-    --olive-deep:#6d5460;
-    --ochre:#8a6a3d;          /* warm bark accent */
-    --ochre-deep:#6f5230;
-    --rose:#b48892;           /* dusty rose */
-    --rose-deep:#8a6b74;
-    --line:#d9d0bf;           /* hairline */
-    --shadow:42 38 32;        /* rgb for shadows */
-    --sage:#7d8a6b;
-    --sage-deep:#4a5a3e;
-    --bark:#8a6a3d;
+    /* warm, earthy, premium palette */
+    --paper:#f7f1e8;          /* warm oat paper */
+    --paper-2:#efe6d6;        /* deeper oat */
+    --card:#fffaf3;           /* warm white card */
+    --ink:#33291f;            /* roasted brown-black text */
+    --ink-soft:#7c6a55;       /* muted clay text */
+    --clay:#c0633b;           /* terracotta / clay primary */
+    --clay-deep:#9e4a28;      /* deep clay */
+    --olive:#6e7449;          /* olive secondary */
+    --olive-deep:#545936;
+    --ochre:#d99a3e;          /* warm ochre accent */
+    --ochre-deep:#a86f23;
+    --rose:#9c4f56;           /* deep dusty rose for Agenda */
+    --rose-deep:#723a3f;
+    --line:#e3d6c2;           /* hairline */
+    --shadow:38 27 16;        /* rgb for shadows */
   }
   html[data-theme="dark"]{
-    --paper:#1c1a15;
-    --paper-2:#26231d;
-    --card:#2a2620;
-    --ink:#f2ede4;
-    --ink-soft:#b8ac97;
-    --clay:#9aa887;           /* sage sits brighter in dark */
-    --clay-deep:#c9b6a3;
-    --rose:#c9a0a9;
-    --line:#3a352c;
+    --paper:#211a14;
+    --paper-2:#2b2219;
+    --card:#2c241b;
+    --ink:#f3e9da;
+    --ink-soft:#bba98e;
+    --line:#473a2a;
     --shadow:0 0 0;
-    --sage:#9aa887;
-    --sage-deep:#c9b6a3;
   }
   html, body{ transition: background-color .35s ease, color .35s ease; }
   *{box-sizing:border-box;}
@@ -86,8 +78,8 @@
     -webkit-font-smoothing:antialiased;
     /* subtle paper grain */
     background-image:
-      radial-gradient(circle at 18% 12%, rgba(125,138,107,.06), transparent 38%),
-      radial-gradient(circle at 82% 78%, rgba(180,136,146,.06), transparent 40%);
+      radial-gradient(circle at 18% 12%, rgba(192,99,59,.05), transparent 38%),
+      radial-gradient(circle at 82% 78%, rgba(110,116,73,.05), transparent 40%);
   }
   .tamil{font-family:'Noto Sans Tamil', sans-serif;}
   ::selection{background:var(--ochre); color:#fff;}
@@ -359,8 +351,8 @@
   .module:hover{ transform:translateY(-6px); box-shadow:0 28px 50px -22px rgb(var(--shadow)/.5); }
   .module:active{ transform:translateY(-2px); }
 
-  .m-watch{ background:linear-gradient(150deg,#7d8a6b,#4a5a3e); color:#fff7ef; }
-  .m-upload{ background:linear-gradient(150deg,#b48892,#8a6b74); color:#f6f4e6; }
+  .m-watch{ background:linear-gradient(150deg,#c0633b,#9e4a28); color:#fff7ef; }
+  .m-upload{ background:linear-gradient(150deg,#6e7449,#545936); color:#f6f4e6; }
   .m-food{ background:linear-gradient(150deg,var(--ochre),var(--ochre-deep)); color:#fff8ec; }
   .m-agenda{ background:linear-gradient(150deg,var(--rose),var(--rose-deep)); color:#fbeeee; }
 
@@ -448,9 +440,9 @@
     min-height:170px; display:flex; flex-direction:column; justify-content:flex-end;
   }
   .day:hover{ transform:translateY(-5px); box-shadow:0 26px 46px -20px rgb(var(--shadow)/.55); }
-  .day.engagement{ background:linear-gradient(155deg,#c9a86a,#8a6a3d); }
-  .day.reception{ background:linear-gradient(155deg,#b48892,#6d5460); }
-  .day.wedding{ background:linear-gradient(155deg,#7d8a6b,#4a5a3e); }
+  .day.engagement{ background:linear-gradient(155deg,#d99a3e,#a86f23); }
+  .day.reception{ background:linear-gradient(155deg,#c0633b,#8a3f22); }
+  .day.wedding{ background:linear-gradient(155deg,#6e7449,#444828); }
   .day .num{ position:absolute; top:22px; right:26px; font-family:'Fraunces',serif; font-style:italic; font-size:46px; opacity:.32; }
   .day .lbl{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; opacity:.85; }
   .day h3{ font-family:'Fraunces',serif; font-weight:400; font-size:34px; margin:4px 0 4px; }
@@ -549,7 +541,7 @@
     width:66px; height:66px; border-radius:19px; margin:0 auto 20px;
     display:flex; align-items:center; justify-content:center; color:#fff;
   }
-  .panel.watch .ic{ background:linear-gradient(150deg,#7d8a6b,#4a5a3e); }
+  .panel.watch .ic{ background:linear-gradient(150deg,#c0633b,#9e4a28); }
 
   .watch-embed{
     position:relative; width:100%; max-width:720px; margin:0 auto;
@@ -562,7 +554,7 @@
     font-size:13px; font-weight:600; color:var(--clay-deep);
     text-decoration:underline;
   }
-  .panel.upload .ic{ background:linear-gradient(150deg,#b48892,#8a6b74); }
+  .panel.upload .ic{ background:linear-gradient(150deg,#6e7449,#545936); }
   .panel .ic svg{ width:32px; height:32px; }
   .panel h2{ font-family:'Fraunces',serif; font-weight:400; font-size:27px; margin:0 0 8px; }
   .panel p.say{ color:var(--ink-soft); font-size:14.5px; line-height:1.6; margin:0 auto 26px; max-width:360px; }
@@ -581,7 +573,7 @@
   .chosen{ margin-top:14px; font-size:13px; color:var(--olive-deep); font-weight:600; min-height:18px; }
   .go-btn{
     width:100%; margin-top:18px; padding:15px; border:none; border-radius:14px;
-    background:linear-gradient(150deg,#b48892,#8a6b74); color:#fff;
+    background:linear-gradient(150deg,#6e7449,#545936); color:#fff;
     font-weight:700; font-size:15px; cursor:pointer;
     transition:transform .2s ease, box-shadow .2s ease;
   }
@@ -830,8 +822,8 @@
     font-size:10.5px; letter-spacing:.32em; text-transform:uppercase;
     color:var(--clay); font-weight:700;
     padding:6px 14px; border-radius:100px;
-    background:rgba(125,138,107,.12);
-    border:1px solid rgba(125,138,107,.35);
+    background:rgba(192,99,59,.1);
+    border:1px solid rgba(192,99,59,.3);
     margin-bottom:12px;
   }
   .ww-head h2{
@@ -848,256 +840,6 @@
 
   /* extra breathing room between the engagement carousel and the wedding-week bucket */
   .memories + .wedding-week{ margin-top:50px; }
-
-  /* ---------- Photo Galleries (editorial postcard flow) ---------- */
-  .galleries{ margin: 8px 0 46px; }
-  .gal-head{ text-align:center; margin-bottom:22px; }
-  .gal-kicker{
-    display:block; font-family:'Fraunces', serif; font-style:italic;
-    color:var(--rose); font-size:15px; margin-bottom:6px;
-  }
-  .gal-head h2{
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:clamp(28px, 6vw, 44px);
-    letter-spacing:-.01em; margin:0 0 14px; color:var(--ink);
-  }
-  .gal-divider{
-    display:flex; align-items:center; justify-content:center;
-    gap:12px; margin:0 auto 20px;
-  }
-  .gal-divider .hair{ height:1px; width:44px; background:var(--line); }
-  .gal-divider .dot{ width:6px; height:6px; border-radius:50%; background:var(--sage); }
-
-  /* Collapse/expand toggle — one click hides the whole photo flow so the
-     modules & memories below are reachable without a wall of scrolling. */
-  .gal-toggle{
-    display:inline-flex; align-items:center; gap:7px;
-    margin:18px auto 0;
-    border:1px solid var(--line); background:var(--card);
-    color:var(--ink); border-radius:100px;
-    padding:9px 17px; font-size:12.5px; font-weight:600;
-    cursor:pointer; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-  .gal-toggle:hover{ transform:translateY(-2px); box-shadow:0 12px 22px -12px rgb(var(--shadow)/.4); border-color:var(--sage); }
-  .gal-toggle svg{ width:14px; height:14px; transition:transform .3s ease; }
-  .gal-toggle.collapsed svg{ transform:rotate(-180deg); }
-  .gal-body{
-    overflow:hidden;
-    transition:max-height .5s cubic-bezier(.2,.7,.2,1);
-  }
-
-  /* Category switcher */
-  .gal-tabs{
-    display:inline-flex; gap:4px; padding:5px;
-    background:var(--paper-2); border-radius:100px;
-    border:1px solid var(--line);
-  }
-  .gal-tab{
-    border:none; background:transparent; cursor:pointer;
-    padding:9px 16px; border-radius:100px;
-    color:var(--ink-soft); font-weight:600; font-size:13px;
-    line-height:1.15; transition:background .25s, color .25s, box-shadow .25s;
-    text-align:center;
-  }
-  .gal-tab .cat-name{ display:block; }
-  .gal-tab .cat-sub{
-    display:block; font-family:'Noto Sans Tamil', sans-serif;
-    font-weight:500; font-size:10px; opacity:.65;
-    margin-top:2px; letter-spacing:.02em;
-  }
-  .gal-tab:hover{ color:var(--ink); }
-  .gal-tab.active{
-    background:var(--card); color:var(--clay-deep);
-    box-shadow:0 2px 8px -3px rgb(var(--shadow)/.28);
-    border:1px solid var(--line);
-    padding:8px 15px;
-  }
-
-  /* Postcard flow grid */
-  .gal-flow{
-    column-count:1; column-gap:22px;
-    margin-top:6px;
-  }
-  @media(min-width:640px){ .gal-flow{ column-count:2; } }
-  @media(min-width:960px){ .gal-flow{ column-count:3; column-gap:26px; } }
-
-  .gal-card{
-    break-inside:avoid; -webkit-column-break-inside:avoid;
-    page-break-inside:avoid;
-    margin:0 0 22px;
-    position:relative;
-    animation:galReveal .7s cubic-bezier(.19,1,.22,1) both;
-  }
-  @keyframes galReveal{
-    from{ opacity:0; transform:translateY(14px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-  .gal-photo{
-    position:relative; overflow:hidden;
-    border-radius:3px; background:var(--paper-2);
-    box-shadow:0 1px 2px rgba(42,38,32,.06);
-    cursor:zoom-in;
-    transition:transform .5s cubic-bezier(.19,1,.22,1),
-               box-shadow .5s cubic-bezier(.19,1,.22,1);
-  }
-  .gal-photo::after{
-    /* subtle warm layered shadow on hover */
-    content:""; position:absolute; inset:0;
-    box-shadow:inset 0 0 0 1px rgba(42,38,32,.06);
-    pointer-events:none; border-radius:inherit;
-  }
-  .gal-photo img{
-    display:block; width:100%; height:auto;
-    object-fit:cover; background:var(--paper-2);
-    transition:transform .9s cubic-bezier(.19,1,.22,1);
-  }
-  .gal-photo:hover{
-    transform:translateY(-3px);
-    box-shadow:0 18px 32px -14px rgba(42,38,32,.28),
-               0 4px 10px -6px rgba(42,38,32,.12);
-  }
-  .gal-photo:hover img{ transform:scale(1.04); }
-
-  /* hover pill "Open slideshow" */
-  .gal-photo .peek{
-    position:absolute; left:50%; bottom:14px;
-    transform:translate(-50%, 8px);
-    background:var(--card); color:var(--ink);
-    border:1px solid var(--line);
-    padding:6px 12px; border-radius:100px;
-    font-size:10px; letter-spacing:.18em; text-transform:uppercase;
-    font-weight:700; white-space:nowrap;
-    box-shadow:0 6px 16px -6px rgba(42,38,32,.25);
-    opacity:0; transition:opacity .3s, transform .3s;
-    pointer-events:none;
-  }
-  .gal-photo:hover .peek{ opacity:1; transform:translate(-50%, 0); }
-
-  .gal-caption{
-    display:block; margin-top:10px;
-    font-family:'Fraunces', serif; font-style:italic;
-    color:var(--ink-soft); font-size:14px; line-height:1.35;
-  }
-  .gal-index{
-    display:flex; align-items:baseline; gap:12px;
-    margin-top:8px;
-  }
-  .gal-index .idx{
-    font-size:10px; letter-spacing:.24em; font-weight:700;
-    color:var(--ink-soft); text-transform:uppercase; white-space:nowrap;
-  }
-  .gal-index .hair{ height:1px; flex:1; background:var(--line); }
-
-  /* pull-quote / editorial card interleaved in the flow */
-  .gal-quote{
-    break-inside:avoid; page-break-inside:avoid;
-    margin:0 0 22px; padding:26px 22px;
-    border:1px solid var(--line); border-radius:6px;
-    background:linear-gradient(180deg, var(--paper-2), var(--card));
-    display:flex; flex-direction:column; justify-content:center;
-    min-height:220px; text-align:left;
-  }
-  .gal-quote q{
-    font-family:'Fraunces', serif; font-style:italic;
-    font-size:20px; line-height:1.3; color:var(--ink);
-    quotes:"“" "”"; margin-bottom:14px;
-  }
-  .gal-quote .attrib{
-    font-size:10px; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--ink-soft); font-weight:700;
-  }
-
-  /* footer strip under the flow */
-  .gal-foot{
-    margin-top:18px; padding-top:22px;
-    border-top:1px solid var(--line);
-    text-align:center;
-  }
-  .gal-foot .fkick{
-    display:block; font-size:10px; letter-spacing:.28em;
-    text-transform:uppercase; color:var(--ink-soft);
-    font-weight:700; margin-bottom:8px;
-  }
-  .gal-foot .fline{
-    font-family:'Fraunces', serif; font-style:italic;
-    color:var(--ink); font-size:19px;
-  }
-
-  /* Floating "Play slideshow" affordance */
-  .gal-play-fab{
-    position:fixed; right:18px; bottom:18px;
-    z-index:60; display:none;
-    align-items:center; gap:10px;
-    padding:11px 16px 11px 13px;
-    background:var(--ink); color:var(--paper);
-    border:none; border-radius:100px; cursor:pointer;
-    font-family:inherit; font-weight:600; font-size:12px;
-    letter-spacing:.18em; text-transform:uppercase;
-    box-shadow:0 14px 30px -10px rgba(0,0,0,.35);
-    transition:transform .25s, box-shadow .25s;
-  }
-  .gal-play-fab:hover{ transform:translateY(-2px); box-shadow:0 20px 34px -12px rgba(0,0,0,.4); }
-  .gal-play-fab .fab-dot{
-    width:7px; height:7px; border-radius:50%;
-    background:var(--rose);
-    animation:fabPulse 1.4s ease-in-out infinite;
-  }
-  @keyframes fabPulse{ 0%,100%{opacity:.55; transform:scale(.85);} 50%{opacity:1; transform:scale(1);} }
-  .gal-play-fab.show{ display:inline-flex; }
-
-  /* ---------- Lightbox enhancements (extends existing .lightbox) ---------- */
-  .lightbox img{ transition:opacity .35s ease; }
-  .lightbox img.ken{ animation:kenBurns 8s ease-in-out infinite alternate; }
-  @keyframes kenBurns{
-    from{ transform:scale(1) translate(0,0); }
-    to{ transform:scale(1.06) translate(-1.5%,1%); }
-  }
-  .lb-bar{
-    position:absolute; left:0; right:0; bottom:0; z-index:3;
-    padding:14px 20px 22px;
-    display:flex; align-items:center; gap:14px;
-    background:linear-gradient(to top, rgba(0,0,0,.55), transparent);
-    color:rgba(242,237,228,.85); pointer-events:none;
-  }
-  .lb-bar > *{ pointer-events:auto; }
-  .lb-meta{
-    font-family:'Fraunces', serif; font-style:italic;
-    font-size:14px; color:#f2ede4; flex:1; min-width:0;
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-  }
-  .lb-play{
-    display:inline-flex; align-items:center; gap:8px;
-    background:rgba(255,255,255,.12); color:#f2ede4;
-    border:1px solid rgba(255,255,255,.22);
-    padding:7px 13px; border-radius:100px; cursor:pointer;
-    font:600 10.5px/1 'Bricolage Grotesque', sans-serif;
-    letter-spacing:.18em; text-transform:uppercase;
-    backdrop-filter:blur(6px);
-    transition:background .2s;
-  }
-  .lb-play:hover{ background:rgba(255,255,255,.22); }
-  .lb-play .lbl-pause{ display:none; }
-  .lb-play.playing .lbl-play{ display:none; }
-  .lb-play.playing .lbl-pause{ display:inline; }
-  .lb-play .dot{
-    width:6px; height:6px; border-radius:50%; background:var(--rose);
-  }
-  .lb-play.playing .dot{ animation:fabPulse 1.2s ease-in-out infinite; }
-  .lb-progress{
-    position:absolute; left:0; right:0; bottom:0; height:2px;
-    background:rgba(255,255,255,.08); overflow:hidden; z-index:4;
-    opacity:0; transition:opacity .2s;
-  }
-  .lb-progress.on{ opacity:1; }
-  .lb-progress > span{
-    display:block; height:100%; width:0%;
-    background:var(--rose); transition:width .1s linear;
-  }
-  @media(max-width:560px){
-    .lb-bar{ padding:12px 14px 18px; }
-    .lb-meta{ font-size:12.5px; }
-    .lb-play{ padding:6px 10px; font-size:10px; letter-spacing:.14em; }
-  }
 </style>
 </head>
 <body>
@@ -1153,56 +895,66 @@
     <!-- HOME -->
     <section id="view-home" class="view active">
 
-      <!-- THE WEDDING WEEK — front runner: highlights reel + full galleries + archive modules -->
+      <!-- SNEAK PEEK — wedding photos from the photographer -->
+      <div class="sneak-peek">
+        <div class="sneak-head">
+          <span class="sneak-tag">Just dropped ✨</span>
+          <h2>Sneak Peek</h2>
+          <p class="tamil">முதல் பார்வை</p>
+        </div>
+        <div class="sneak-scroll">
+          <button class="sneak-arrow sneak-prev" onclick="sneakStep(-1)" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="sneak-track" id="sneak-track"></div>
+          <button class="sneak-arrow sneak-next" onclick="sneakStep(1)" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <p class="sneak-cooking">The full album &amp; wedding film are currently cooking. Stay tuned.</p>
+      </div>
+
+      <div class="memories">
+        <div class="memories-head">
+          <span class="sneak-tag">Our Story So Far</span>
+          <h2>How we said yes <em class="mem-and">and</em> everything after</h2>
+        </div>
+
+        <div class="video-wrap" id="video-wrap">
+          <video id="eng-video" src="videos/engagement.mp4" playsinline webkit-playsinline autoplay loop muted></video>
+          <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen(event)" aria-label="Watch fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
+          </button>
+          <button class="mute-btn" id="mute-btn" onclick="toggleMute(event)">
+            <svg id="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5z"/><path d="M16.5 8.5a4 4 0 0 1 0 7M19 6a7.5 7.5 0 0 1 0 12" opacity=".4"/><line x1="3" y1="3" x2="21" y2="21" id="mute-slash"/></svg>
+          </button>
+        </div>
+
+        <div class="carousel-head">
+          <h3>Flashback to Jan 28</h3>
+          <span class="sub">Betrothal</span>
+        </div>
+        <div class="carousel" id="carousel">
+          <img class="layer front" id="layer-a" src="" alt="Engagement photo">
+          <img class="layer" id="layer-b" src="" alt="Engagement photo">
+          <button class="car-arrow car-prev" onclick="manualAdvance(-1)" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="car-arrow car-next" onclick="manualAdvance(1)" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button class="car-expand" onclick="carouselTapped()" aria-label="View fullscreen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- THE WEDDING WEEK — archive of live content from the two days -->
       <div class="wedding-week">
         <div class="ww-head">
           <span class="ww-tag">Rewind</span>
           <h2>The Wedding Week</h2>
           <p class="tamil">திருமண வாரம்</p>
-        </div>
-
-        <!-- HIGHLIGHTS REEL — photographer sneak peek, kept as curated portrait strip -->
-        <div class="sneak-peek">
-          <div class="sneak-head">
-            <span class="sneak-tag">Highlights reel ✨</span>
-            <h2>Sneak Peek</h2>
-            <p class="tamil">முதல் பார்வை</p>
-          </div>
-          <div class="sneak-scroll">
-            <button class="sneak-arrow sneak-prev" onclick="sneakStep(-1)" aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <div class="sneak-track" id="sneak-track"></div>
-            <button class="sneak-arrow sneak-next" onclick="sneakStep(1)" aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
-            </button>
-          </div>
-          <p class="sneak-cooking">A curated handful from the photographer. The full galleries live below.</p>
-        </div>
-
-        <!-- PHOTO GALLERIES — three events in an editorial postcard flow -->
-        <div class="galleries" id="galleries">
-          <div class="gal-head">
-            <span class="gal-kicker">The days themselves</span>
-            <h2>Photo Galleries</h2>
-            <div class="gal-divider">
-              <span class="hair"></span><span class="dot"></span><span class="hair"></span>
-            </div>
-            <nav class="gal-tabs" role="tablist" id="gal-tabs"></nav>
-            <button class="gal-toggle" id="gal-toggle" onclick="toggleGalleries()" aria-expanded="true" aria-controls="gal-body">
-              <span id="gal-toggle-label">Hide photos</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-          </div>
-
-          <div class="gal-body" id="gal-body">
-            <div class="gal-flow" id="gal-flow"></div>
-
-            <div class="gal-foot">
-              <span class="fkick" id="gal-foot-kick">RECEPTION COLLECTION</span>
-              <span class="fline" id="gal-foot-line">And then the celebration truly began.</span>
-            </div>
-          </div>
         </div>
 
         <div class="modules">
@@ -1265,48 +1017,6 @@
 
         </div>
       </div>
-
-      <!-- MEMORIES — pre-wedding animation + betrothal (Jan 28) carousel -->
-      <div class="memories">
-        <div class="memories-head">
-          <span class="sneak-tag">Our Story So Far</span>
-          <h2>How we said yes <em class="mem-and">and</em> everything after</h2>
-        </div>
-
-        <div class="video-wrap" id="video-wrap">
-          <video id="eng-video" src="videos/engagement.mp4" playsinline webkit-playsinline autoplay loop muted></video>
-          <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen(event)" aria-label="Watch fullscreen">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
-          </button>
-          <button class="mute-btn" id="mute-btn" onclick="toggleMute(event)">
-            <svg id="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5z"/><path d="M16.5 8.5a4 4 0 0 1 0 7M19 6a7.5 7.5 0 0 1 0 12" opacity=".4"/><line x1="3" y1="3" x2="21" y2="21" id="mute-slash"/></svg>
-          </button>
-        </div>
-
-        <div class="carousel-head">
-          <h3>Flashback to Jan 28</h3>
-          <span class="sub">Betrothal</span>
-        </div>
-        <div class="carousel" id="carousel">
-          <img class="layer front" id="layer-a" src="" alt="Engagement photo">
-          <img class="layer" id="layer-b" src="" alt="Engagement photo">
-          <button class="car-arrow car-prev" onclick="manualAdvance(-1)" aria-label="Previous photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button class="car-arrow car-next" onclick="manualAdvance(1)" aria-label="Next photo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-          <button class="car-expand" onclick="carouselTapped()" aria-label="View fullscreen">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Floating "Play slideshow" affordance — shows when the galleries scroll into view -->
-      <button class="gal-play-fab" id="gal-play-fab" aria-label="Play slideshow" onclick="Lightbox.openSlideshow()">
-        <span class="fab-dot"></span>
-        <span>Play Slideshow</span>
-      </button>
     </section>
 
     <!-- LIGHTBOX -->
@@ -1318,15 +1028,6 @@
       <button class="lb-nav lb-prev" onclick="lbStep(-1, event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg></button>
       <img id="lb-img" src="" alt="">
       <button class="lb-nav lb-next" onclick="lbStep(1, event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg></button>
-      <div class="lb-bar" id="lb-bar">
-        <span class="lb-meta" id="lb-meta"></span>
-        <button class="lb-play" id="lb-play" onclick="lbTogglePlay(event)" aria-label="Toggle slideshow">
-          <span class="dot"></span>
-          <span class="lbl-play">Play</span>
-          <span class="lbl-pause">Pause</span>
-        </button>
-      </div>
-      <div class="lb-progress" id="lb-progress"><span id="lb-progress-bar"></span></div>
     </div>
 
     <!-- DAYS -->
@@ -2151,16 +1852,9 @@ function sneakStep(dir){
 // ---------- Lightbox ----------
 let lbIndex = 0;
 let activeLbSet = null;
-let activeLbLabel = '';
-let lbAutoplay = false;
-let lbTimer = null;
-let lbProgTimer = null;
-let lbProgStart = 0;
-const LB_AUTOPLAY_MS = 4200;
 
 function openLightbox(i){
   activeLbSet = engImgs;
-  activeLbLabel = 'Betrothal · Jan 28';
   lbIndex = i;
   stopCarousel();
   renderLightbox();
@@ -2168,17 +1862,14 @@ function openLightbox(i){
 }
 function openSneakLightbox(i){
   activeLbSet = SNEAK_IMAGES;
-  activeLbLabel = 'Sneak Peek';
   lbIndex = i;
   renderLightbox();
   document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox(){
-  lbStopAutoplay();
   document.getElementById('lightbox').classList.remove('open');
   if(activeLbSet === engImgs) startCarousel();
   activeLbSet = null;
-  activeLbLabel = '';
 }
 function lightboxBackdropClick(e){
   if(e.target.id === 'lightbox') closeLightbox();
@@ -2191,33 +1882,14 @@ function lbStep(d, e){
 }
 function renderLightbox(){
   if(!activeLbSet) return;
-  const img = document.getElementById('lb-img');
-  const item = activeLbSet[lbIndex];
-  const src = (typeof item === 'string') ? item : item.src;
-  img.classList.remove('ken');
-  img.src = src;
+  document.getElementById('lb-img').src = activeLbSet[lbIndex];
   document.getElementById('lb-count').textContent = (lbIndex+1) + ' / ' + activeLbSet.length;
-  const meta = document.getElementById('lb-meta');
-  if(meta){
-    const cap = (typeof item === 'object' && item.caption) ? item.caption
-              : (activeLbLabel ? activeLbLabel : '');
-    meta.textContent = cap;
-  }
-  // prefetch neighbours
-  [1,2].forEach(o=>{
-    const n = (lbIndex + o) % activeLbSet.length;
-    const nx = activeLbSet[n]; const s = (typeof nx==='string')?nx:nx.src;
-    const im = new Image(); im.src = s;
-  });
-  // ken-burns only during autoplay
-  if(lbAutoplay){ requestAnimationFrame(()=> img.classList.add('ken')); }
-  lbResetProgress();
 }
-// swipe + interaction support
+// swipe support
 (function(){
   const lb = document.getElementById('lightbox');
   let startX = null;
-  lb.addEventListener('touchstart', e => { startX = e.touches[0].clientX; lbPauseTemporarily(); }, {passive:true});
+  lb.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
   lb.addEventListener('touchend', e => {
     if(startX === null) return;
     const dx = e.changedTouches[0].clientX - startX;
@@ -2225,444 +1897,6 @@ function renderLightbox(){
     startX = null;
   }, {passive:true});
 })();
-
-// ---------- Autoplay ----------
-function lbTogglePlay(e){
-  if(e) e.stopPropagation();
-  if(lbAutoplay) lbStopAutoplay(); else lbStartAutoplay();
-}
-function lbStartAutoplay(){
-  lbAutoplay = true;
-  document.getElementById('lb-play').classList.add('playing');
-  document.getElementById('lb-progress').classList.add('on');
-  const img = document.getElementById('lb-img');
-  img.classList.add('ken');
-  lbScheduleNext();
-}
-function lbStopAutoplay(){
-  lbAutoplay = false;
-  const play = document.getElementById('lb-play');
-  if(play) play.classList.remove('playing');
-  const prog = document.getElementById('lb-progress');
-  if(prog) prog.classList.remove('on');
-  const img = document.getElementById('lb-img');
-  if(img) img.classList.remove('ken');
-  clearTimeout(lbTimer); lbTimer = null;
-  clearInterval(lbProgTimer); lbProgTimer = null;
-  const bar = document.getElementById('lb-progress-bar');
-  if(bar) bar.style.width = '0%';
-}
-function lbPauseTemporarily(){
-  // user interacted; pause autoplay entirely (they can re-hit Play)
-  if(lbAutoplay) lbStopAutoplay();
-}
-function lbScheduleNext(){
-  clearTimeout(lbTimer);
-  lbTimer = setTimeout(()=>{ if(lbAutoplay){ lbIndex = (lbIndex + 1) % activeLbSet.length; renderLightbox(); } }, LB_AUTOPLAY_MS);
-}
-function lbResetProgress(){
-  const bar = document.getElementById('lb-progress-bar');
-  if(!bar) return;
-  bar.style.transition = 'none';
-  bar.style.width = '0%';
-  if(!lbAutoplay) return;
-  lbProgStart = performance.now();
-  clearInterval(lbProgTimer);
-  requestAnimationFrame(()=>{
-    bar.style.transition = 'width .1s linear';
-    lbProgTimer = setInterval(()=>{
-      const pct = Math.min(100, ((performance.now() - lbProgStart) / LB_AUTOPLAY_MS) * 100);
-      bar.style.width = pct + '%';
-    }, 80);
-  });
-  lbScheduleNext();
-}
-
-// wrap lbStep to reset progress + gently pause autoplay on user nav
-const _origLbStep = lbStep;
-lbStep = function(d, e){
-  if(e) e.stopPropagation();
-  if(!activeLbSet) return;
-  if(lbAutoplay){
-    // let autoplay continue but reset the timer for this step
-    lbIndex = (lbIndex + d + activeLbSet.length) % activeLbSet.length;
-    renderLightbox();
-    return;
-  }
-  _origLbStep(d);
-};
-
-// keyboard: arrows / esc / space
-document.addEventListener('keydown', e=>{
-  const lb = document.getElementById('lightbox');
-  if(!lb.classList.contains('open')) return;
-  if(e.key === 'Escape'){ e.preventDefault(); closeLightbox(); }
-  else if(e.key === 'ArrowRight'){ e.preventDefault(); lbStep(1); }
-  else if(e.key === 'ArrowLeft'){ e.preventDefault(); lbStep(-1); }
-  else if(e.key === ' '){ e.preventDefault(); lbTogglePlay(); }
-});
-
-// ---------- Photo Galleries: collapse/expand ----------
-// Default is expanded (unchanged first-load experience). One click on the
-// toggle collapses the whole photo flow + footer so the modules/memories
-// sections below become reachable without scrolling past ~150+ photos.
-let galOpen = true;
-
-function toggleGalleries(){
-  const body = document.getElementById('gal-body');
-  const btn = document.getElementById('gal-toggle');
-  const label = document.getElementById('gal-toggle-label');
-  if(!body || !btn || !label) return;
-
-  if(galOpen){
-    // lock in the current rendered height first so there's a real pixel
-    // value to animate FROM, then shrink it to 0 on the next frame
-    body.style.maxHeight = body.scrollHeight + 'px';
-    requestAnimationFrame(()=> requestAnimationFrame(()=>{ body.style.maxHeight = '0px'; }));
-    btn.classList.add('collapsed');
-    btn.setAttribute('aria-expanded','false');
-    label.textContent = 'Show photos';
-    galOpen = false;
-    // jump back up to the toggle button so collapsing doesn't strand the
-    // guest below a now-empty space
-    btn.scrollIntoView({behavior:'smooth', block:'center'});
-  } else {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    btn.classList.remove('collapsed');
-    btn.setAttribute('aria-expanded','true');
-    label.textContent = 'Hide photos';
-    galOpen = true;
-    body.addEventListener('transitionend', function onEnd(e){
-      if(e.propertyName === 'max-height' && galOpen) body.style.maxHeight = 'none';
-      body.removeEventListener('transitionend', onEnd);
-    });
-  }
-}
-
-// Categories hold very different photo counts, so switching tabs while the
-// gallery is open can change its natural height a lot — keep it uncapped
-// in that case so the new tab's content never gets clipped.
-function syncGalleryHeight(){
-  const body = document.getElementById('gal-body');
-  if(body && galOpen) body.style.maxHeight = 'none';
-}
-
-// ---------- Photo Galleries ----------
-// EDIT THIS MANIFEST to add real photos. Each entry: { src, w, h, caption? }.
-// Filenames are relative to the site root; keep the same folder shape as other images.
-const GALLERIES = {
-  nichithartham: {
-    label: 'Nichithartham',
-    tamil: 'நிச்சயதார்த்தம்',
-    footKick: 'NICHITHARTHAM COLLECTION',
-    footLine: 'The evening the two families said yes, together.',
-    photos: [
-      { src:'images/nichithartham/nich-001.jpg', w:1066, h:1599 },
-      { src:'images/nichithartham/nich-002.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-003.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-004.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-005.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-006.jpg', w:1599, h:1066 },
-      { src:'images/nichithartham/nich-007.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-008.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-009.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-010.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-011.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-012.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-013.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-014.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-015.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-016.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-017.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-018.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-019.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-020.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-021.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-022.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-023.jpg', w:1599, h:1066 },
-      { src:'images/nichithartham/nich-024.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-025.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-026.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-027.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-028.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-029.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-030.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-031.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-032.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-033.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-034.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-035.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-036.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-037.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-038.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-039.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-040.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-041.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-042.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-043.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-044.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-045.jpg', w:1599, h:1066 },
-      { src:'images/nichithartham/nich-046.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-047.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-048.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-049.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-050.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-051.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-052.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-053.jpg', w:1309, h:1963 },
-      { src:'images/nichithartham/nich-054.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-055.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-056.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-057.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-058.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-059.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-060.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-061.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-062.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-063.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-064.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-065.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-066.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-067.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-068.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-069.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-070.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-071.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-072.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-073.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-074.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-075.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-076.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-077.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-078.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-079.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-080.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-081.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-082.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-083.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-084.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-085.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-086.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-087.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-088.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-089.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-090.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-091.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-092.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-093.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-094.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-095.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-096.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-097.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-098.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-099.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-100.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-101.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-102.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-103.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-104.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-105.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-106.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-107.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-108.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-109.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-110.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-111.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-112.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-113.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-114.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-115.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-116.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-117.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-118.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-119.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-120.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-121.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-122.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-123.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-124.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-125.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-126.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-127.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-128.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-129.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-130.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-131.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-132.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-133.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-134.jpg', w:1365, h:2047 },
-      { src:'images/nichithartham/nich-135.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-136.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-137.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-138.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-139.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-140.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-141.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-142.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-143.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-144.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-145.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-146.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-147.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-148.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-149.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-150.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-151.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-152.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-153.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-154.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-155.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-156.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-157.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-158.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-159.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-160.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-161.jpg', w:1600, h:1066 },
-      { src:'images/nichithartham/nich-162.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-163.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-164.jpg', w:1066, h:1600 },
-      { src:'images/nichithartham/nich-165.jpg', w:1600, h:1066 }
-    ]
-  },
-  reception: {
-    label: 'Reception',
-    tamil: 'வரவேற்பு',
-    footKick: 'RECEPTION COLLECTION',
-    footLine: 'And then the celebration truly began.',
-    photos: []   // TODO: fill with { src:'images/reception/xxx.jpg' } entries
-  },
-  wedding: {
-    label: 'Wedding Day',
-    tamil: 'திருமண நாள்',
-    footKick: 'WEDDING DAY COLLECTION',
-    footLine: 'One day. A lifetime, promised.',
-    photos: []   // TODO: fill with { src:'images/wedding/xxx.jpg' } entries
-  }
-};
-
-// Curator captions and pull-quotes interleaved into the flow (rendered at fixed
-// positions within the current category). Keep short — Fraunces italic.
-const GALLERY_CAPTIONS = {
-  reception: [
-    { at:0, text:'The anticipation of the evening' },
-    { at:3, text:'The Grand Ballroom, in jasmine and marigolds' },
-    { at:6, text:'Family, laughing at nothing in particular' }
-  ],
-  wedding: [
-    { at:0, text:'Sunrise, before the mandap fills' },
-    { at:4, text:'Muhurtham' }
-  ],
-  nichithartham: [
-    { at:0, text:'The first exchange' }
-  ]
-};
-const GALLERY_QUOTES = {
-  reception: [{ at:5, quote:'Every glance was a chapter, every smile a song.', attrib:'S. & A. · 23 JUNE 2026' }],
-  wedding:   [{ at:6, quote:'Two families, one thread, tied for good.', attrib:'24 JUNE 2026' }],
-  nichithartham: []
-};
-
-const Galleries = (function(){
-  const flow = () => document.getElementById('gal-flow');
-  const tabs = () => document.getElementById('gal-tabs');
-  let currentCat = 'nichithartham';
-
-  function init(){
-    const t = tabs();
-    if(!t) return;
-    t.innerHTML = Object.entries(GALLERIES).map(([key, g])=>(
-      '<button class="gal-tab'+(key===currentCat?' active':'')+'" data-cat="'+key+'" role="tab" onclick="Galleries.select(\''+key+'\')">'+
-        '<span class="cat-name">'+g.label+'</span>'+
-        '<span class="cat-sub">'+g.tamil+' ('+g.photos.length+')</span>'+
-      '</button>'
-    )).join('');
-    render();
-    // Show floating Play FAB when the galleries scroll into view
-    const fab = document.getElementById('gal-play-fab');
-    if(fab && 'IntersectionObserver' in window){
-      const io = new IntersectionObserver(entries=>{
-        entries.forEach(en => fab.classList.toggle('show', en.isIntersecting));
-      }, { threshold:0.05 });
-      io.observe(document.getElementById('galleries'));
-    }
-  }
-
-  function select(cat){
-    currentCat = cat;
-    document.querySelectorAll('.gal-tab').forEach(b=>{
-      b.classList.toggle('active', b.dataset.cat === cat);
-    });
-    render();
-    syncGalleryHeight();
-  }
-
-  function render(){
-    const g = GALLERIES[currentCat];
-    const f = flow();
-    if(!f) return;
-    // update footer
-    document.getElementById('gal-foot-kick').textContent = g.footKick;
-    document.getElementById('gal-foot-line').textContent = g.footLine;
-
-    if(!g.photos.length){
-      f.innerHTML = '<div class="gal-quote" style="grid-column:1/-1"><q>Photos from '+g.label+' are being curated.</q><span class="attrib">CHECK BACK SOON</span></div>';
-      return;
-    }
-
-    const caps = (GALLERY_CAPTIONS[currentCat] || []);
-    const quotes = (GALLERY_QUOTES[currentCat] || []);
-
-    // Build items with occasional quote cards interleaved.
-    const nodes = [];
-    g.photos.forEach((p, i)=>{
-      const cap = caps.find(c => c.at === i);
-      const idxLabel = g.label.toUpperCase() + ' / ' + String(i+1).padStart(3,'0');
-      nodes.push(
-        '<div class="gal-card" style="animation-delay:'+Math.min(i*60, 700)+'ms">'+
-          '<div class="gal-photo" onclick="Galleries.open('+i+')">'+
-            '<img src="'+p.src+'" alt="'+(p.alt||g.label+' photo '+(i+1))+'" loading="lazy" decoding="async"'+
-              (p.w&&p.h ? ' width="'+p.w+'" height="'+p.h+'" style="aspect-ratio:'+p.w+'/'+p.h+'"' : '')+'>'+
-            '<span class="peek">Open slideshow</span>'+
-          '</div>'+
-          (cap ? '<span class="gal-caption">'+cap.text+'</span>'
-               : '<div class="gal-index"><span class="idx">'+idxLabel+'</span><span class="hair"></span></div>')+
-        '</div>'
-      );
-      const q = quotes.find(c => c.at === i);
-      if(q){
-        nodes.push(
-          '<div class="gal-quote">'+
-            '<q>'+q.quote+'</q>'+
-            '<span class="attrib">'+q.attrib+'</span>'+
-          '</div>'
-        );
-      }
-    });
-    f.innerHTML = nodes.join('');
-  }
-
-  function open(i){
-    const g = GALLERIES[currentCat];
-    if(!g || !g.photos.length) return;
-    activeLbSet = g.photos.map(p => ({ src:p.src, caption:p.caption || '' }));
-    activeLbLabel = g.label;
-    lbIndex = i;
-    stopCarousel();
-    renderLightbox();
-    document.getElementById('lightbox').classList.add('open');
-  }
-
-  return { init, select, open, current: ()=>currentCat };
-})();
-Galleries.init();
-
-const Lightbox = {
-  openSlideshow(){
-    // FAB: start slideshow from photo 1 of current category, autoplay on
-    Galleries.open(0);
-    lbStartAutoplay();
-  }
-};
 </script>
 </body>
 </html>
