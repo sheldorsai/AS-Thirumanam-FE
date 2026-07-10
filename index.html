@@ -868,6 +868,24 @@
   .gal-divider .hair{ height:1px; width:44px; background:var(--line); }
   .gal-divider .dot{ width:6px; height:6px; border-radius:50%; background:var(--sage); }
 
+  /* Collapse/expand toggle — one click hides the whole photo flow so the
+     modules & memories below are reachable without a wall of scrolling. */
+  .gal-toggle{
+    display:inline-flex; align-items:center; gap:7px;
+    margin:18px auto 0;
+    border:1px solid var(--line); background:var(--card);
+    color:var(--ink); border-radius:100px;
+    padding:9px 17px; font-size:12.5px; font-weight:600;
+    cursor:pointer; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .gal-toggle:hover{ transform:translateY(-2px); box-shadow:0 12px 22px -12px rgb(var(--shadow)/.4); border-color:var(--sage); }
+  .gal-toggle svg{ width:14px; height:14px; transition:transform .3s ease; }
+  .gal-toggle.collapsed svg{ transform:rotate(-180deg); }
+  .gal-body{
+    overflow:hidden;
+    transition:max-height .5s cubic-bezier(.2,.7,.2,1);
+  }
+
   /* Category switcher */
   .gal-tabs{
     display:inline-flex; gap:4px; padding:5px;
@@ -1171,13 +1189,19 @@
               <span class="hair"></span><span class="dot"></span><span class="hair"></span>
             </div>
             <nav class="gal-tabs" role="tablist" id="gal-tabs"></nav>
+            <button class="gal-toggle" id="gal-toggle" onclick="toggleGalleries()" aria-expanded="true" aria-controls="gal-body">
+              <span id="gal-toggle-label">Hide photos</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
           </div>
 
-          <div class="gal-flow" id="gal-flow"></div>
+          <div class="gal-body" id="gal-body">
+            <div class="gal-flow" id="gal-flow"></div>
 
-          <div class="gal-foot">
-            <span class="fkick" id="gal-foot-kick">RECEPTION COLLECTION</span>
-            <span class="fline" id="gal-foot-line">And then the celebration truly began.</span>
+            <div class="gal-foot">
+              <span class="fkick" id="gal-foot-kick">RECEPTION COLLECTION</span>
+              <span class="fline" id="gal-foot-line">And then the celebration truly began.</span>
+            </div>
           </div>
         </div>
 
@@ -2278,6 +2302,51 @@ document.addEventListener('keydown', e=>{
   else if(e.key === ' '){ e.preventDefault(); lbTogglePlay(); }
 });
 
+// ---------- Photo Galleries: collapse/expand ----------
+// Default is expanded (unchanged first-load experience). One click on the
+// toggle collapses the whole photo flow + footer so the modules/memories
+// sections below become reachable without scrolling past ~150+ photos.
+let galOpen = true;
+
+function toggleGalleries(){
+  const body = document.getElementById('gal-body');
+  const btn = document.getElementById('gal-toggle');
+  const label = document.getElementById('gal-toggle-label');
+  if(!body || !btn || !label) return;
+
+  if(galOpen){
+    // lock in the current rendered height first so there's a real pixel
+    // value to animate FROM, then shrink it to 0 on the next frame
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(()=> requestAnimationFrame(()=>{ body.style.maxHeight = '0px'; }));
+    btn.classList.add('collapsed');
+    btn.setAttribute('aria-expanded','false');
+    label.textContent = 'Show photos';
+    galOpen = false;
+    // jump back up to the toggle button so collapsing doesn't strand the
+    // guest below a now-empty space
+    btn.scrollIntoView({behavior:'smooth', block:'center'});
+  } else {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    btn.classList.remove('collapsed');
+    btn.setAttribute('aria-expanded','true');
+    label.textContent = 'Hide photos';
+    galOpen = true;
+    body.addEventListener('transitionend', function onEnd(e){
+      if(e.propertyName === 'max-height' && galOpen) body.style.maxHeight = 'none';
+      body.removeEventListener('transitionend', onEnd);
+    });
+  }
+}
+
+// Categories hold very different photo counts, so switching tabs while the
+// gallery is open can change its natural height a lot — keep it uncapped
+// in that case so the new tab's content never gets clipped.
+function syncGalleryHeight(){
+  const body = document.getElementById('gal-body');
+  if(body && galOpen) body.style.maxHeight = 'none';
+}
+
 // ---------- Photo Galleries ----------
 // EDIT THIS MANIFEST to add real photos. Each entry: { src, w, h, caption? }.
 // Filenames are relative to the site root; keep the same folder shape as other images.
@@ -2524,6 +2593,7 @@ const Galleries = (function(){
       b.classList.toggle('active', b.dataset.cat === cat);
     });
     render();
+    syncGalleryHeight();
   }
 
   function render(){
