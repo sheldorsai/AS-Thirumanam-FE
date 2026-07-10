@@ -868,87 +868,31 @@
   .gal-divider .hair{ height:1px; width:44px; background:var(--line); }
   .gal-divider .dot{ width:6px; height:6px; border-radius:50%; background:var(--sage); }
 
-  /* Collapsible category sections (accordion) */
-  .gal-accordion{ margin-top:14px; }
-  .gal-section{ border-top:1px solid var(--line); }
-  .gal-section:last-child{ border-bottom:1px solid var(--line); }
-  .gal-section-head{
-    width:100%; box-sizing:border-box;
-    display:flex; align-items:center; gap:14px;
-    padding:20px 6px;
-    background:transparent; border:none; cursor:pointer;
-    text-align:left;
-    transition:background .2s ease;
+  /* Category switcher */
+  .gal-tabs{
+    display:inline-flex; gap:4px; padding:5px;
+    background:var(--paper-2); border-radius:100px;
+    border:1px solid var(--line);
   }
-  .gal-section-head:hover{ background:rgba(125,138,107,.05); }
-  .gal-section-head .chevron{
-    width:22px; height:22px; flex:0 0 auto;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--clay-deep);
-    transition:transform .3s cubic-bezier(.2,.7,.2,1);
+  .gal-tab{
+    border:none; background:transparent; cursor:pointer;
+    padding:9px 16px; border-radius:100px;
+    color:var(--ink-soft); font-weight:600; font-size:13px;
+    line-height:1.15; transition:background .25s, color .25s, box-shadow .25s;
+    text-align:center;
   }
-  .gal-section-head .chevron svg{ width:18px; height:18px; }
-  .gal-section.open .gal-section-head .chevron{ transform:rotate(90deg); }
-  .gal-section-head .head-text{ flex:1; min-width:0; }
-  .gal-section-head .head-title{
-    display:block;
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:clamp(20px, 3.4vw, 26px);
-    color:var(--ink); letter-spacing:-.01em;
-    line-height:1.15;
+  .gal-tab .cat-name{ display:block; }
+  .gal-tab .cat-sub{
+    display:block; font-family:'Noto Sans Tamil', sans-serif;
+    font-weight:500; font-size:10px; opacity:.65;
+    margin-top:2px; letter-spacing:.02em;
   }
-  .gal-section-head .head-sub{
-    display:block; margin-top:3px;
-    font-family:'Noto Sans Tamil', sans-serif;
-    font-size:12.5px; color:var(--ink-soft); font-weight:500;
-  }
-  .gal-section-head .count-pill{
-    flex:0 0 auto;
-    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-    font-weight:700; color:var(--clay-deep);
-    background:var(--paper-2); border:1px solid var(--line);
-    padding:5px 11px; border-radius:100px;
-    white-space:nowrap;
-  }
-  /* Per-category "Slideshow" trigger inside each header — mobile-friendly
-     alternative to the floating FAB, which is easy to miss on small screens. */
-  .gal-section-head .gal-play-btn{
-    flex:0 0 auto;
-    display:inline-flex; align-items:center; gap:6px;
-    padding:7px 12px 7px 10px;
-    background:var(--ink); color:var(--paper);
-    border:none; border-radius:100px;
-    cursor:pointer;
-    font:700 10.5px/1 'Bricolage Grotesque', sans-serif;
-    letter-spacing:.16em; text-transform:uppercase;
-    box-shadow:0 4px 12px -5px rgba(0,0,0,.35);
-    transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-  }
-  .gal-section-head .gal-play-btn:hover{
-    transform:translateY(-1px);
-    box-shadow:0 8px 16px -6px rgba(0,0,0,.45);
-  }
-  .gal-section-head .gal-play-btn svg{ width:11px; height:11px; }
-  .gal-section-head .gal-play-btn .lbl{ display:none; }
-  @media(min-width:520px){ .gal-section-head .gal-play-btn .lbl{ display:inline; } }
-  /* Narrow phones: drop the photo-count pill so the play button always fits */
-  @media(max-width:380px){ .gal-section-head .count-pill{ display:none; } }
-  .gal-section-body{
-    display:grid;
-    grid-template-rows:0fr;
-    transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1);
-  }
-  .gal-section.open .gal-section-body{ grid-template-rows:1fr; }
-  .gal-section-body .body-inner{
-    overflow:hidden;
-    min-height:0;
-    padding:0 2px;
-  }
-  .gal-section.open .gal-section-body .body-inner{ padding-bottom:22px; }
-  .gal-section-empty{
-    padding:22px 4px 26px;
-    font-family:'Fraunces', serif; font-style:italic;
-    color:var(--ink-soft); font-size:15px;
+  .gal-tab:hover{ color:var(--ink); }
+  .gal-tab.active{
+    background:var(--card); color:var(--clay-deep);
+    box-shadow:0 2px 8px -3px rgb(var(--shadow)/.28);
+    border:1px solid var(--line);
+    padding:8px 15px;
   }
 
   /* Postcard flow grid */
@@ -1082,9 +1026,6 @@
   }
   @keyframes fabPulse{ 0%,100%{opacity:.55; transform:scale(.85);} 50%{opacity:1; transform:scale(1);} }
   .gal-play-fab.show{ display:inline-flex; }
-  /* On phones, the per-category Slideshow button in each header replaces the
-     FAB — hide the FAB there to avoid two triggers competing for attention. */
-  @media(max-width:640px){ .gal-play-fab.show{ display:none; } }
 
   /* ---------- Lightbox enhancements (extends existing .lightbox) ---------- */
   .lightbox img{ transition:opacity .35s ease; }
@@ -1221,7 +1162,7 @@
           <p class="sneak-cooking">A curated handful from the photographer. The full galleries live below.</p>
         </div>
 
-        <!-- PHOTO GALLERIES — collapsible sections per event -->
+        <!-- PHOTO GALLERIES — three events in an editorial postcard flow -->
         <div class="galleries" id="galleries">
           <div class="gal-head">
             <span class="gal-kicker">The days themselves</span>
@@ -1229,9 +1170,15 @@
             <div class="gal-divider">
               <span class="hair"></span><span class="dot"></span><span class="hair"></span>
             </div>
+            <nav class="gal-tabs" role="tablist" id="gal-tabs"></nav>
           </div>
 
-          <div class="gal-accordion" id="gal-accordion"></div>
+          <div class="gal-flow" id="gal-flow"></div>
+
+          <div class="gal-foot">
+            <span class="fkick" id="gal-foot-kick">RECEPTION COLLECTION</span>
+            <span class="fline" id="gal-foot-line">And then the celebration truly began.</span>
+          </div>
         </div>
 
         <div class="modules">
@@ -2547,48 +2494,20 @@ const GALLERY_QUOTES = {
 };
 
 const Galleries = (function(){
-  const container = () => document.getElementById('gal-accordion');
-  // Tracks the last-opened section — used by the floating Play FAB so
-  // "Play Slideshow" starts on whichever category the guest is currently
-  // browsing, not always the first one.
+  const flow = () => document.getElementById('gal-flow');
+  const tabs = () => document.getElementById('gal-tabs');
   let currentCat = 'nichithartham';
 
   function init(){
-    const el = container();
-    if(!el) return;
-    // Render every category as its own collapsible section. First one
-    // starts expanded so the page has visible content on load; the rest
-    // are collapsed so guests can scan the list and skip straight to the
-    // modules below (Watch Again, Share Photos, etc.) without a long scroll.
-    el.innerHTML = Object.entries(GALLERIES).map(([key, g], idx)=>{
-      const isOpen = (idx === 0);
-      const count = g.photos.length;
-      // Show the play button only when the category has photos — no point
-      // offering a slideshow for a "being curated" empty gallery.
-      const playBtn = count ? (
-        '<button class="gal-play-btn" onclick="event.stopPropagation(); Galleries.playSlideshow(\''+key+'\')" aria-label="Play '+g.label+' slideshow">'+
-          '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'+
-          '<span class="lbl">Slideshow</span>'+
-        '</button>'
-      ) : '';
-      return (
-        '<section class="gal-section'+(isOpen?' open':'')+'" data-cat="'+key+'">'+
-          '<button class="gal-section-head" aria-expanded="'+(isOpen?'true':'false')+'" onclick="Galleries.toggle(\''+key+'\')">'+
-            '<span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>'+
-            '<span class="head-text">'+
-              '<span class="head-title">'+g.label+'</span>'+
-              '<span class="head-sub">'+g.tamil+'</span>'+
-            '</span>'+
-            '<span class="count-pill">'+count+' photo'+(count===1?'':'s')+'</span>'+
-            playBtn+
-          '</button>'+
-          '<div class="gal-section-body">'+
-            '<div class="body-inner">'+renderBody(key)+'</div>'+
-          '</div>'+
-        '</section>'
-      );
-    }).join('');
-
+    const t = tabs();
+    if(!t) return;
+    t.innerHTML = Object.entries(GALLERIES).map(([key, g])=>(
+      '<button class="gal-tab'+(key===currentCat?' active':'')+'" data-cat="'+key+'" role="tab" onclick="Galleries.select(\''+key+'\')">'+
+        '<span class="cat-name">'+g.label+'</span>'+
+        '<span class="cat-sub">'+g.tamil+' ('+g.photos.length+')</span>'+
+      '</button>'
+    )).join('');
+    render();
     // Show floating Play FAB when the galleries scroll into view
     const fab = document.getElementById('gal-play-fab');
     if(fab && 'IntersectionObserver' in window){
@@ -2599,30 +2518,38 @@ const Galleries = (function(){
     }
   }
 
-  function toggle(cat){
-    const el = document.querySelector('.gal-section[data-cat="'+cat+'"]');
-    if(!el) return;
-    const nowOpen = el.classList.toggle('open');
-    const btn = el.querySelector('.gal-section-head');
-    if(btn) btn.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
-    if(nowOpen) currentCat = cat;
+  function select(cat){
+    currentCat = cat;
+    document.querySelectorAll('.gal-tab').forEach(b=>{
+      b.classList.toggle('active', b.dataset.cat === cat);
+    });
+    render();
   }
 
-  function renderBody(cat){
-    const g = GALLERIES[cat];
-    if(!g) return '';
+  function render(){
+    const g = GALLERIES[currentCat];
+    const f = flow();
+    if(!f) return;
+    // update footer
+    document.getElementById('gal-foot-kick').textContent = g.footKick;
+    document.getElementById('gal-foot-line').textContent = g.footLine;
+
     if(!g.photos.length){
-      return '<div class="gal-section-empty">Photos from '+g.label+' are being curated. Check back soon.</div>';
+      f.innerHTML = '<div class="gal-quote" style="grid-column:1/-1"><q>Photos from '+g.label+' are being curated.</q><span class="attrib">CHECK BACK SOON</span></div>';
+      return;
     }
-    const caps = (GALLERY_CAPTIONS[cat] || []);
-    const quotes = (GALLERY_QUOTES[cat] || []);
+
+    const caps = (GALLERY_CAPTIONS[currentCat] || []);
+    const quotes = (GALLERY_QUOTES[currentCat] || []);
+
+    // Build items with occasional quote cards interleaved.
     const nodes = [];
     g.photos.forEach((p, i)=>{
       const cap = caps.find(c => c.at === i);
       const idxLabel = g.label.toUpperCase() + ' / ' + String(i+1).padStart(3,'0');
       nodes.push(
         '<div class="gal-card" style="animation-delay:'+Math.min(i*60, 700)+'ms">'+
-          '<div class="gal-photo" onclick="Galleries.open(\''+cat+'\','+i+')">'+
+          '<div class="gal-photo" onclick="Galleries.open('+i+')">'+
             '<img src="'+p.src+'" alt="'+(p.alt||g.label+' photo '+(i+1))+'" loading="lazy" decoding="async"'+
               (p.w&&p.h ? ' width="'+p.w+'" height="'+p.h+'" style="aspect-ratio:'+p.w+'/'+p.h+'"' : '')+'>'+
             '<span class="peek">Open slideshow</span>'+
@@ -2641,17 +2568,12 @@ const Galleries = (function(){
         );
       }
     });
-    return '<div class="gal-flow">'+nodes.join('')+'</div>'+
-      '<div class="gal-foot">'+
-        '<span class="fkick">'+g.footKick+'</span>'+
-        '<span class="fline">'+g.footLine+'</span>'+
-      '</div>';
+    f.innerHTML = nodes.join('');
   }
 
-  function open(cat, i){
-    const g = GALLERIES[cat];
+  function open(i){
+    const g = GALLERIES[currentCat];
     if(!g || !g.photos.length) return;
-    currentCat = cat;
     activeLbSet = g.photos.map(p => ({ src:p.src, caption:p.caption || '' }));
     activeLbLabel = g.label;
     lbIndex = i;
@@ -2660,28 +2582,14 @@ const Galleries = (function(){
     document.getElementById('lightbox').classList.add('open');
   }
 
-  function currentPlayable(){
-    if(GALLERIES[currentCat] && GALLERIES[currentCat].photos.length) return currentCat;
-    return Object.keys(GALLERIES).find(k => GALLERIES[k].photos.length) || currentCat;
-  }
-
-  function playSlideshow(cat){
-    const g = GALLERIES[cat];
-    if(!g || !g.photos.length) return;
-    open(cat, 0);
-    lbStartAutoplay();
-  }
-
-  return { init, toggle, open, playSlideshow, current: currentPlayable };
+  return { init, select, open, current: ()=>currentCat };
 })();
 Galleries.init();
 
 const Lightbox = {
   openSlideshow(){
-    // FAB: start slideshow from photo 1 of the last-viewed (or first
-    // non-empty) category, autoplay on
-    const cat = Galleries.current();
-    Galleries.open(cat, 0);
+    // FAB: start slideshow from photo 1 of current category, autoplay on
+    Galleries.open(0);
     lbStartAutoplay();
   }
 };
