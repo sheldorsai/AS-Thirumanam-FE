@@ -237,19 +237,19 @@ body{
   filter:blur(12px) brightness(.28);
   opacity:.65;pointer-events:none;user-select:none;
 }
-.lb-side-l{right:calc(50% + 170px);}
-.lb-side-r{left:calc(50% + 170px);}
+.lb-side-l{right:calc(50% + min(44vw,600px));}
+.lb-side-r{left:calc(50% + min(44vw,600px));}
 
 #lb-img{
   position:relative;z-index:2;
-  max-width:min(50vw,660px);max-height:84vh;
+  max-width:min(88vw,1200px);max-height:88vh;
   object-fit:contain;display:block;
   transition:opacity .16s ease;user-select:none;-webkit-user-drag:none;
 }
 #lb-img.fade{opacity:0;}
 
 @media(max-width:680px){
-  #lb-img{max-width:90vw;max-height:78vh;}
+  #lb-img{max-width:96vw;max-height:82vh;}
   .lb-side{display:none;}
 }
 
@@ -594,10 +594,12 @@ function buildGallery(){
 
 // ── Auto-scroll ────────────────────────────────────────────────────────────
 let scrollDir=1, autoOn=true, manualOff=false, pauseTimer=null;
-const SPEED=0.38;
+let scrollPos=0; // internal accumulator — avoids sub-pixel rounding bug on Safari
+const SPEED=0.20;
 
 function pauseAuto(resume=true){
   if(manualOff) return;
+  scrollPos=window.scrollY; // sync position on manual scroll
   autoOn=false;
   clearTimeout(pauseTimer);
   if(resume) pauseTimer=setTimeout(()=>{autoOn=true;},3200);
@@ -607,10 +609,10 @@ function autoTick(){
   if(autoOn){
     const max=document.documentElement.scrollHeight-window.innerHeight;
     if(max>10){
-      let y=window.scrollY+scrollDir*SPEED;
-      if(y>=max){y=max;scrollDir=-1;}
-      else if(y<=0){y=0;scrollDir=1;}
-      window.scrollTo(0,y);
+      scrollPos+=scrollDir*SPEED;
+      if(scrollPos>=max){scrollPos=max;scrollDir=-1;}
+      else if(scrollPos<=0){scrollPos=0;scrollDir=1;}
+      window.scrollTo(0,scrollPos);
     }
   }
   requestAnimationFrame(autoTick);
@@ -628,6 +630,7 @@ window.addEventListener('scroll',()=>{
   topBtn.classList.toggle('show',window.scrollY>300);
 },{passive:true});
 topBtn.addEventListener('click',()=>{
+  scrollPos=0;
   window.scrollTo({top:0,behavior:'smooth'});
 });
 
