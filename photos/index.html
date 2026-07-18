@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swathi &amp; Adithyaa — Family Photos</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Noto+Sans+Tamil:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f1e8;
+    --paper-2:#efe6d6;
+    --card:#fffaf3;
+    --ink:#33291f;
+    --ink-soft:#7c6a55;
+    --clay:#c0633b;
+    --clay-deep:#9e4a28;
+    --olive:#6e7449;
+    --ochre:#d99a3e;
+    --line:#e3d6c2;
+    --shadow:38 27 16;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    min-height:100vh;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Bricolage Grotesque', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  body{
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(192,99,59,.05), transparent 38%),
+      radial-gradient(circle at 82% 78%, rgba(110,116,73,.05), transparent 40%);
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:.4;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+
+  /* ── PIN SCREEN ── */
+  #pin-screen{
+    position:fixed; inset:0; z-index:500;
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(192,99,59,.06), transparent 38%),
+      radial-gradient(circle at 82% 78%, rgba(110,116,73,.06), transparent 40%);
+  }
+  #pin-screen.hidden{ display:none; }
+
+  .pin-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:44px 36px 40px;
+    max-width:360px; width:100%;
+    text-align:center;
+    box-shadow:0 24px 60px -24px rgb(var(--shadow)/.35);
+    position:relative; z-index:1;
+  }
+  .pin-icon{
+    width:62px; height:62px; border-radius:19px; margin:0 auto 22px;
+    background:linear-gradient(150deg,var(--clay),var(--clay-deep));
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 12px 28px -10px rgba(192,99,59,.45);
+  }
+  .pin-icon svg{ width:30px; height:30px; color:#fff; }
+  .pin-card h1{
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:28px; margin-bottom:6px; color:var(--ink);
+  }
+  .pin-card .sub{
+    font-size:13.5px; color:var(--ink-soft); line-height:1.55;
+    margin-bottom:28px;
+  }
+  .pin-card .sub .ta{
+    display:block; font-family:'Noto Sans Tamil',sans-serif;
+    font-size:13px; margin-top:3px;
+  }
+
+  .pin-dots{
+    display:flex; justify-content:center; gap:12px;
+    margin-bottom:22px;
+  }
+  .pin-dot{
+    width:14px; height:14px; border-radius:50%;
+    background:var(--paper-2);
+    border:2px solid var(--line);
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .pin-dot.filled{
+    background:var(--clay);
+    border-color:var(--clay-deep);
+    transform:scale(1.15);
+  }
+
+  .pin-input-wrap{ position:relative; margin-bottom:14px; }
+  #pin-input{
+    width:100%;
+    padding:14px 16px;
+    border:2px solid var(--line);
+    border-radius:14px;
+    font-size:26px;
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:700;
+    letter-spacing:8px;
+    text-align:center;
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .2s ease;
+    -webkit-text-security:disc;
+    text-security:disc;
+  }
+  #pin-input:focus{ border-color:var(--clay); }
+  #pin-input.error{ border-color:#c0392b; animation:shake .4s ease; }
+  @keyframes shake{
+    0%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)}
+    60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} 100%{transform:translateX(0)}
+  }
+
+  .pin-error{
+    font-size:13px; color:#c0392b; font-weight:600;
+    min-height:18px; margin-bottom:14px;
+    opacity:0; transition:opacity .2s ease;
+  }
+  .pin-error.show{ opacity:1; }
+
+  .pin-btn{
+    width:100%; padding:15px;
+    border:none; border-radius:14px;
+    background:linear-gradient(150deg,var(--clay),var(--clay-deep));
+    color:#fff; font-size:15px; font-weight:700;
+    font-family:'Bricolage Grotesque', sans-serif;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+    box-shadow:0 12px 24px -10px rgba(192,99,59,.45);
+  }
+  .pin-btn:hover{ transform:translateY(-2px); box-shadow:0 18px 32px -12px rgba(192,99,59,.55); }
+  .pin-btn:active{ transform:none; }
+
+  .pin-home{
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:22px;
+    font-size:12.5px; color:var(--ink-soft); font-weight:600;
+    text-decoration:none;
+    transition:color .2s ease;
+  }
+  .pin-home:hover{ color:var(--clay); }
+  .pin-home svg{ width:13px; height:13px; }
+
+  /* ── GALLERY ── */
+  #gallery{ display:none; position:relative; z-index:1; }
+  #gallery.visible{ display:block; }
+
+  .g-topbar{
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px;
+    background:rgba(247,241,232,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .g-home-btn{
+    border:none; background:none; cursor:pointer;
+    padding:2px; display:flex; align-items:center;
+    transition:transform .2s ease;
+  }
+  .g-home-btn:hover{ transform:scale(1.06); }
+  .g-home-btn img{ height:30px; width:auto; display:block; }
+
+  .g-title{
+    font-family:'Fraunces', serif; font-weight:400; font-style:italic;
+    font-size:17px; color:var(--clay-deep);
+  }
+  .g-count{
+    font-size:12px; font-weight:600; color:var(--ink-soft);
+    background:var(--paper-2); border-radius:100px;
+    padding:5px 12px;
+  }
+
+  .g-main{ max-width:1280px; margin:0 auto; padding:40px 20px 80px; }
+
+  .g-hero{ text-align:center; margin-bottom:50px; }
+  .g-hero-tag{
+    display:inline-block;
+    font-size:10.5px; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--clay); font-weight:700;
+    padding:5px 14px; border-radius:100px;
+    background:rgba(192,99,59,.1);
+    border:1px solid rgba(192,99,59,.25);
+    margin-bottom:14px;
+  }
+  .g-hero h1{
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:clamp(32px,7vw,52px);
+    color:var(--ink); line-height:1.1; margin-bottom:8px;
+  }
+  .g-hero h1 em{ font-style:italic; color:var(--clay); }
+  .g-hero .ta{
+    font-family:'Noto Sans Tamil', sans-serif;
+    font-size:14px; color:var(--ink-soft);
+  }
+
+  /* ── Section headings ── */
+  .g-section{ margin-bottom:60px; }
+  .g-section-head{
+    display:flex; align-items:center; gap:14px;
+    margin-bottom:28px; padding-bottom:14px;
+    border-bottom:2px solid var(--line);
+  }
+  .g-section-icon{
+    width:42px; height:42px; border-radius:13px; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+    box-shadow:0 8px 20px -8px rgba(0,0,0,.3);
+  }
+  .g-section-icon svg{ width:22px; height:22px; }
+  .s-reception .g-section-icon{ background:linear-gradient(150deg,var(--clay),var(--clay-deep)); }
+  .s-wedding .g-section-icon{ background:linear-gradient(150deg,var(--olive),#444828); }
+
+  .g-section-head .info{ flex:1; }
+  .g-section-head h2{
+    font-family:'Fraunces', serif; font-weight:400;
+    font-size:clamp(22px,4vw,30px); color:var(--ink); margin-bottom:2px;
+  }
+  .g-section-head .meta{
+    font-size:12.5px; color:var(--ink-soft); font-weight:600;
+  }
+  .g-section-head .chip{
+    font-size:11px; font-weight:700; letter-spacing:.06em;
+    padding:5px 12px; border-radius:100px;
+    background:var(--paper-2); color:var(--ink-soft);
+    white-space:nowrap;
+  }
+
+  /* ── Polaroid grid ── */
+  .polaroid-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
+    gap:22px 18px;
+    align-items:start;
+  }
+  @media(min-width:600px){ .polaroid-grid{ grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:26px 22px; } }
+  @media(min-width:1024px){ .polaroid-grid{ grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); } }
+
+  .polaroid{
+    background:#fff;
+    padding:9px 9px 36px;
+    cursor:pointer;
+    box-shadow:0 5px 20px -6px rgba(38,27,16,.24), 0 1px 4px rgba(38,27,16,.08);
+    transform:rotate(var(--rot,0deg));
+    transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
+    display:block; position:relative;
+    content-visibility:auto;
+    contain-intrinsic-size:200px 230px;
+  }
+  .polaroid:hover{
+    transform:rotate(0deg) scale(1.04) translateY(-4px);
+    box-shadow:0 18px 42px -12px rgba(38,27,16,.38), 0 3px 8px rgba(38,27,16,.1);
+    z-index:2;
+  }
+  .polaroid:active{ transform:rotate(0deg) scale(.98); }
+  .polaroid img{
+    display:block; width:100%;
+    aspect-ratio:4/3; object-fit:cover;
+    background:var(--paper-2);
+  }
+  .polaroid .p-label{
+    position:absolute; bottom:0; left:0; right:0;
+    height:36px; display:flex; align-items:center; justify-content:center;
+    font-size:10px; color:var(--ink-soft); font-weight:500; font-family:'Fraunces',serif; font-style:italic;
+    letter-spacing:.02em;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox{
+    position:fixed; inset:0; z-index:300;
+    background:rgba(14,10,6,.96);
+    display:none; align-items:center; justify-content:center;
+    flex-direction:column;
+  }
+  .lightbox.open{ display:flex; }
+
+  .lb-img-wrap{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    width:100%; flex:1;
+    overflow:hidden;
+  }
+  #lb-img{
+    max-width:92vw; max-height:82vh;
+    object-fit:contain;
+    border-radius:6px;
+    box-shadow:0 30px 70px rgba(0,0,0,.6);
+    transition:opacity .18s ease;
+    display:block;
+    user-select:none;
+  }
+  #lb-img.fading{ opacity:0; }
+
+  .lb-close{
+    position:fixed; top:16px; right:16px;
+    width:44px; height:44px; border-radius:50%;
+    border:none; background:rgba(255,255,255,.12); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:310; backdrop-filter:blur(4px);
+    transition:background .2s ease, transform .2s ease;
+  }
+  .lb-close:hover{ background:rgba(255,255,255,.22); transform:scale(1.08); }
+  .lb-close svg{ width:20px; height:20px; }
+
+  .lb-info{
+    position:fixed; top:0; left:0; right:0; padding:18px 70px;
+    display:flex; align-items:center; justify-content:center; gap:16px;
+    pointer-events:none;
+  }
+  .lb-count{
+    color:rgba(255,255,255,.8); font-size:13px; font-weight:600;
+    letter-spacing:.04em;
+  }
+  .lb-section-tag{
+    font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    padding:4px 11px; border-radius:100px;
+    background:rgba(255,255,255,.12); color:rgba(255,255,255,.7);
+  }
+
+  .lb-nav{
+    position:fixed; top:50%; transform:translateY(-50%);
+    width:48px; height:48px; border-radius:50%;
+    border:none; background:rgba(255,255,255,.12); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; backdrop-filter:blur(4px); z-index:310;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .lb-nav:hover{ background:rgba(255,255,255,.24); }
+  .lb-prev{ left:14px; transform:translateY(-50%); }
+  .lb-next{ right:14px; transform:translateY(-50%); }
+  .lb-prev:hover{ transform:translateY(-50%) translateX(-2px); }
+  .lb-next:hover{ transform:translateY(-50%) translateX(2px); }
+  .lb-nav svg{ width:22px; height:22px; }
+  @media(max-width:500px){
+    .lb-nav{ width:38px; height:38px; }
+    .lb-prev{ left:8px; } .lb-next{ right:8px; }
+    #lb-img{ max-width:96vw; max-height:78vh; }
+  }
+
+  .lb-thumb-bar{
+    height:5px; background:rgba(255,255,255,.1);
+    width:min(320px, 70vw); border-radius:3px; margin:18px auto 12px; flex:0 0 auto;
+    position:relative; overflow:hidden;
+  }
+  .lb-thumb-fill{
+    position:absolute; left:0; top:0; height:100%;
+    background:var(--clay);
+    border-radius:3px;
+    transition:width .2s ease;
+  }
+
+  /* footer */
+  .g-footer{
+    text-align:center; padding:8px 16px 48px;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600;
+  }
+  .g-footer .heart{ color:var(--clay); }
+</style>
+</head>
+<body>
+
+<!-- ═══ PIN SCREEN ═══ -->
+<div id="pin-screen">
+  <div class="pin-card">
+    <div class="pin-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="11" width="18" height="11" rx="3"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    <h1>Family Photos</h1>
+    <p class="sub">
+      For family and loved ones only.<br>
+      Enter the secret code to continue.
+      <span class="ta">குடும்பத்தினருக்காக மட்டும்</span>
+    </p>
+
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+
+    <div class="pin-input-wrap">
+      <input type="password" id="pin-input" inputmode="numeric"
+             maxlength="8" pattern="[0-9]*"
+             placeholder="●  ●  ●  ●"
+             autocomplete="off" autofocus>
+    </div>
+    <div class="pin-error" id="pin-error">Incorrect code — try again</div>
+
+    <button class="pin-btn" id="pin-btn">Enter →</button>
+
+    <br>
+    <a href="../" class="pin-home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to swadi.info
+    </a>
+  </div>
+</div>
+
+<!-- ═══ GALLERY ═══ -->
+<div id="gallery">
+  <nav class="g-topbar">
+    <button class="g-home-btn" onclick="window.location='../'" aria-label="Home">
+      <img src="../images/logo-as.png" alt="A&amp;S">
+    </button>
+    <span class="g-title">Family Photos</span>
+    <span class="g-count" id="g-count-chip">422 photos</span>
+  </nav>
+
+  <div class="g-main">
+    <div class="g-hero">
+      <span class="g-hero-tag">Family &amp; Loved Ones Only</span>
+      <h1>Swathi <em>&amp;</em> Adithyaa</h1>
+      <p class="ta">திருமண நினைவுகள்</p>
+    </div>
+
+    <!-- SECTION 1: Reception Groups -->
+    <div class="g-section s-reception">
+      <div class="g-section-head">
+        <div class="g-section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h2>Reception Night</h2>
+          <span class="meta">23 June 2026 · வரவேற்பு</span>
+        </div>
+        <span class="chip" id="reception-chip">190 photos</span>
+      </div>
+      <div class="polaroid-grid" id="reception-grid"></div>
+    </div>
+
+    <!-- SECTION 2: Wedding Day / Parents & Chennai -->
+    <div class="g-section s-wedding">
+      <div class="g-section-head">
+        <div class="g-section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h2>Wedding Day &amp; Families</h2>
+          <span class="meta">24 June 2026 · திருமணம்</span>
+        </div>
+        <span class="chip" id="wedding-chip">232 photos</span>
+      </div>
+      <div class="polaroid-grid" id="wedding-grid"></div>
+    </div>
+  </div>
+
+  <footer class="g-footer">Made with <span class="heart">♥</span> for Swathi &amp; Adithyaa</footer>
+</div>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-info">
+    <span class="lb-count" id="lb-count"></span>
+    <span class="lb-section-tag" id="lb-section-tag"></span>
+  </div>
+  <button class="lb-close" id="lb-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 6l12 12M18 6 6 18"/>
+    </svg>
+  </button>
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt="Wedding photo">
+  </div>
+  <div class="lb-thumb-bar"><div class="lb-thumb-fill" id="lb-progress"></div></div>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<script src="config.js"></script>
+<script>
+// ── Image data ──────────────────────────────────────────────────────────────
+
+const RECEPTION_FOLDER = '../images/RECEPTION GROUPS/';
+const WEDDING_FOLDER   = '../images/Parents-Chennai Selection/';
+
+// Reception: sequential CAMIE-1 to CAMIE-190
+const RECEPTION_FILES = Array.from({length: 190}, (_, i) => 'CAMIE-' + (i + 1) + '.jpg');
+
+// Wedding day / Parents-Chennai (232 files, non-sequential with variants)
+const WEDDING_FILES = [
+  'CAMIE-1.jpg','CAMIE-10.jpg','CAMIE-100 (1).jpg','CAMIE-100.jpg','CAMIE-101.jpg',
+  'CAMIE-103.jpg','CAMIE-104.jpg','CAMIE-105.jpg','CAMIE-106.jpg','CAMIE-107 (1).jpg',
+  'CAMIE-107.jpg','CAMIE-109.jpg','CAMIE-110.jpg','CAMIE-112.jpg','CAMIE-114 (1).jpg',
+  'CAMIE-114.jpg','CAMIE-118.jpg','CAMIE-12.jpg','CAMIE-120.jpg','CAMIE-122.jpg',
+  'CAMIE-124.jpg','CAMIE-126.jpg','CAMIE-127.jpg','CAMIE-129.jpg','CAMIE-130.jpg',
+  'CAMIE-131.jpg','CAMIE-133.jpg','CAMIE-134.jpg','CAMIE-138.jpg','CAMIE-139 (1).jpg',
+  'CAMIE-139.jpg','CAMIE-14.jpg','CAMIE-140.jpg','CAMIE-141.jpg','CAMIE-143.jpg',
+  'CAMIE-145.jpg','CAMIE-147.jpg','CAMIE-148.jpg','CAMIE-15.jpg','CAMIE-151.jpg',
+  'CAMIE-154.jpg','CAMIE-155.jpg','CAMIE-158.jpg','CAMIE-159 (1).jpg','CAMIE-159.jpg',
+  'CAMIE-16 (1).jpg','CAMIE-16.jpg','CAMIE-160.jpg','CAMIE-161 (1).jpg','CAMIE-161.jpg',
+  'CAMIE-162.jpg','CAMIE-168 (1).jpg','CAMIE-168 (2).jpg','CAMIE-168.jpg','CAMIE-17.jpg',
+  'CAMIE-171.jpg','CAMIE-172.jpg','CAMIE-173.jpg','CAMIE-175.jpg','CAMIE-177.jpg',
+  'CAMIE-178.jpg','CAMIE-18.jpg','CAMIE-180.jpg','CAMIE-181.jpg','CAMIE-182.jpg',
+  'CAMIE-183.jpg','CAMIE-184.jpg','CAMIE-186 (1).jpg','CAMIE-186.jpg','CAMIE-187 (1).jpg',
+  'CAMIE-187.jpg','CAMIE-188 (1).jpg','CAMIE-188.jpg','CAMIE-189.jpg','CAMIE-19.jpg',
+  'CAMIE-190 (1).jpg','CAMIE-190.jpg','CAMIE-193.jpg','CAMIE-194.jpg','CAMIE-195.jpg',
+  'CAMIE-197.jpg','CAMIE-198.jpg','CAMIE-20.jpg','CAMIE-201.jpg','CAMIE-203.jpg',
+  'CAMIE-21 (1).jpg','CAMIE-21.jpg','CAMIE-211.jpg','CAMIE-213.jpg','CAMIE-216.jpg',
+  'CAMIE-22 (1).jpg','CAMIE-22.jpg','CAMIE-223.jpg','CAMIE-227.jpg','CAMIE-229.jpg',
+  'CAMIE-23.jpg','CAMIE-230.jpg','CAMIE-232.jpg','CAMIE-235.jpg','CAMIE-239.jpg',
+  'CAMIE-24.jpg','CAMIE-240.jpg','CAMIE-243.jpg','CAMIE-244.jpg','CAMIE-246.jpg',
+  'CAMIE-249.jpg','CAMIE-25.jpg','CAMIE-253.jpg','CAMIE-258.jpg','CAMIE-26.jpg',
+  'CAMIE-263.jpg','CAMIE-269.jpg','CAMIE-27.jpg','CAMIE-276.jpg','CAMIE-279.jpg',
+  'CAMIE-29.jpg','CAMIE-3.jpg','CAMIE-31.jpg','CAMIE-32.jpg','CAMIE-33 (1).jpg',
+  'CAMIE-33.jpg','CAMIE-34.jpg','CAMIE-35.jpg','CAMIE-37 (1).jpg','CAMIE-37.jpg',
+  'CAMIE-38.jpg','CAMIE-39.jpg','CAMIE-4.jpg','CAMIE-42 (1).jpg','CAMIE-42.jpg',
+  'CAMIE-43 (1).jpg','CAMIE-43.jpg','CAMIE-44 (1).jpg','CAMIE-44.jpg','CAMIE-45.jpg',
+  'CAMIE-46.jpg','CAMIE-47 (1).jpg','CAMIE-47.jpg','CAMIE-48.jpg','CAMIE-49.jpg',
+  'CAMIE-5 (1).jpg','CAMIE-5.jpg','CAMIE-50.jpg','CAMIE-52 (1).jpg','CAMIE-52.jpg',
+  'CAMIE-53.jpg','CAMIE-54 (1).jpg','CAMIE-54.jpg','CAMIE-55.jpg','CAMIE-57 (1).jpg',
+  'CAMIE-57.jpg','CAMIE-6.jpg','CAMIE-61.jpg','CAMIE-63.jpg','CAMIE-64 (1).jpg',
+  'CAMIE-64.jpg','CAMIE-65.jpg','CAMIE-67.jpg','CAMIE-68 (1).jpg','CAMIE-68.jpg',
+  'CAMIE-69 (1).jpg','CAMIE-69.jpg','CAMIE-71 (1).jpg','CAMIE-71.jpg','CAMIE-72.jpg',
+  'CAMIE-73 (1).jpg','CAMIE-73.jpg','CAMIE-74.jpg','CAMIE-75.jpg','CAMIE-8.jpg',
+  'CAMIE-80.jpg','CAMIE-83.jpg','CAMIE-84.jpg','CAMIE-86.jpg','CAMIE-87.jpg',
+  'CAMIE-88.jpg','CAMIE-89 (1).jpg','CAMIE-89.jpg','CAMIE-90.jpg','CAMIE-91.jpg',
+  'CAMIE-92 (1).jpg','CAMIE-92.jpg','CAMIE-93.jpg','CAMIE-94.jpg','CAMIE-97.jpg',
+  'DSC00004.jpg','DSC00095.jpg','DSC00172.jpg','DSC00187.jpg','DSC00208.jpg',
+  'DSC00282.jpg','DSC00342.jpg','DSC00373.jpg','DSC00399.jpg','DSC00452.jpg',
+  'DSC00474.jpg','DSC00497.jpg','DSC00508.jpg','DSC00525.jpg','DSC00536.jpg',
+  'DSC00550.jpg','DSC00577.jpg','DSC00615.jpg','DSC00633.jpg','DSC00640.jpg',
+  'DSC00706.jpg','DSC00726.jpg','DSC07939.jpg','DSC07949.jpg','DSC07964.jpg',
+  'DSC07980.jpg','DSC08000.jpg','DSC08017.jpg','DSC08051.jpg','DSC08076.jpg',
+  'DSC08102.jpg','DSC08110.jpg','DSC08155.jpg','DSC08202.jpg','DSC08266.jpg',
+  'DSC08353.jpg','DSC08368.jpg','DSC08637.jpg','DSC08667.jpg','DSC08674.jpg',
+  'DSC08820.jpg','DSC08882.jpg','DSC08893.jpg','DSC08897.jpg','DSC08923.jpg',
+  'DSC09542.jpg','DSC09975.jpg'
+];
+
+// Combined list for lightbox navigation (reception first, then wedding)
+const ALL_PHOTOS = [
+  ...RECEPTION_FILES.map(f => ({ folder: RECEPTION_FOLDER, file: f, section: 'Reception Night' })),
+  ...WEDDING_FILES.map(f => ({ folder: WEDDING_FOLDER,   file: f, section: 'Wedding Day'     }))
+];
+
+function imgSrc(folder, file) {
+  return folder + encodeURIComponent(file);
+}
+
+// ── Rotation helper (deterministic, not random so it stays stable) ──────────
+const ROTS = [-3.2, -1.8, -0.8, 0, 1.2, 2.4, -2.6, 0.6, 3, -1.4];
+function rot(i) { return ROTS[i % ROTS.length]; }
+
+// ── PIN logic ────────────────────────────────────────────────────────────────
+const pinScreen   = document.getElementById('pin-screen');
+const pinInput    = document.getElementById('pin-input');
+const pinError    = document.getElementById('pin-error');
+const pinBtn      = document.getElementById('pin-btn');
+const galleryEl   = document.getElementById('gallery');
+
+function updateDots() {
+  const len = pinInput.value.length;
+  // show 4 dots minimum (or more if pin is longer)
+  const total = Math.max(4, (typeof PHOTOS_PIN !== 'undefined' ? PHOTOS_PIN.length : 4));
+  const container = document.getElementById('pin-dots');
+  // rebuild dots if pin length changed
+  if (container.children.length !== total) {
+    container.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'pin-dot';
+      container.appendChild(d);
+    }
+  }
+  Array.from(container.children).forEach((d, i) => {
+    d.classList.toggle('filled', i < len);
+  });
+}
+
+function tryPin() {
+  const entered = pinInput.value.trim();
+  const correct = (typeof PHOTOS_PIN !== 'undefined') ? PHOTOS_PIN : '';
+  if (entered === correct) {
+    sessionStorage.setItem('photos_auth', '1');
+    pinScreen.classList.add('hidden');
+    galleryEl.classList.add('visible');
+    buildGallery();
+  } else {
+    pinInput.classList.add('error');
+    pinError.classList.add('show');
+    pinInput.value = '';
+    updateDots();
+    setTimeout(() => {
+      pinInput.classList.remove('error');
+    }, 450);
+    pinInput.focus();
+  }
+}
+
+pinInput.addEventListener('input', () => {
+  updateDots();
+  pinError.classList.remove('show');
+  // auto-submit when length matches
+  if (typeof PHOTOS_PIN !== 'undefined' && pinInput.value.length === PHOTOS_PIN.length) {
+    setTimeout(tryPin, 80);
+  }
+});
+
+pinInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') tryPin();
+});
+
+pinBtn.addEventListener('click', tryPin);
+
+// Check session on load
+if (sessionStorage.getItem('photos_auth') === '1') {
+  pinScreen.classList.add('hidden');
+  galleryEl.classList.add('visible');
+  // defer gallery build after DOM ready
+  document.addEventListener('DOMContentLoaded', buildGallery);
+  buildGallery();
+}
+
+// ── Gallery build ────────────────────────────────────────────────────────────
+function buildGallery() {
+  const rGrid = document.getElementById('reception-grid');
+  const wGrid = document.getElementById('wedding-grid');
+  if (rGrid.children.length > 0) return; // already built
+
+  const total = ALL_PHOTOS.length;
+  document.getElementById('g-count-chip').textContent = total + ' photos';
+
+  // Build reception grid (indices 0..189)
+  RECEPTION_FILES.forEach((file, i) => {
+    rGrid.appendChild(makePolaroid(i, RECEPTION_FOLDER, file));
+  });
+
+  // Build wedding grid (indices 190..421)
+  WEDDING_FILES.forEach((file, i) => {
+    wGrid.appendChild(makePolaroid(RECEPTION_FILES.length + i, WEDDING_FOLDER, file));
+  });
+}
+
+function makePolaroid(globalIndex, folder, file) {
+  const div = document.createElement('div');
+  div.className = 'polaroid';
+  div.style.setProperty('--rot', rot(globalIndex) + 'deg');
+  div.setAttribute('role', 'button');
+  div.setAttribute('tabindex', '0');
+  div.setAttribute('aria-label', 'View photo ' + (globalIndex + 1));
+
+  const img = document.createElement('img');
+  img.src = imgSrc(folder, file);
+  img.alt = 'Wedding photo';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  div.appendChild(img);
+
+  const lbl = document.createElement('div');
+  lbl.className = 'p-label';
+  lbl.textContent = 'SwAdi \'26';
+  div.appendChild(lbl);
+
+  div.addEventListener('click', () => openLightbox(globalIndex));
+  div.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(globalIndex); });
+
+  return div;
+}
+
+// ── Lightbox ─────────────────────────────────────────────────────────────────
+let lbIndex = 0;
+const lightbox   = document.getElementById('lightbox');
+const lbImg      = document.getElementById('lb-img');
+const lbCount    = document.getElementById('lb-count');
+const lbSectionTag = document.getElementById('lb-section-tag');
+const lbProgress = document.getElementById('lb-progress');
+
+function openLightbox(index) {
+  lbIndex = index;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  showPhoto(index, false);
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showPhoto(index, fade = true) {
+  const total = ALL_PHOTOS.length;
+  lbIndex = ((index % total) + total) % total;
+  const p = ALL_PHOTOS[lbIndex];
+
+  if (fade) {
+    lbImg.classList.add('fading');
+    setTimeout(() => {
+      lbImg.src = imgSrc(p.folder, p.file);
+      lbImg.classList.remove('fading');
+    }, 130);
+  } else {
+    lbImg.src = imgSrc(p.folder, p.file);
+  }
+
+  lbCount.textContent = (lbIndex + 1) + ' / ' + total;
+  lbSectionTag.textContent = p.section;
+  lbProgress.style.width = ((lbIndex + 1) / total * 100) + '%';
+}
+
+document.getElementById('lb-prev').addEventListener('click', (e) => { e.stopPropagation(); showPhoto(lbIndex - 1); });
+document.getElementById('lb-next').addEventListener('click', (e) => { e.stopPropagation(); showPhoto(lbIndex + 1); });
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox || e.target === lbImg.parentElement) closeLightbox();
+});
+
+// Keyboard nav
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); showPhoto(lbIndex - 1); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); showPhoto(lbIndex + 1); }
+  if (e.key === 'Escape')     { e.preventDefault(); closeLightbox(); }
+});
+
+// Swipe on lightbox
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
+lightbox.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
+}, {passive:true});
+</script>
+</body>
+</html>
