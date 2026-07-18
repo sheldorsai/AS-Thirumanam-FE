@@ -203,6 +203,22 @@ body{
   .p-col:nth-child(3){padding-top:24px;}
 }
 
+/* ── Hearts counter ── */
+.g-hearts{
+  display:inline-flex;align-items:center;gap:7px;margin-top:18px;
+  background:rgba(192,99,59,.10);border:1px solid rgba(192,99,59,.22);
+  border-radius:100px;padding:6px 16px;
+  font-family:'Bricolage Grotesque',sans-serif;
+}
+.g-hearts-emoji{font-size:14px;line-height:1;}
+.g-hearts-count{
+  font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+  font-size:16px;color:#9e4a28;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.g-hearts-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7c6a55;}
+@keyframes heartsPop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+
 /* ── LIGHTBOX ── */
 #lightbox{
   position:fixed;inset:0;z-index:300;
@@ -413,6 +429,11 @@ body{
     <p class="g-tamil">திருமணப் புகைப்படங்கள்</p>
     <p class="g-desc">A hand-hung album from two evenings of ceremony and celebration.<br>
       Tap any photo to open it, then swipe or use the arrows to move through the gallery.</p>
+    <div class="g-hearts">
+      <span class="g-hearts-emoji">❤️</span>
+      <span class="g-hearts-count" id="photos-hearts-num">—</span>
+      <span class="g-hearts-label">Hearts Reached</span>
+    </div>
   </div>
 
   <div class="photos-outer">
@@ -450,6 +471,37 @@ body{
 </div>
 
 <script src="config.js"></script>
+<script>
+// ── Photos-page visitor tracking ───────────────────────────────────────────
+const PHOTOS_API_BASE = "https://as-thirumanam.onrender.com";
+
+function setPhotosHeartsCount(n){
+  const el = document.getElementById('photos-hearts-num');
+  if(!el) return;
+  const changed = el.textContent !== String(n);
+  el.textContent = n;
+  if(changed){
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = 'heartsPop .45s cubic-bezier(.2,.8,.2,1)';
+  }
+}
+
+function pingPhotosPage(){
+  fetch(PHOTOS_API_BASE + '/api/photos/visits/count')
+    .then(r => r.json())
+    .then(d => { if(d.unique_visitors != null) setPhotosHeartsCount(d.unique_visitors); })
+    .catch(() => {});
+
+  if(sessionStorage.getItem('photos_pinged')) return;
+  sessionStorage.setItem('photos_pinged', '1');
+
+  fetch(PHOTOS_API_BASE + '/api/photos/ping', { method: 'POST' })
+    .then(r => r.json())
+    .then(d => { if(d.unique_visitors != null) setPhotosHeartsCount(d.unique_visitors); })
+    .catch(() => {});
+}
+</script>
 <script>
 // ── Image data ─────────────────────────────────────────────────────────────
 const RF = '../images/RECEPTION GROUPS/';
@@ -541,6 +593,7 @@ function tryPin(){
     pinScreen.classList.add('gone');
     gallery.classList.add('visible');
     buildGallery();
+    pingPhotosPage();
     setTimeout(()=>requestAnimationFrame(autoTick), 1400);
   } else {
     pinInput.classList.add('error');
@@ -565,6 +618,7 @@ if(sessionStorage.getItem('photos_auth')==='1'){
   pinScreen.classList.add('gone');
   gallery.classList.add('visible');
   buildGallery();
+  pingPhotosPage();
   setTimeout(()=>requestAnimationFrame(autoTick),1400);
 }
 
