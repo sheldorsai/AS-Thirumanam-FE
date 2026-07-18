@@ -3,378 +3,337 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swathi &amp; Adithyaa — Family Photos</title>
+<title>Swathi &amp; Adithyaa — Wedding Photos</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Noto+Sans+Tamil:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Noto+Sans+Tamil:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#f7f1e8;
-    --paper-2:#efe6d6;
-    --card:#fffaf3;
-    --ink:#33291f;
-    --ink-soft:#7c6a55;
-    --clay:#c0633b;
-    --clay-deep:#9e4a28;
-    --olive:#6e7449;
-    --ochre:#d99a3e;
-    --line:#e3d6c2;
-    --shadow:38 27 16;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{
-    min-height:100vh;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Bricolage Grotesque', sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  body{
-    background-image:
-      radial-gradient(circle at 18% 12%, rgba(192,99,59,.05), transparent 38%),
-      radial-gradient(circle at 82% 78%, rgba(110,116,73,.05), transparent 40%);
-  }
-  body::before{
-    content:"";
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    opacity:.4;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-    mix-blend-mode:multiply;
-  }
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100vh;overflow-x:hidden;}
+body{
+  font-family:'Bricolage Grotesque',sans-serif;
+  color:#33291f;
+  -webkit-font-smoothing:antialiased;
+  background:#ece0cb;
+}
 
-  /* ── PIN SCREEN ── */
-  #pin-screen{
-    position:fixed; inset:0; z-index:500;
-    display:flex; align-items:center; justify-content:center;
-    padding:24px;
-    background:var(--paper);
-    background-image:
-      radial-gradient(circle at 18% 12%, rgba(192,99,59,.06), transparent 38%),
-      radial-gradient(circle at 82% 78%, rgba(110,116,73,.06), transparent 40%);
-  }
-  #pin-screen.hidden{ display:none; }
+/* ── Fixed background ── */
+.bg-base{
+  position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(ellipse 55% 42% at 6% 9%, rgba(195,118,38,.17) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 28% at 90% 82%, rgba(158,95,28,.1) 0%, transparent 55%),
+    #ece0cb;
+}
+.bg-mandala{
+  position:fixed;inset:0;z-index:-2;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.055;pointer-events:none;
+}
+.bg-mandala svg{width:min(680px,90vw);height:min(680px,90vw);}
 
-  .pin-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:28px;
-    padding:44px 36px 40px;
-    max-width:360px; width:100%;
-    text-align:center;
-    box-shadow:0 24px 60px -24px rgb(var(--shadow)/.35);
-    position:relative; z-index:1;
-  }
-  .pin-icon{
-    width:62px; height:62px; border-radius:19px; margin:0 auto 22px;
-    background:linear-gradient(150deg,var(--clay),var(--clay-deep));
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 12px 28px -10px rgba(192,99,59,.45);
-  }
-  .pin-icon svg{ width:30px; height:30px; color:#fff; }
-  .pin-card h1{
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:28px; margin-bottom:6px; color:var(--ink);
-  }
-  .pin-card .sub{
-    font-size:13.5px; color:var(--ink-soft); line-height:1.55;
-    margin-bottom:28px;
-  }
-  .pin-card .sub .ta{
-    display:block; font-family:'Noto Sans Tamil',sans-serif;
-    font-size:13px; margin-top:3px;
-  }
+/* ── Corner flourishes ── */
+.corner{position:fixed;z-index:10;width:72px;height:72px;pointer-events:none;}
+.corner-tl{top:8px;left:10px;}
+.corner-tr{top:8px;right:10px;transform:scaleX(-1);}
+.corner-bl{bottom:8px;left:10px;transform:scaleY(-1);}
+.corner-br{bottom:8px;right:10px;transform:scale(-1,-1);}
 
-  .pin-dots{
-    display:flex; justify-content:center; gap:12px;
-    margin-bottom:22px;
-  }
-  .pin-dot{
-    width:14px; height:14px; border-radius:50%;
-    background:var(--paper-2);
-    border:2px solid var(--line);
-    transition:background .15s ease, border-color .15s ease, transform .15s ease;
-  }
-  .pin-dot.filled{
-    background:var(--clay);
-    border-color:var(--clay-deep);
-    transform:scale(1.15);
-  }
+/* ── PIN SCREEN ── */
+#pin-screen{
+  position:fixed;inset:0;z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+#pin-screen.gone{display:none;}
+.pin-card{
+  background:#fffaf3;border:1px solid #e3d6c2;border-radius:28px;
+  padding:44px 36px 40px;max-width:360px;width:100%;text-align:center;
+  box-shadow:0 24px 60px -24px rgba(38,27,16,.35);position:relative;z-index:1;
+}
+.pin-icon{
+  width:62px;height:62px;border-radius:19px;margin:0 auto 22px;
+  background:linear-gradient(150deg,#c0633b,#9e4a28);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 28px -10px rgba(192,99,59,.45);
+}
+.pin-icon svg{width:30px;height:30px;color:#fff;}
+.pin-card h1{font-family:'Fraunces',serif;font-weight:400;font-size:28px;margin-bottom:6px;color:#33291f;}
+.pin-sub{font-size:13.5px;color:#7c6a55;line-height:1.55;margin-bottom:28px;}
+.pin-sub .ta{display:block;font-family:'Noto Sans Tamil',sans-serif;font-size:13px;margin-top:3px;}
+.pin-dots{display:flex;justify-content:center;gap:12px;margin-bottom:22px;}
+.pin-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:#efe6d6;border:2px solid #e3d6c2;
+  transition:background .15s,border-color .15s,transform .15s;
+}
+.pin-dot.filled{background:#c0633b;border-color:#9e4a28;transform:scale(1.15);}
+#pin-input{
+  width:100%;padding:14px 16px;border:2px solid #e3d6c2;border-radius:14px;
+  font-size:28px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;
+  letter-spacing:10px;text-align:center;background:#f7f1e8;color:#33291f;
+  outline:none;transition:border-color .2s;margin-bottom:14px;
+  -webkit-text-security:disc;text-security:disc;
+}
+#pin-input:focus{border-color:#c0633b;}
+#pin-input.error{border-color:#c0392b;animation:shake .4s ease;}
+@keyframes shake{0%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}100%{transform:translateX(0)}}
+.pin-err{font-size:13px;color:#c0392b;font-weight:600;min-height:18px;margin-bottom:14px;opacity:0;transition:opacity .2s;}
+.pin-err.show{opacity:1;}
+.pin-btn{
+  width:100%;padding:15px;border:none;border-radius:14px;
+  background:linear-gradient(150deg,#c0633b,#9e4a28);color:#fff;
+  font-size:15px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;
+  cursor:pointer;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 12px 24px -10px rgba(192,99,59,.45);
+}
+.pin-btn:hover{transform:translateY(-2px);box-shadow:0 18px 32px -12px rgba(192,99,59,.55);}
+.pin-home{
+  display:inline-flex;align-items:center;gap:6px;margin-top:22px;
+  font-size:12.5px;color:#7c6a55;font-weight:600;text-decoration:none;transition:color .2s;
+}
+.pin-home:hover{color:#c0633b;}
+.pin-home svg{width:13px;height:13px;}
 
-  .pin-input-wrap{ position:relative; margin-bottom:14px; }
-  #pin-input{
-    width:100%;
-    padding:14px 16px;
-    border:2px solid var(--line);
-    border-radius:14px;
-    font-size:26px;
-    font-family:'Bricolage Grotesque', sans-serif;
-    font-weight:700;
-    letter-spacing:8px;
-    text-align:center;
-    background:var(--paper);
-    color:var(--ink);
-    outline:none;
-    transition:border-color .2s ease;
-    -webkit-text-security:disc;
-    text-security:disc;
-  }
-  #pin-input:focus{ border-color:var(--clay); }
-  #pin-input.error{ border-color:#c0392b; animation:shake .4s ease; }
-  @keyframes shake{
-    0%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)}
-    60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} 100%{transform:translateX(0)}
-  }
+/* ── GALLERY ── */
+#gallery{display:none;}
+#gallery.visible{display:block;}
 
-  .pin-error{
-    font-size:13px; color:#c0392b; font-weight:600;
-    min-height:18px; margin-bottom:14px;
-    opacity:0; transition:opacity .2s ease;
-  }
-  .pin-error.show{ opacity:1; }
+.g-back{
+  position:fixed;top:18px;left:20px;z-index:50;
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;color:#7c6a55;text-decoration:none;
+  background:rgba(236,224,203,.82);backdrop-filter:blur(6px);
+  border:1px solid rgba(200,182,158,.5);border-radius:100px;padding:7px 13px 7px 10px;
+  transition:color .2s,background .2s;
+}
+.g-back:hover{color:#c0633b;background:rgba(236,224,203,.97);}
+.g-back svg{width:13px;height:13px;}
 
-  .pin-btn{
-    width:100%; padding:15px;
-    border:none; border-radius:14px;
-    background:linear-gradient(150deg,var(--clay),var(--clay-deep));
-    color:#fff; font-size:15px; font-weight:700;
-    font-family:'Bricolage Grotesque', sans-serif;
-    cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease;
-    box-shadow:0 12px 24px -10px rgba(192,99,59,.45);
-  }
-  .pin-btn:hover{ transform:translateY(-2px); box-shadow:0 18px 32px -12px rgba(192,99,59,.55); }
-  .pin-btn:active{ transform:none; }
+.scroll-btn{
+  position:fixed;top:18px;right:20px;z-index:50;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(236,224,203,.82);backdrop-filter:blur(6px);
+  border:1px solid rgba(200,182,158,.5);color:#7c6a55;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .2s,background .2s;
+}
+.scroll-btn:hover{color:#c0633b;background:rgba(236,224,203,.97);}
+.scroll-btn svg{width:15px;height:15px;}
 
-  .pin-home{
-    display:inline-flex; align-items:center; gap:6px;
-    margin-top:22px;
-    font-size:12.5px; color:var(--ink-soft); font-weight:600;
-    text-decoration:none;
-    transition:color .2s ease;
-  }
-  .pin-home:hover{ color:var(--clay); }
-  .pin-home svg{ width:13px; height:13px; }
+/* ── Header ── */
+.g-header{
+  text-align:center;padding:64px 24px 52px;position:relative;z-index:1;
+}
+.g-label{
+  display:inline-block;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;
+  color:#c0633b;font-weight:700;margin-bottom:14px;
+}
+.g-header h1{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(54px,11vw,92px);color:#2b2118;
+  line-height:1;margin-bottom:10px;letter-spacing:-.015em;
+}
+.g-tamil{
+  font-family:'Noto Sans Tamil',sans-serif;font-size:17px;
+  color:#6e7449;font-weight:400;margin-bottom:18px;
+}
+.g-desc{font-size:14px;color:#7c6a55;line-height:1.68;max-width:400px;margin:0 auto;}
 
-  /* ── GALLERY ── */
-  #gallery{ display:none; position:relative; z-index:1; }
-  #gallery.visible{ display:block; }
+/* ── Photo columns ── */
+.photos-outer{
+  max-width:980px;margin:0 auto;
+  padding:10px 32px 140px;position:relative;z-index:1;
+}
+.photos-cols{display:flex;gap:26px;align-items:flex-start;}
+.p-col{flex:1;display:flex;flex-direction:column;gap:30px;}
+.p-col:nth-child(2){padding-top:74px;}
+.p-col:nth-child(3){padding-top:38px;}
 
-  .g-topbar{
-    position:sticky; top:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:12px 18px;
-    background:rgba(247,241,232,.88);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .g-home-btn{
-    border:none; background:none; cursor:pointer;
-    padding:2px; display:flex; align-items:center;
-    transition:transform .2s ease;
-  }
-  .g-home-btn:hover{ transform:scale(1.06); }
-  .g-home-btn img{ height:30px; width:auto; display:block; }
+/* ── Photo card ── */
+.photo-card{
+  background:#fff;padding:10px;position:relative;cursor:pointer;
+  box-shadow:0 5px 24px -5px rgba(30,20,10,.18),0 2px 6px rgba(30,20,10,.08);
+  transform:rotate(var(--rot,0deg));
+  transition:transform .36s cubic-bezier(.2,.7,.2,1),box-shadow .36s ease;
+  will-change:transform;
+}
+.photo-card:hover{
+  transform:rotate(0deg) scale(1.04) translateY(-6px);
+  box-shadow:0 18px 52px -8px rgba(30,20,10,.28),0 4px 14px rgba(30,20,10,.12);
+  z-index:6;
+}
+.photo-card:active{transform:scale(.97);}
+.photo-pin{
+  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #d9764a, #a03e1e);
+  box-shadow:0 2px 8px rgba(160,62,30,.5);z-index:2;
+}
+.photo-pin::after{
+  content:'';position:absolute;top:2px;left:3px;
+  width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);
+}
+.photo-card img{
+  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
+  background:#ddd0bc;
+}
 
-  .g-title{
-    font-family:'Fraunces', serif; font-weight:400; font-style:italic;
-    font-size:17px; color:var(--clay-deep);
-  }
-  .g-count{
-    font-size:12px; font-weight:600; color:var(--ink-soft);
-    background:var(--paper-2); border-radius:100px;
-    padding:5px 12px;
-  }
+@media(max-width:600px){
+  .photos-outer{padding:8px 14px 100px;}
+  .photos-cols{gap:14px;}
+  .p-col{gap:18px;}
+  .p-col:nth-child(2){padding-top:48px;}
+  .p-col:nth-child(3){padding-top:24px;}
+}
 
-  .g-main{ max-width:1280px; margin:0 auto; padding:40px 20px 80px; }
+/* ── LIGHTBOX ── */
+#lightbox{
+  position:fixed;inset:0;z-index:300;
+  background:#2c241b;
+  display:none;align-items:center;justify-content:center;
+}
+#lightbox.open{display:flex;}
 
-  .g-hero{ text-align:center; margin-bottom:50px; }
-  .g-hero-tag{
-    display:inline-block;
-    font-size:10.5px; letter-spacing:.3em; text-transform:uppercase;
-    color:var(--clay); font-weight:700;
-    padding:5px 14px; border-radius:100px;
-    background:rgba(192,99,59,.1);
-    border:1px solid rgba(192,99,59,.25);
-    margin-bottom:14px;
-  }
-  .g-hero h1{
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:clamp(32px,7vw,52px);
-    color:var(--ink); line-height:1.1; margin-bottom:8px;
-  }
-  .g-hero h1 em{ font-style:italic; color:var(--clay); }
-  .g-hero .ta{
-    font-family:'Noto Sans Tamil', sans-serif;
-    font-size:14px; color:var(--ink-soft);
-  }
+.lb-counter{
+  position:fixed;top:20px;left:22px;z-index:310;
+  font-size:13px;font-weight:600;letter-spacing:.06em;
+  color:rgba(255,255,255,.6);pointer-events:none;
+}
+.lb-close{
+  position:fixed;top:14px;right:16px;z-index:311;
+  width:34px;height:34px;background:none;border:none;
+  color:rgba(255,255,255,.55);cursor:pointer;font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .2s;
+}
+.lb-close:hover{color:rgba(255,255,255,.95);}
+.lb-close svg{width:18px;height:18px;}
 
-  /* ── Section headings ── */
-  .g-section{ margin-bottom:60px; }
-  .g-section-head{
-    display:flex; align-items:center; gap:14px;
-    margin-bottom:28px; padding-bottom:14px;
-    border-bottom:2px solid var(--line);
-  }
-  .g-section-icon{
-    width:42px; height:42px; border-radius:13px; flex:0 0 auto;
-    display:flex; align-items:center; justify-content:center; color:#fff;
-    box-shadow:0 8px 20px -8px rgba(0,0,0,.3);
-  }
-  .g-section-icon svg{ width:22px; height:22px; }
-  .s-reception .g-section-icon{ background:linear-gradient(150deg,var(--clay),var(--clay-deep)); }
-  .s-wedding .g-section-icon{ background:linear-gradient(150deg,var(--olive),#444828); }
+.lb-stage{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.lb-side{
+  position:absolute;max-height:62vh;
+  object-fit:contain;
+  filter:blur(12px) brightness(.28);
+  opacity:.65;pointer-events:none;user-select:none;
+}
+.lb-side-l{right:calc(50% + 170px);}
+.lb-side-r{left:calc(50% + 170px);}
 
-  .g-section-head .info{ flex:1; }
-  .g-section-head h2{
-    font-family:'Fraunces', serif; font-weight:400;
-    font-size:clamp(22px,4vw,30px); color:var(--ink); margin-bottom:2px;
-  }
-  .g-section-head .meta{
-    font-size:12.5px; color:var(--ink-soft); font-weight:600;
-  }
-  .g-section-head .chip{
-    font-size:11px; font-weight:700; letter-spacing:.06em;
-    padding:5px 12px; border-radius:100px;
-    background:var(--paper-2); color:var(--ink-soft);
-    white-space:nowrap;
-  }
+#lb-img{
+  position:relative;z-index:2;
+  max-width:min(50vw,660px);max-height:84vh;
+  object-fit:contain;display:block;
+  transition:opacity .16s ease;user-select:none;-webkit-user-drag:none;
+}
+#lb-img.fade{opacity:0;}
 
-  /* ── Polaroid grid ── */
-  .polaroid-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
-    gap:22px 18px;
-    align-items:start;
-  }
-  @media(min-width:600px){ .polaroid-grid{ grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:26px 22px; } }
-  @media(min-width:1024px){ .polaroid-grid{ grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); } }
+@media(max-width:680px){
+  #lb-img{max-width:90vw;max-height:78vh;}
+  .lb-side{display:none;}
+}
 
-  .polaroid{
-    background:#fff;
-    padding:9px 9px 36px;
-    cursor:pointer;
-    box-shadow:0 5px 20px -6px rgba(38,27,16,.24), 0 1px 4px rgba(38,27,16,.08);
-    transform:rotate(var(--rot,0deg));
-    transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
-    display:block; position:relative;
-    content-visibility:auto;
-    contain-intrinsic-size:200px 230px;
-  }
-  .polaroid:hover{
-    transform:rotate(0deg) scale(1.04) translateY(-4px);
-    box-shadow:0 18px 42px -12px rgba(38,27,16,.38), 0 3px 8px rgba(38,27,16,.1);
-    z-index:2;
-  }
-  .polaroid:active{ transform:rotate(0deg) scale(.98); }
-  .polaroid img{
-    display:block; width:100%;
-    aspect-ratio:4/3; object-fit:cover;
-    background:var(--paper-2);
-  }
-  .polaroid .p-label{
-    position:absolute; bottom:0; left:0; right:0;
-    height:36px; display:flex; align-items:center; justify-content:center;
-    font-size:10px; color:var(--ink-soft); font-weight:500; font-family:'Fraunces',serif; font-style:italic;
-    letter-spacing:.02em;
-  }
-
-  /* ── LIGHTBOX ── */
-  .lightbox{
-    position:fixed; inset:0; z-index:300;
-    background:rgba(14,10,6,.96);
-    display:none; align-items:center; justify-content:center;
-    flex-direction:column;
-  }
-  .lightbox.open{ display:flex; }
-
-  .lb-img-wrap{
-    position:relative;
-    display:flex; align-items:center; justify-content:center;
-    width:100%; flex:1;
-    overflow:hidden;
-  }
-  #lb-img{
-    max-width:92vw; max-height:82vh;
-    object-fit:contain;
-    border-radius:6px;
-    box-shadow:0 30px 70px rgba(0,0,0,.6);
-    transition:opacity .18s ease;
-    display:block;
-    user-select:none;
-  }
-  #lb-img.fading{ opacity:0; }
-
-  .lb-close{
-    position:fixed; top:16px; right:16px;
-    width:44px; height:44px; border-radius:50%;
-    border:none; background:rgba(255,255,255,.12); color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer; z-index:310; backdrop-filter:blur(4px);
-    transition:background .2s ease, transform .2s ease;
-  }
-  .lb-close:hover{ background:rgba(255,255,255,.22); transform:scale(1.08); }
-  .lb-close svg{ width:20px; height:20px; }
-
-  .lb-info{
-    position:fixed; top:0; left:0; right:0; padding:18px 70px;
-    display:flex; align-items:center; justify-content:center; gap:16px;
-    pointer-events:none;
-  }
-  .lb-count{
-    color:rgba(255,255,255,.8); font-size:13px; font-weight:600;
-    letter-spacing:.04em;
-  }
-  .lb-section-tag{
-    font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-    padding:4px 11px; border-radius:100px;
-    background:rgba(255,255,255,.12); color:rgba(255,255,255,.7);
-  }
-
-  .lb-nav{
-    position:fixed; top:50%; transform:translateY(-50%);
-    width:48px; height:48px; border-radius:50%;
-    border:none; background:rgba(255,255,255,.12); color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer; backdrop-filter:blur(4px); z-index:310;
-    transition:background .2s ease, transform .2s ease;
-  }
-  .lb-nav:hover{ background:rgba(255,255,255,.24); }
-  .lb-prev{ left:14px; transform:translateY(-50%); }
-  .lb-next{ right:14px; transform:translateY(-50%); }
-  .lb-prev:hover{ transform:translateY(-50%) translateX(-2px); }
-  .lb-next:hover{ transform:translateY(-50%) translateX(2px); }
-  .lb-nav svg{ width:22px; height:22px; }
-  @media(max-width:500px){
-    .lb-nav{ width:38px; height:38px; }
-    .lb-prev{ left:8px; } .lb-next{ right:8px; }
-    #lb-img{ max-width:96vw; max-height:78vh; }
-  }
-
-  .lb-thumb-bar{
-    height:5px; background:rgba(255,255,255,.1);
-    width:min(320px, 70vw); border-radius:3px; margin:18px auto 12px; flex:0 0 auto;
-    position:relative; overflow:hidden;
-  }
-  .lb-thumb-fill{
-    position:absolute; left:0; top:0; height:100%;
-    background:var(--clay);
-    border-radius:3px;
-    transition:width .2s ease;
-  }
-
-  /* footer */
-  .g-footer{
-    text-align:center; padding:8px 16px 48px;
-    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--ink-soft); font-weight:600;
-  }
-  .g-footer .heart{ color:var(--clay); }
+.lb-nav{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:311;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.11);border:none;
+  color:rgba(255,255,255,.75);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.lb-nav:hover{background:rgba(255,255,255,.22);}
+.lb-nav svg{width:13px;height:13px;}
+.lb-prev{left:12px;}
+.lb-next{right:12px;}
 </style>
 </head>
 <body>
+
+<!-- Fixed backgrounds -->
+<div class="bg-base"></div>
+<div class="bg-mandala">
+  <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#5a4430" stroke-width="1">
+      <circle cx="300" cy="300" r="28"/>
+      <circle cx="300" cy="300" r="65"/>
+      <circle cx="300" cy="300" r="108"/>
+      <circle cx="300" cy="300" r="158"/>
+      <circle cx="300" cy="300" r="210"/>
+      <circle cx="300" cy="300" r="258"/>
+      <circle cx="300" cy="300" r="285"/>
+    </g>
+    <g stroke="#5a4430" stroke-width=".75">
+      <line x1="300" y1="15" x2="300" y2="585"/>
+      <line x1="15" y1="300" x2="585" y2="300"/>
+      <line x1="85" y1="85" x2="515" y2="515"/>
+      <line x1="515" y1="85" x2="85" y2="515"/>
+    </g>
+    <g stroke="#5a4430" stroke-width=".8" fill="none">
+      <path d="M300 235 Q278 268 300 300 Q322 268 300 235Z"/>
+      <path d="M365 300 Q332 278 300 300 Q332 322 365 300Z"/>
+      <path d="M300 365 Q322 332 300 300 Q278 332 300 365Z"/>
+      <path d="M235 300 Q268 322 300 300 Q268 278 235 300Z"/>
+      <path d="M255 255 Q272 278 300 300 Q278 272 255 255Z"/>
+      <path d="M345 255 Q322 272 300 300 Q328 278 345 255Z"/>
+      <path d="M345 345 Q328 322 300 300 Q322 328 345 345Z"/>
+      <path d="M255 345 Q278 328 300 300 Q272 322 255 345Z"/>
+    </g>
+    <g fill="#5a4430">
+      <circle cx="300" cy="42" r="3"/><circle cx="300" cy="558" r="3"/>
+      <circle cx="42" cy="300" r="3"/><circle cx="558" cy="300" r="3"/>
+      <circle cx="118" cy="118" r="2.5"/><circle cx="482" cy="118" r="2.5"/>
+      <circle cx="118" cy="482" r="2.5"/><circle cx="482" cy="482" r="2.5"/>
+    </g>
+  </svg>
+</div>
+
+<!-- Corner flourishes -->
+<div class="corner corner-tl">
+  <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 74 C6 44 44 6 74 6" stroke="#8B7355" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M6 52 C20 36 36 26 52 22" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M26 74 C38 56 54 44 70 38" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M34 14 Q40 22 34 30 Q28 22 34 14Z" fill="#8B7355" opacity=".5"/>
+    <path d="M14 34 Q22 40 14 46 Q6 40 14 34Z" fill="#8B7355" opacity=".5"/>
+    <circle cx="6" cy="74" r="3.5" fill="#c0633b" opacity=".75"/>
+  </svg>
+</div>
+<div class="corner corner-tr">
+  <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 74 C6 44 44 6 74 6" stroke="#8B7355" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M6 52 C20 36 36 26 52 22" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M26 74 C38 56 54 44 70 38" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M34 14 Q40 22 34 30 Q28 22 34 14Z" fill="#8B7355" opacity=".5"/>
+    <path d="M14 34 Q22 40 14 46 Q6 40 14 34Z" fill="#8B7355" opacity=".5"/>
+    <circle cx="6" cy="74" r="3.5" fill="#c0633b" opacity=".75"/>
+  </svg>
+</div>
+<div class="corner corner-bl">
+  <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 74 C6 44 44 6 74 6" stroke="#8B7355" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M6 52 C20 36 36 26 52 22" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M26 74 C38 56 54 44 70 38" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M34 14 Q40 22 34 30 Q28 22 34 14Z" fill="#8B7355" opacity=".5"/>
+    <path d="M14 34 Q22 40 14 46 Q6 40 14 34Z" fill="#8B7355" opacity=".5"/>
+    <circle cx="6" cy="74" r="3.5" fill="#c0633b" opacity=".75"/>
+  </svg>
+</div>
+<div class="corner corner-br">
+  <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 74 C6 44 44 6 74 6" stroke="#8B7355" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M6 52 C20 36 36 26 52 22" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M26 74 C38 56 54 44 70 38" stroke="#8B7355" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M34 14 Q40 22 34 30 Q28 22 34 14Z" fill="#8B7355" opacity=".5"/>
+    <path d="M14 34 Q22 40 14 46 Q6 40 14 34Z" fill="#8B7355" opacity=".5"/>
+    <circle cx="6" cy="74" r="3.5" fill="#c0633b" opacity=".75"/>
+  </svg>
+</div>
 
 <!-- ═══ PIN SCREEN ═══ -->
 <div id="pin-screen">
@@ -386,29 +345,22 @@
       </svg>
     </div>
     <h1>Family Photos</h1>
-    <p class="sub">
+    <p class="pin-sub">
       For family and loved ones only.<br>
       Enter the secret code to continue.
       <span class="ta">குடும்பத்தினருக்காக மட்டும்</span>
     </p>
-
     <div class="pin-dots" id="pin-dots">
-      <div class="pin-dot" id="d0"></div>
-      <div class="pin-dot" id="d1"></div>
-      <div class="pin-dot" id="d2"></div>
-      <div class="pin-dot" id="d3"></div>
+      <div class="pin-dot"></div>
+      <div class="pin-dot"></div>
+      <div class="pin-dot"></div>
+      <div class="pin-dot"></div>
     </div>
-
-    <div class="pin-input-wrap">
-      <input type="password" id="pin-input" inputmode="numeric"
-             maxlength="8" pattern="[0-9]*"
-             placeholder="●  ●  ●  ●"
-             autocomplete="off" autofocus>
-    </div>
-    <div class="pin-error" id="pin-error">Incorrect code — try again</div>
-
+    <input type="password" id="pin-input" inputmode="numeric"
+           maxlength="8" pattern="[0-9]*"
+           placeholder="● ● ● ●" autocomplete="off" autofocus>
+    <div class="pin-err" id="pin-err">Incorrect code — try again</div>
     <button class="pin-btn" id="pin-btn">Enter →</button>
-
     <br>
     <a href="../" class="pin-home">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -421,95 +373,70 @@
 
 <!-- ═══ GALLERY ═══ -->
 <div id="gallery">
-  <nav class="g-topbar">
-    <button class="g-home-btn" onclick="window.location='../'" aria-label="Home">
-      <img src="../images/logo-as.png" alt="A&amp;S">
-    </button>
-    <span class="g-title">Family Photos</span>
-    <span class="g-count" id="g-count-chip">422 photos</span>
-  </nav>
+  <a href="../" class="g-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <path d="M15 19l-7-7 7-7"/>
+    </svg>
+    Home
+  </a>
 
-  <div class="g-main">
-    <div class="g-hero">
-      <span class="g-hero-tag">Family &amp; Loved Ones Only</span>
-      <h1>Swathi <em>&amp;</em> Adithyaa</h1>
-      <p class="ta">திருமண நினைவுகள்</p>
-    </div>
+  <button class="scroll-btn" id="scroll-btn" title="Pause / resume scroll">
+    <svg id="scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/>
+      <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/>
+    </svg>
+  </button>
 
-    <!-- SECTION 1: Reception Groups -->
-    <div class="g-section s-reception">
-      <div class="g-section-head">
-        <div class="g-section-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <div class="info">
-          <h2>Reception Night</h2>
-          <span class="meta">23 June 2026 · வரவேற்பு</span>
-        </div>
-        <span class="chip" id="reception-chip">190 photos</span>
-      </div>
-      <div class="polaroid-grid" id="reception-grid"></div>
-    </div>
-
-    <!-- SECTION 2: Wedding Day / Parents & Chennai -->
-    <div class="g-section s-wedding">
-      <div class="g-section-head">
-        <div class="g-section-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </div>
-        <div class="info">
-          <h2>Wedding Day &amp; Families</h2>
-          <span class="meta">24 June 2026 · திருமணம்</span>
-        </div>
-        <span class="chip" id="wedding-chip">232 photos</span>
-      </div>
-      <div class="polaroid-grid" id="wedding-grid"></div>
-    </div>
+  <div class="g-header">
+    <span class="g-label">The Album</span>
+    <h1>Wedding Photos</h1>
+    <p class="g-tamil">திருமணப் புகைப்படங்கள்</p>
+    <p class="g-desc">A hand-hung album from two evenings of ceremony and celebration.<br>
+      Tap any photo to open it, then swipe or use the arrows to move through the gallery.</p>
   </div>
 
-  <footer class="g-footer">Made with <span class="heart">♥</span> for Swathi &amp; Adithyaa</footer>
+  <div class="photos-outer">
+    <div class="photos-cols">
+      <div class="p-col" id="col-0"></div>
+      <div class="p-col" id="col-1"></div>
+      <div class="p-col" id="col-2"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ LIGHTBOX ═══ -->
-<div class="lightbox" id="lightbox">
-  <div class="lb-info">
-    <span class="lb-count" id="lb-count"></span>
-    <span class="lb-section-tag" id="lb-section-tag"></span>
-  </div>
-  <button class="lb-close" id="lb-close" aria-label="Close">
+<div id="lightbox">
+  <span class="lb-counter" id="lb-counter">01 / 422</span>
+  <button class="lb-close" id="lb-close">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M6 6l12 12M18 6 6 18"/>
+      <path d="M18 6 6 18M6 6l12 12"/>
     </svg>
   </button>
-  <div class="lb-img-wrap">
+  <div class="lb-stage">
+    <img class="lb-side lb-side-l" id="lb-left" src="" alt="">
     <img id="lb-img" src="" alt="Wedding photo">
+    <img class="lb-side lb-side-r" id="lb-right" src="" alt="">
   </div>
-  <div class="lb-thumb-bar"><div class="lb-thumb-fill" id="lb-progress"></div></div>
-  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
+  <button class="lb-nav lb-prev" id="lb-prev">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
   </button>
-  <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+  <button class="lb-nav lb-next" id="lb-next">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M9 18l6-6-6-6"/>
+    </svg>
   </button>
 </div>
 
 <script src="config.js"></script>
 <script>
-// ── Image data ──────────────────────────────────────────────────────────────
+// ── Image data ─────────────────────────────────────────────────────────────
+const RF = '../images/RECEPTION GROUPS/';
+const WF = '../images/Parents-Chennai Selection/';
 
-const RECEPTION_FOLDER = '../images/RECEPTION GROUPS/';
-const WEDDING_FOLDER   = '../images/Parents-Chennai Selection/';
+const RECEPTION = Array.from({length:190}, (_,i) => RF + encodeURIComponent('CAMIE-'+(i+1)+'.jpg'));
 
-// Reception: sequential CAMIE-1 to CAMIE-190
-const RECEPTION_FILES = Array.from({length: 190}, (_, i) => 'CAMIE-' + (i + 1) + '.jpg');
-
-// Wedding day / Parents-Chennai (232 files, non-sequential with variants)
 const WEDDING_FILES = [
   'CAMIE-1.jpg','CAMIE-10.jpg','CAMIE-100 (1).jpg','CAMIE-100.jpg','CAMIE-101.jpg',
   'CAMIE-103.jpg','CAMIE-104.jpg','CAMIE-105.jpg','CAMIE-106.jpg','CAMIE-107 (1).jpg',
@@ -559,200 +486,191 @@ const WEDDING_FILES = [
   'DSC08820.jpg','DSC08882.jpg','DSC08893.jpg','DSC08897.jpg','DSC08923.jpg',
   'DSC09542.jpg','DSC09975.jpg'
 ];
+const WEDDING = WEDDING_FILES.map(f => WF + encodeURIComponent(f));
 
-// Combined list for lightbox navigation (reception first, then wedding)
-const ALL_PHOTOS = [
-  ...RECEPTION_FILES.map(f => ({ folder: RECEPTION_FOLDER, file: f, section: 'Reception Night' })),
-  ...WEDDING_FILES.map(f => ({ folder: WEDDING_FOLDER,   file: f, section: 'Wedding Day'     }))
-];
+const ALL = [...RECEPTION, ...WEDDING];
+const TOTAL = ALL.length;
 
-function imgSrc(folder, file) {
-  return folder + encodeURIComponent(file);
-}
+const ROTS = [-3.1,1.8,-1.5,2.6,-0.7,2.2,-2.8,0.9,-1.2,3,-2,0.5,-1.8,2.4,-0.4];
+const rot = i => ROTS[i % ROTS.length];
 
-// ── Rotation helper (deterministic, not random so it stays stable) ──────────
-const ROTS = [-3.2, -1.8, -0.8, 0, 1.2, 2.4, -2.6, 0.6, 3, -1.4];
-function rot(i) { return ROTS[i % ROTS.length]; }
+// ── PIN ────────────────────────────────────────────────────────────────────
+const pinScreen = document.getElementById('pin-screen');
+const pinInput  = document.getElementById('pin-input');
+const pinErr    = document.getElementById('pin-err');
+const gallery   = document.getElementById('gallery');
 
-// ── PIN logic ────────────────────────────────────────────────────────────────
-const pinScreen   = document.getElementById('pin-screen');
-const pinInput    = document.getElementById('pin-input');
-const pinError    = document.getElementById('pin-error');
-const pinBtn      = document.getElementById('pin-btn');
-const galleryEl   = document.getElementById('gallery');
-
-function updateDots() {
+function updateDots(){
+  const pin = (typeof PHOTOS_PIN !== 'undefined') ? PHOTOS_PIN : '1234';
   const len = pinInput.value.length;
-  // show 4 dots minimum (or more if pin is longer)
-  const total = Math.max(4, (typeof PHOTOS_PIN !== 'undefined' ? PHOTOS_PIN.length : 4));
+  const total = Math.max(4, pin.length);
   const container = document.getElementById('pin-dots');
-  // rebuild dots if pin length changed
-  if (container.children.length !== total) {
+  if(container.children.length !== total){
     container.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      const d = document.createElement('div');
-      d.className = 'pin-dot';
-      container.appendChild(d);
+    for(let i=0;i<total;i++){
+      const d=document.createElement('div');d.className='pin-dot';container.appendChild(d);
     }
   }
-  Array.from(container.children).forEach((d, i) => {
-    d.classList.toggle('filled', i < len);
-  });
+  [...container.children].forEach((d,i)=>d.classList.toggle('filled',i<len));
 }
 
-function tryPin() {
-  const entered = pinInput.value.trim();
-  const correct = (typeof PHOTOS_PIN !== 'undefined') ? PHOTOS_PIN : '';
-  if (entered === correct) {
-    sessionStorage.setItem('photos_auth', '1');
-    pinScreen.classList.add('hidden');
-    galleryEl.classList.add('visible');
+function tryPin(){
+  const correct = (typeof PHOTOS_PIN !== 'undefined') ? PHOTOS_PIN : '1234';
+  if(pinInput.value.trim()===correct){
+    sessionStorage.setItem('photos_auth','1');
+    pinScreen.classList.add('gone');
+    gallery.classList.add('visible');
     buildGallery();
+    setTimeout(()=>requestAnimationFrame(autoTick), 1400);
   } else {
     pinInput.classList.add('error');
-    pinError.classList.add('show');
-    pinInput.value = '';
+    pinErr.classList.add('show');
+    pinInput.value='';
     updateDots();
-    setTimeout(() => {
-      pinInput.classList.remove('error');
-    }, 450);
+    setTimeout(()=>pinInput.classList.remove('error'),450);
     pinInput.focus();
   }
 }
 
-pinInput.addEventListener('input', () => {
+pinInput.addEventListener('input',()=>{
   updateDots();
-  pinError.classList.remove('show');
-  // auto-submit when length matches
-  if (typeof PHOTOS_PIN !== 'undefined' && pinInput.value.length === PHOTOS_PIN.length) {
-    setTimeout(tryPin, 80);
+  pinErr.classList.remove('show');
+  const pin = (typeof PHOTOS_PIN!=='undefined')?PHOTOS_PIN:'1234';
+  if(pinInput.value.length===pin.length) setTimeout(tryPin,80);
+});
+pinInput.addEventListener('keydown',e=>{if(e.key==='Enter')tryPin();});
+document.getElementById('pin-btn').addEventListener('click',tryPin);
+
+if(sessionStorage.getItem('photos_auth')==='1'){
+  pinScreen.classList.add('gone');
+  gallery.classList.add('visible');
+  document.addEventListener('DOMContentLoaded',()=>{
+    buildGallery();
+    setTimeout(()=>requestAnimationFrame(autoTick),1400);
+  });
+}
+
+// ── Gallery build ──────────────────────────────────────────────────────────
+function buildGallery(){
+  const cols=[document.getElementById('col-0'),document.getElementById('col-1'),document.getElementById('col-2')];
+  if(cols[0].children.length>0) return;
+  ALL.forEach((src,i)=>{
+    const card=document.createElement('div');
+    card.className='photo-card';
+    card.style.setProperty('--rot',rot(i)+'deg');
+    card.tabIndex=0;
+    const pin=document.createElement('div');
+    pin.className='photo-pin';
+    card.appendChild(pin);
+    const img=document.createElement('img');
+    img.src=src;
+    img.loading='lazy';
+    img.decoding='async';
+    img.alt='Wedding photo '+(i+1);
+    card.appendChild(img);
+    card.addEventListener('click',()=>openLb(i));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openLb(i);});
+    cols[i%3].appendChild(card);
+  });
+}
+
+// ── Auto-scroll ────────────────────────────────────────────────────────────
+let scrollDir=1, autoOn=true, manualOff=false, pauseTimer=null;
+const SPEED=0.38;
+
+function pauseAuto(resume=true){
+  if(manualOff) return;
+  autoOn=false;
+  clearTimeout(pauseTimer);
+  if(resume) pauseTimer=setTimeout(()=>{autoOn=true;},3200);
+}
+
+function autoTick(){
+  if(autoOn){
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    if(max>10){
+      let y=window.scrollY+scrollDir*SPEED;
+      if(y>=max){y=max;scrollDir=-1;}
+      else if(y<=0){y=0;scrollDir=1;}
+      window.scrollTo(0,y);
+    }
   }
+  requestAnimationFrame(autoTick);
+}
+
+document.addEventListener('wheel',()=>pauseAuto(true),{passive:true});
+document.addEventListener('touchstart',()=>pauseAuto(true),{passive:true});
+document.addEventListener('keydown',e=>{
+  if(['ArrowUp','ArrowDown','PageUp','PageDown',' '].includes(e.key))pauseAuto(true);
 });
 
-pinInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') tryPin();
-});
-
-pinBtn.addEventListener('click', tryPin);
-
-// Check session on load
-if (sessionStorage.getItem('photos_auth') === '1') {
-  pinScreen.classList.add('hidden');
-  galleryEl.classList.add('visible');
-  // defer gallery build after DOM ready
-  document.addEventListener('DOMContentLoaded', buildGallery);
-  buildGallery();
-}
-
-// ── Gallery build ────────────────────────────────────────────────────────────
-function buildGallery() {
-  const rGrid = document.getElementById('reception-grid');
-  const wGrid = document.getElementById('wedding-grid');
-  if (rGrid.children.length > 0) return; // already built
-
-  const total = ALL_PHOTOS.length;
-  document.getElementById('g-count-chip').textContent = total + ' photos';
-
-  // Build reception grid (indices 0..189)
-  RECEPTION_FILES.forEach((file, i) => {
-    rGrid.appendChild(makePolaroid(i, RECEPTION_FOLDER, file));
-  });
-
-  // Build wedding grid (indices 190..421)
-  WEDDING_FILES.forEach((file, i) => {
-    wGrid.appendChild(makePolaroid(RECEPTION_FILES.length + i, WEDDING_FOLDER, file));
-  });
-}
-
-function makePolaroid(globalIndex, folder, file) {
-  const div = document.createElement('div');
-  div.className = 'polaroid';
-  div.style.setProperty('--rot', rot(globalIndex) + 'deg');
-  div.setAttribute('role', 'button');
-  div.setAttribute('tabindex', '0');
-  div.setAttribute('aria-label', 'View photo ' + (globalIndex + 1));
-
-  const img = document.createElement('img');
-  img.src = imgSrc(folder, file);
-  img.alt = 'Wedding photo';
-  img.loading = 'lazy';
-  img.decoding = 'async';
-  div.appendChild(img);
-
-  const lbl = document.createElement('div');
-  lbl.className = 'p-label';
-  lbl.textContent = 'SwAdi \'26';
-  div.appendChild(lbl);
-
-  div.addEventListener('click', () => openLightbox(globalIndex));
-  div.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(globalIndex); });
-
-  return div;
-}
-
-// ── Lightbox ─────────────────────────────────────────────────────────────────
-let lbIndex = 0;
-const lightbox   = document.getElementById('lightbox');
-const lbImg      = document.getElementById('lb-img');
-const lbCount    = document.getElementById('lb-count');
-const lbSectionTag = document.getElementById('lb-section-tag');
-const lbProgress = document.getElementById('lb-progress');
-
-function openLightbox(index) {
-  lbIndex = index;
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  showPhoto(index, false);
-}
-
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function showPhoto(index, fade = true) {
-  const total = ALL_PHOTOS.length;
-  lbIndex = ((index % total) + total) % total;
-  const p = ALL_PHOTOS[lbIndex];
-
-  if (fade) {
-    lbImg.classList.add('fading');
-    setTimeout(() => {
-      lbImg.src = imgSrc(p.folder, p.file);
-      lbImg.classList.remove('fading');
-    }, 130);
+// pause/play button
+const scrollBtn=document.getElementById('scroll-btn');
+const scrollIcon=document.getElementById('scroll-icon');
+const PAUSE_ICON=`<rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/>`;
+const PLAY_ICON=`<polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none"/>`;
+scrollBtn.addEventListener('click',()=>{
+  manualOff=!manualOff;
+  if(manualOff){
+    autoOn=false;clearTimeout(pauseTimer);
+    scrollIcon.innerHTML=PLAY_ICON;
   } else {
-    lbImg.src = imgSrc(p.folder, p.file);
+    autoOn=true;
+    scrollIcon.innerHTML=PAUSE_ICON;
   }
+});
 
-  lbCount.textContent = (lbIndex + 1) + ' / ' + total;
-  lbSectionTag.textContent = p.section;
-  lbProgress.style.width = ((lbIndex + 1) / total * 100) + '%';
+// ── Lightbox ───────────────────────────────────────────────────────────────
+let lbIdx=0;
+const lb=document.getElementById('lightbox');
+const lbImg=document.getElementById('lb-img');
+const lbLeft=document.getElementById('lb-left');
+const lbRight=document.getElementById('lb-right');
+const lbCounter=document.getElementById('lb-counter');
+
+function openLb(i){
+  lbIdx=i;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+  renderLb(i,false);
+}
+function closeLb(){
+  lb.classList.remove('open');
+  document.body.style.overflow='';
+}
+function renderLb(i,fade=true){
+  lbIdx=((i%TOTAL)+TOTAL)%TOTAL;
+  const prev=((lbIdx-1+TOTAL)%TOTAL);
+  const next=((lbIdx+1)%TOTAL);
+  lbCounter.textContent=String(lbIdx+1).padStart(2,'0')+' / '+String(TOTAL).padStart(2,'0');
+  lbLeft.src=ALL[prev];
+  lbRight.src=ALL[next];
+  if(fade){
+    lbImg.classList.add('fade');
+    setTimeout(()=>{lbImg.src=ALL[lbIdx];lbImg.classList.remove('fade');},140);
+  } else {
+    lbImg.src=ALL[lbIdx];
+  }
 }
 
-document.getElementById('lb-prev').addEventListener('click', (e) => { e.stopPropagation(); showPhoto(lbIndex - 1); });
-document.getElementById('lb-next').addEventListener('click', (e) => { e.stopPropagation(); showPhoto(lbIndex + 1); });
-document.getElementById('lb-close').addEventListener('click', closeLightbox);
+document.getElementById('lb-prev').addEventListener('click',e=>{e.stopPropagation();renderLb(lbIdx-1);});
+document.getElementById('lb-next').addEventListener('click',e=>{e.stopPropagation();renderLb(lbIdx+1);});
+document.getElementById('lb-close').addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
 
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox || e.target === lbImg.parentElement) closeLightbox();
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='ArrowLeft'){e.preventDefault();renderLb(lbIdx-1);}
+  if(e.key==='ArrowRight'){e.preventDefault();renderLb(lbIdx+1);}
+  if(e.key==='Escape')closeLb();
 });
 
-// Keyboard nav
-document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'ArrowLeft')  { e.preventDefault(); showPhoto(lbIndex - 1); }
-  if (e.key === 'ArrowRight') { e.preventDefault(); showPhoto(lbIndex + 1); }
-  if (e.key === 'Escape')     { e.preventDefault(); closeLightbox(); }
-});
-
-// Swipe on lightbox
-let touchStartX = 0;
-lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
-lightbox.addEventListener('touchend', (e) => {
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 50) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
-}, {passive:true});
+let tx=0;
+lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+lb.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50)renderLb(lbIdx+(dx<0?1:-1));
+},{passive:true});
 </script>
 </body>
 </html>
