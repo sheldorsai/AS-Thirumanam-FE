@@ -123,6 +123,20 @@ body{
 .scroll-btn:hover{color:#c0633b;background:rgba(236,224,203,.97);}
 .scroll-btn svg{width:15px;height:15px;}
 
+.top-btn{
+  position:fixed;bottom:24px;right:20px;z-index:50;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(236,224,203,.88);backdrop-filter:blur(6px);
+  border:1px solid rgba(200,182,158,.5);color:#7c6a55;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .2s,background .2s,opacity .3s,transform .3s;
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  box-shadow:0 4px 16px -4px rgba(30,20,10,.18);
+}
+.top-btn.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+.top-btn:hover{color:#c0633b;background:rgba(236,224,203,.97);}
+.top-btn svg{width:16px;height:16px;}
+
 /* ── Header ── */
 .g-header{
   text-align:center;padding:64px 24px 52px;position:relative;z-index:1;
@@ -380,6 +394,12 @@ body{
     Home
   </a>
 
+  <button class="top-btn" id="top-btn" title="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
   <button class="scroll-btn" id="scroll-btn" title="Pause / resume scroll">
     <svg id="scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/>
@@ -544,10 +564,8 @@ document.getElementById('pin-btn').addEventListener('click',tryPin);
 if(sessionStorage.getItem('photos_auth')==='1'){
   pinScreen.classList.add('gone');
   gallery.classList.add('visible');
-  document.addEventListener('DOMContentLoaded',()=>{
-    buildGallery();
-    setTimeout(()=>requestAnimationFrame(autoTick),1400);
-  });
+  buildGallery();
+  setTimeout(()=>requestAnimationFrame(autoTick),1400);
 }
 
 // ── Gallery build ──────────────────────────────────────────────────────────
@@ -602,6 +620,15 @@ document.addEventListener('wheel',()=>pauseAuto(true),{passive:true});
 document.addEventListener('touchstart',()=>pauseAuto(true),{passive:true});
 document.addEventListener('keydown',e=>{
   if(['ArrowUp','ArrowDown','PageUp','PageDown',' '].includes(e.key))pauseAuto(true);
+});
+
+// scroll-to-top button
+const topBtn=document.getElementById('top-btn');
+window.addEventListener('scroll',()=>{
+  topBtn.classList.toggle('show',window.scrollY>300);
+},{passive:true});
+topBtn.addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
 });
 
 // pause/play button
