@@ -10,7 +10,7 @@ const PIN  = '6402'; // change here if you update the pin
 
 function listJpgs(dir) {
   return fs.readdirSync(path.join(ROOT, dir))
-    .filter(f => /\.(jpg|jpeg)$/i.test(f))
+    .filter(f => /\.(jpg|jpeg)$/i.test(f) && !f.startsWith('._'))
     .sort();
 }
 
