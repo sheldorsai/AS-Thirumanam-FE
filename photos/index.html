@@ -124,7 +124,7 @@ body{
 .scroll-btn svg{width:15px;height:15px;}
 
 .top-btn{
-  position:fixed;bottom:24px;right:20px;z-index:50;
+  position:fixed;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);right:20px;z-index:50;
   width:38px;height:38px;border-radius:50%;
   background:rgba(236,224,203,.88);backdrop-filter:blur(6px);
   border:1px solid rgba(200,182,158,.5);color:#7c6a55;cursor:pointer;
@@ -139,27 +139,30 @@ body{
 
 /* ── Section toggle ── */
 .section-toggle{
-  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  position:fixed;
+  bottom:calc(env(safe-area-inset-bottom,0px) + 18px);
+  left:50%;transform:translateX(-50%);
   z-index:50;display:flex;
-  background:rgba(236,224,203,.82);backdrop-filter:blur(6px);
-  border:1px solid rgba(200,182,158,.5);border-radius:100px;
-  padding:4px;gap:2px;
+  background:rgba(236,224,203,.97);backdrop-filter:blur(10px);
+  border:2px solid rgba(150,115,75,.5);border-radius:100px;
+  padding:5px;gap:3px;
+  box-shadow:0 6px 24px -4px rgba(30,20,10,.28);
 }
 .section-tab{
-  padding:6px 14px;border:none;border-radius:100px;
-  font-size:12px;font-weight:700;letter-spacing:.02em;
+  padding:10px 20px;border:none;border-radius:100px;
+  font-size:14px;font-weight:700;letter-spacing:.02em;
   font-family:'Bricolage Grotesque',sans-serif;
-  color:#7c6a55;background:transparent;cursor:pointer;
+  color:#3d2e1e;background:transparent;cursor:pointer;
   transition:color .2s,background .2s,box-shadow .2s;
   white-space:nowrap;
 }
 .section-tab.active{
   background:#c0633b;color:#fff;
-  box-shadow:0 2px 8px -2px rgba(192,99,59,.4);
+  box-shadow:0 3px 12px -2px rgba(192,99,59,.55);
 }
-.section-tab:hover:not(.active){color:#c0633b;}
+.section-tab:hover:not(.active){color:#c0633b;background:rgba(192,99,59,.1);}
 @media(max-width:600px){
-  .section-tab{padding:5px 9px;font-size:10.5px;}
+  .section-tab{padding:9px 14px;font-size:13px;}
 }
 
 /* ── Header ── */
@@ -184,7 +187,7 @@ body{
 /* ── Photo columns ── */
 .photos-outer{
   max-width:980px;margin:0 auto;
-  padding:10px 32px 140px;position:relative;z-index:1;
+  padding:10px 32px 160px;position:relative;z-index:1;
 }
 .photos-cols{display:flex;gap:26px;align-items:flex-start;}
 .p-col{flex:1;display:flex;flex-direction:column;gap:30px;}
@@ -221,7 +224,7 @@ body{
 }
 
 @media(max-width:600px){
-  .photos-outer{padding:8px 14px 100px;}
+  .photos-outer{padding:8px 14px 140px;}
   .photos-cols{gap:14px;}
   .p-col{gap:18px;}
   .p-col:nth-child(2){padding-top:48px;}
@@ -534,70 +537,14 @@ function pingPhotosPage(){
 }
 </script>
 <script>
-// ── Image data ─────────────────────────────────────────────────────────────
+// ── Image data — file lists live in config.js (auto-generated) ──────────────
 const NF = '../images/Nichithartham/';
 const RF = '../images/RECEPTION GROUPS/';
 const WF = '../images/Wedding/';
 
-const NICHITHARTHAM = [
-  'CAMIE-160.jpg','CAMIE-161 (1).jpg','CAMIE-162.jpg','CAMIE-187.jpg',
-  'DSC08000.jpg','DSC08017.jpg','DSC08051.jpg','DSC08076.jpg','DSC08102.jpg','DSC08110.jpg'
-].map(f => NF + encodeURIComponent(f));
-
-const RECEPTION = [1,2,3,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
-  31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,
-  61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,
-  91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,
-  116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,
-  139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,
-  162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,
-  185,186,187,188,189,190
-].map(n => RF + encodeURIComponent('CAMIE-'+n+'.jpg'));
-
-const WEDDING_FILES = [
-  'CAMIE-1.jpg','CAMIE-10.jpg','CAMIE-100 (1).jpg','CAMIE-101.jpg','CAMIE-103.jpg',
-  'CAMIE-104.jpg','CAMIE-105.jpg','CAMIE-106.jpg','CAMIE-107 (1).jpg','CAMIE-107.jpg',
-  'CAMIE-109.jpg','CAMIE-110.jpg','CAMIE-112.jpg','CAMIE-114 (1).jpg','CAMIE-114.jpg',
-  'CAMIE-118.jpg','CAMIE-12.jpg','CAMIE-120.jpg','CAMIE-122.jpg','CAMIE-124.jpg',
-  'CAMIE-126.jpg','CAMIE-127.jpg','CAMIE-129.jpg','CAMIE-130.jpg','CAMIE-131.jpg',
-  'CAMIE-133.jpg','CAMIE-134.jpg','CAMIE-138.jpg','CAMIE-139 (1).jpg','CAMIE-139.jpg',
-  'CAMIE-14.jpg','CAMIE-140.jpg','CAMIE-141.jpg','CAMIE-143.jpg','CAMIE-145.jpg',
-  'CAMIE-147.jpg','CAMIE-148.jpg','CAMIE-15.jpg','CAMIE-151.jpg','CAMIE-154.jpg',
-  'CAMIE-155.jpg','CAMIE-158.jpg','CAMIE-159 (1).jpg','CAMIE-159.jpg','CAMIE-16 (1).jpg',
-  'CAMIE-16.jpg','CAMIE-168 (1).jpg','CAMIE-168 (2).jpg','CAMIE-168.jpg','CAMIE-17.jpg',
-  'CAMIE-171.jpg','CAMIE-172.jpg','CAMIE-173.jpg','CAMIE-175.jpg','CAMIE-177.jpg',
-  'CAMIE-178.jpg','CAMIE-18.jpg','CAMIE-180.jpg','CAMIE-181.jpg','CAMIE-182.jpg',
-  'CAMIE-183.jpg','CAMIE-186 (1).jpg','CAMIE-186.jpg','CAMIE-187 (1).jpg','CAMIE-188 (1).jpg',
-  'CAMIE-19.jpg','CAMIE-190 (1).jpg','CAMIE-190.jpg','CAMIE-193.jpg','CAMIE-194.jpg',
-  'CAMIE-195.jpg','CAMIE-197.jpg','CAMIE-198.jpg','CAMIE-20.jpg','CAMIE-201.jpg',
-  'CAMIE-203.jpg','CAMIE-21 (1).jpg','CAMIE-21.jpg','CAMIE-211.jpg','CAMIE-213.jpg',
-  'CAMIE-216.jpg','CAMIE-22 (1).jpg','CAMIE-22.jpg','CAMIE-223.jpg','CAMIE-227.jpg',
-  'CAMIE-229.jpg','CAMIE-230.jpg','CAMIE-232.jpg','CAMIE-235.jpg','CAMIE-239.jpg',
-  'CAMIE-24.jpg','CAMIE-240.jpg','CAMIE-243.jpg','CAMIE-244.jpg','CAMIE-246.jpg',
-  'CAMIE-249.jpg','CAMIE-253.jpg','CAMIE-258.jpg','CAMIE-263.jpg','CAMIE-269.jpg',
-  'CAMIE-276.jpg','CAMIE-279.jpg','CAMIE-3.jpg','CAMIE-32.jpg','CAMIE-33 (1).jpg',
-  'CAMIE-33.jpg','CAMIE-34.jpg','CAMIE-35.jpg','CAMIE-37 (1).jpg','CAMIE-37.jpg',
-  'CAMIE-38.jpg','CAMIE-39.jpg','CAMIE-4.jpg','CAMIE-42 (1).jpg','CAMIE-42.jpg',
-  'CAMIE-43 (1).jpg','CAMIE-43.jpg','CAMIE-44 (1).jpg','CAMIE-45.jpg','CAMIE-47 (1).jpg',
-  'CAMIE-48.jpg','CAMIE-49.jpg','CAMIE-5 (1).jpg','CAMIE-5.jpg','CAMIE-50.jpg',
-  'CAMIE-52 (1).jpg','CAMIE-52.jpg','CAMIE-53.jpg','CAMIE-54 (1).jpg','CAMIE-54.jpg',
-  'CAMIE-55.jpg','CAMIE-57 (1).jpg','CAMIE-57.jpg','CAMIE-6.jpg','CAMIE-61.jpg',
-  'CAMIE-63.jpg','CAMIE-64 (1).jpg','CAMIE-64.jpg','CAMIE-65.jpg','CAMIE-68 (1).jpg',
-  'CAMIE-69 (1).jpg','CAMIE-71 (1).jpg','CAMIE-72.jpg','CAMIE-73 (1).jpg','CAMIE-73.jpg',
-  'CAMIE-74.jpg','CAMIE-75.jpg','CAMIE-8.jpg','CAMIE-80.jpg','CAMIE-83.jpg',
-  'CAMIE-84.jpg','CAMIE-86.jpg','CAMIE-87.jpg','CAMIE-88.jpg','CAMIE-89 (1).jpg',
-  'CAMIE-89.jpg','CAMIE-90.jpg','CAMIE-91.jpg','CAMIE-92 (1).jpg','CAMIE-92.jpg',
-  'CAMIE-93.jpg','DSC00004.jpg','DSC00095.jpg','DSC00172.jpg','DSC00187.jpg',
-  'DSC00208.jpg','DSC00282.jpg','DSC00342.jpg','DSC00373.jpg','DSC00399.jpg',
-  'DSC00452.jpg','DSC00474.jpg','DSC00497.jpg','DSC00508.jpg','DSC00525.jpg',
-  'DSC00536.jpg','DSC00550.jpg','DSC00577.jpg','DSC00615.jpg','DSC00633.jpg',
-  'DSC00640.jpg','DSC00706.jpg','DSC00726.jpg','DSC07939.jpg','DSC07949.jpg',
-  'DSC07964.jpg','DSC07980.jpg','DSC08155.jpg','DSC08202.jpg','DSC08266.jpg',
-  'DSC08353.jpg','DSC08368.jpg','DSC08637.jpg','DSC08667.jpg','DSC08674.jpg',
-  'DSC08820.jpg','DSC08882.jpg','DSC08893.jpg','DSC08897.jpg','DSC08923.jpg',
-  'DSC09542.jpg','DSC09975.jpg'
-];
-const WEDDING = WEDDING_FILES.map(f => WF + encodeURIComponent(f));
+const NICHITHARTHAM = NICHITHARTHAM_FILES.map(f => NF + encodeURIComponent(f));
+const RECEPTION     = RECEPTION_FILES.map(f => RF + encodeURIComponent(f));
+const WEDDING       = WEDDING_FILES.map(f => WF + encodeURIComponent(f));
 
 let currentImages = RECEPTION;
 
